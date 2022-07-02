@@ -29,6 +29,9 @@ S*S.    S*S.    S*S    S%S  S*S    S*S  S*S.    S*S    S%S  S*S.     .S*S    .S*
 Cerberus is a layer 7 network stress testing tool that has a wide variety of normal and exotic attack vectors. <br>
 It's written in Python3 and is usable on all systems with Python installed.
 
+# Notes
+- Cloudflare bypass won't be added, since i can't get it to work anymore. If you want to add it, go ahead and open a pull request
+
 # Depencies
 - Python 3.6 or higher
 - Everything can be installed with the `setup.py` script:
@@ -38,7 +41,8 @@ It's written in Python3 and is usable on all systems with Python installed.
 If you want to contribute, you can do so by 
 - Creating a new method, more information can be found in `src/methods`
 - Creating a pull request
-- Donate (adding wallets soon)
+- Donate:
+   - XMR: `4BFpJ8hEUBBUE8vKUq6arUhRNkmQbPFMG38tDJHroAiTcENF2oCjYgoeHRJg6ULcs42EZ1ynCGj6RVhBTBQ3BcRmKAP1ZRb`
 
 # License
 ```sh

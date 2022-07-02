@@ -6,3 +6,4 @@ undetected_chromedriver
 argparse
 tabulate
 dnspython
+websocket-client

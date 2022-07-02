@@ -24,12 +24,13 @@ SOFTWARE.
 
 # import all non-stdlib modules, just to check if they are actually installed
 try:
-    import requests # for sending the actual requests
+    from requests.cookies import RequestsCookieJar # for sending the actual requests
     from colorama import Fore, init # fancy colors :O
     import cloudscraper, selenium, undetected_chromedriver # cloudflare bypass
     import argparse # needed for command line argument parsing
     import tabulate # pretty tables
     import dns.resolver # dns watertorture attack
+    import websocket # websocket flooder
 except Exception as e:
     print(' - Error, it looks like i\'m missing some modules. Did you try "pip install -r requirements"?')
     print(f' - Stacktrace: \n{str(e).rstrip()}')
@@ -116,17 +117,18 @@ SOFTWARE.
 ''', argument_default=argparse.SUPPRESS, allow_abbrev=False)
 
     # add arguments
-    parser.add_argument('-t',       '--target',          action='store',      dest='target_url',  metavar="target url",   type=str,    help="Target url(s) to attack, seperated by \",\"", default=None)
-    parser.add_argument('-d',       '--attack-duration', action='store',      dest='duration',    metavar='duration',     type=int,    help='Attack length in seconds', default=100)
-    parser.add_argument('-w',       '--workers',         action='store',      dest='workers',     metavar='workers',      type=int,    help='Number of threads/workers to spawn', default=40)
-    parser.add_argument('-m',       '--method',          action='store',      dest='method',      metavar='method',       type=str,    help='Attack method/vector to use', default='GET')
-    parser.add_argument(            '--proxy-file',      action='store',      dest='proxy_file',  metavar='location',     type=str,    help='Location of the proxy file to use', default=None)
-    parser.add_argument(            '--proxy-proto',     action='store',      dest='proxy_proto', metavar='protocol',     type=str,    help='Proxy protocol (SOCKS4, SOCKS5, HTTP)', default='SOCKS5')
-    parser.add_argument('-logs',    '--list-logs',       action='store_true', dest='list_logs',                                        help='List all attack logs', default=False)
-    parser.add_argument('-methods', '--list-methods',    action='store_true', dest='list_methods',                                     help='List all the attack methods', default=False)
-    parser.add_argument('-bc',      '--bypass-cache',    action='store_true', dest='bypass_cache',                                     help='Try to bypass any caching systems to ensure we hit the main servers', default=True)
-    parser.add_argument('-y',       '--yes-to-all',      action='store_true', dest='yes_to_all',                                       help='Skip any user prompts, and just launch the attack', default=False)
-    parser.add_argument(            '--http-version',    action='store',      dest='http_ver',    metavar='http version', type=str,    help='Set the HTTP protocol version', default='1.1')
+    parser.add_argument('-t',       '--target',          action='store',      dest='target_url',    metavar='target url',   type=str,    help='Target url(s) to attack, seperated by ","', default=None)
+    parser.add_argument('-d',       '--attack-duration', action='store',      dest='duration',      metavar='duration',     type=int,    help='Attack length in seconds', default=100)
+    parser.add_argument('-w',       '--workers',         action='store',      dest='workers',       metavar='workers',      type=int,    help='Number of threads/workers to spawn', default=40)
+    parser.add_argument('-m',       '--method',          action='store',      dest='method',        metavar='method',       type=str,    help='Attack method/vector to use', default='GET')
+    parser.add_argument(            '--proxy-file',      action='store',      dest='proxy_file',    metavar='location',     type=str,    help='Location of the proxy file to use', default=None)
+    parser.add_argument(            '--proxy-proto',     action='store',      dest='proxy_proto',   metavar='protocol',     type=str,    help='Proxy protocol (SOCKS4, SOCKS5, HTTP)', default='SOCKS5')
+    #parser.add_argument(            '--driver-engine',   action='store',      dest='driver_engine', metavar='driver engine',type=str,    help='Driver engine to use (CHROME for Chrome, GECKO for Firefox)', default='CHROME')
+    parser.add_argument('-logs',    '--list-logs',       action='store_true', dest='list_logs',                                          help='List all attack logs', default=False)
+    parser.add_argument('-methods', '--list-methods',    action='store_true', dest='list_methods',                                       help='List all the attack methods', default=False)
+    parser.add_argument('-bc',      '--bypass-cache',    action='store_true', dest='bypass_cache',                                       help='Try to bypass any caching systems to ensure we hit the main servers', default=True)
+    parser.add_argument('-y',       '--yes-to-all',      action='store_true', dest='yes_to_all',                                         help='Skip any user prompts, and just launch the attack', default=False)
+    parser.add_argument(            '--http-version',    action='store',      dest='http_ver',      metavar='http version', type=str,    help='Set the HTTP protocol version', default='1.1')
     args = vars(parser.parse_args()) # parse the arguments
 
     if args['list_logs']:
@@ -165,6 +167,7 @@ SOFTWARE.
     
     Core.bypass_cache = args['bypass_cache']
     Core.proxy_proto = args['proxy_proto']
+    #Core.driver_engine = args['driver_engine']
 
     if args['proxy_file']:
         Core.proxy_pool = []

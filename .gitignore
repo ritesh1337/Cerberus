@@ -9,6 +9,9 @@ pyrightconfig.json
 # database
 db.db
 
+# testing
+testing/*
+
 # C extensions
 *.so
 

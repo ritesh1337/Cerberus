@@ -34,6 +34,8 @@ class Core:
     bypass_cache = True
     session = None
     ddosguard_cookies_grabbed = False
+    #cloudflare_cookies_grabbed = False
+    #driver_engine = None
     proxy_pool = []
     proxy_proto = None
     targets = None
