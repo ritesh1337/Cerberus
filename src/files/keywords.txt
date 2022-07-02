@@ -1,36 +1,9 @@
 014 Sochi Winter Olympics
-104.com.tw
 11
 110
-11st.co.kr
-123cha.com
-123movies.to
-123rf.com
-126.com
 13
 13fasdf
-163.com
-1688.com
-17ok.com
-1905.com
 1Shot
-2ch.net
-360.cn
-360.com
-360doc.com
-39.net
-3dmgame.com
-4399.com
-4chan.org
-4dsply.com
-4pda.ru
-4shared.com
-51.la
-51sole.com
-51yes.com
-58.com
-6pm.com
-9gag.com
 A&M
 A&P
 AAA
@@ -3796,7 +3769,6 @@ Petersen
 Peterson
 Peugeot
 Pfizer
-Ph.D
 PhD
 Phelps
 Phil
@@ -4748,8 +4720,6 @@ Typhon
 Tyrannosaurus
 Tyson
 Tzeltal
-U.S
-U.S.A
 UCLA
 UFO
 UK
@@ -5103,7 +5073,6 @@ Zurich
 a
 a's
 aa
-aa.com
 aaa
 aah
 aahed
@@ -5124,7 +5093,6 @@ aarrghh
 aarti
 aartis
 aas
-aastocks.com
 aasvogel
 aasvogels
 ab
@@ -5142,7 +5110,6 @@ abbey
 abbot
 abbreviate
 abc
-abcnews.go.com
 abdicate
 abdomen
 abdominal
@@ -5183,7 +5150,6 @@ abort
 abortion
 abound
 about
-about.com
 above
 aboveboard
 aboveground
@@ -5196,12 +5162,10 @@ abreact
 abreast
 abridge
 abridgment
-abril.com.br
 abroad
 abrogate
 abrupt
 abs
-abs-cbn.com
 abscess
 abscissa
 abscissae
@@ -5323,7 +5287,6 @@ accusatory
 accuse
 accused
 accustom
-accuweather.com
 acdbentity
 ace
 acer
@@ -5334,7 +5297,6 @@ acetate
 acetic
 acetone
 acetylene
-acfun.tv
 ache
 achieve
 achieved
@@ -5413,7 +5375,6 @@ actuarial
 actuate
 acuity
 acumen
-acunn.com
 acupuncture
 acute
 acyclic
@@ -5431,7 +5392,6 @@ adapter
 adapters
 adaptive
 adaptor
-adbooth.com
 add
 added
 addend
@@ -5452,7 +5412,6 @@ addressee
 addresses
 addressing
 adds
-addthis.com
 adduce
 adelaide
 adenine
@@ -5461,15 +5420,12 @@ adenosine
 adept
 adequacy
 adequate
-adexc.net
-adf.ly
 adhere
 adherent
 adhesion
 adhesive
 adiabatic
 adidas
-adidas.tmall.com
 adieu
 adipex
 adipic
@@ -5514,10 +5470,8 @@ admix
 admixture
 admonish
 admonition
-adnetworkperformance.com
 ado
 adobe
-adobe.com
 adolescent
 adopt
 adopted
@@ -5526,8 +5480,6 @@ adoptive
 adoration
 adore
 adorn
-adp.com
-adplxmd.com
 adposition
 adrenal
 adrenalin
@@ -5662,7 +5614,6 @@ ag
 again
 against
 agar
-agar.io
 agate
 agave
 age
@@ -5690,7 +5641,6 @@ agleam
 agnomen
 agnostic
 ago
-agoda.com
 agog
 agone
 agony
@@ -5727,7 +5677,6 @@ aimed
 aims
 ain't
 air
-airbnb.com
 airborne
 airbrush
 aircraft
@@ -5751,7 +5700,6 @@ airport
 airports
 airspeed
 airstrip
-airtel.in
 airtight
 airway
 airy
@@ -5760,7 +5708,6 @@ aj
 ajar
 ak
 aka
-akamaihd.net
 akin
 akkas
 al
@@ -5780,7 +5727,6 @@ albacore
 albania
 albany
 albatross
-albawabhnews.com
 albeit
 albert
 alberta
@@ -5805,7 +5751,6 @@ alert
 alerts
 alewife
 alex
-alexa.cn
 alexander
 alexandria
 alfalfa
@@ -5826,25 +5771,20 @@ algorithms
 ali
 alia
 alias
-alibaba.com
 alibi
 alibiing
-alicdn.com
 alice
 alien
 alienate
-aliexpress.com
 alight
 align
 alignment
 alike
 alimentary
 alimony
-alipay.com
 aliphatic
 aliquot
 alive
-aliyun.com
 alizarin
 alkali
 alkaline
@@ -5861,7 +5801,6 @@ allegiant
 allegoric
 allegory
 allegro
-allegro.pl
 allele
 allemand
 allen
@@ -5889,7 +5828,6 @@ allowed
 allowing
 allows
 alloy
-allrecipes.com
 allspice
 allude
 allure
@@ -5958,7 +5896,6 @@ alundum
 alveolar
 alveoli
 alveolus
-alwafd.org
 always
 alyssum
 am
@@ -5975,17 +5912,6 @@ amatory
 amaze
 amazing
 amazon
-amazon.ca
-amazon.cn
-amazon.co.jp
-amazon.co.uk
-amazon.com
-amazon.de
-amazon.es
-amazon.fr
-amazon.in
-amazon.it
-amazonaws.com
 amazoncom
 amazoncouk
 ambassador
@@ -6008,8 +5934,6 @@ ambulatory
 ambuscade
 ambush
 amd
-ameba.jp
-ameblo.jp
 ameliorate
 amen
 amend
@@ -6020,7 +5944,6 @@ amendments
 amenities
 america
 american
-americanexpress.com
 americans
 americas
 americium
@@ -6060,7 +5983,6 @@ amort
 amount
 amounts
 amp
-ampclicks.com
 amperage
 ampere
 ampersand
@@ -6125,7 +6047,6 @@ anatomy
 ancestor
 ancestral
 ancestry
-ancestry.com
 anchor
 anchorage
 anchorite
@@ -6144,7 +6065,6 @@ andreas
 andrew
 andrews
 androgen
-android.com
 andy
 anecdotal
 anecdote
@@ -6191,7 +6111,6 @@ anise
 aniseikonic
 anisotropic
 anisotropy
-anitube.se
 ankle
 ann
 anna
@@ -6244,7 +6163,6 @@ answer
 answered
 answering
 answers
-answers.com
 ant
 antacid
 antagonism
@@ -6325,12 +6243,10 @@ anytime
 anyway
 anywhere
 aol
-aol.com
 aorta
 aot
 ap
 apache
-aparat.com
 apart
 apartheid
 apartment
@@ -6401,8 +6317,6 @@ appetite
 applaud
 applause
 apple
-apple.com
-appledaily.com.tw
 applejack
 appliance
 appliances
@@ -6512,7 +6426,6 @@ architectural
 architecture
 archival
 archive
-archive.org
 archived
 archives
 arcing
@@ -6654,9 +6567,6 @@ aruba
 arum
 aryl
 as
-as.com
-asahi.com
-asana.com
 asbestos
 ascend
 ascendant
@@ -6685,8 +6595,6 @@ aside
 asin
 asinine
 ask
-ask.com
-ask.fm
 askance
 asked
 askew
@@ -6695,7 +6603,6 @@ asks
 asleep
 asn
 asocial
-asos.com
 asp
 asparagine
 asparagus
@@ -6805,7 +6712,6 @@ astrophysics
 astute
 asunder
 asus
-asus.com
 asylum
 asymmetry
 asymptomatic
@@ -6833,7 +6739,6 @@ atlanta
 atlantes
 atlantic
 atlas
-atlassian.net
 atm
 atmosphere
 atmospheric
@@ -6848,7 +6753,6 @@ atrocious
 atrocity
 atrophic
 atrophy
-att.com
 attach
 attache
 attached
@@ -6890,13 +6794,11 @@ attribution
 attributive
 attrition
 attune
-atwiki.jp
 atypic
 au
 auburn
 auckland
 auction
-auction.co.kr
 auctioneer
 auctions
 aud
@@ -6904,7 +6806,6 @@ audacious
 audacity
 audi
 audible
-audible.com
 audience
 audio
 audiotape
@@ -7008,7 +6909,6 @@ averse
 aversion
 avert
 avg
-avg.com
 avi
 avian
 aviary
@@ -7017,7 +6917,6 @@ aviation
 aviatrix
 avid
 avionic
-avito.ru
 avocado
 avocate
 avocet
@@ -7057,7 +6956,6 @@ axiology
 axiom
 axiomatic
 axis
-axisbank.co.in
 axisymmetric
 axle
 axolotl
@@ -7068,7 +6966,6 @@ azalea
 azerbaijan
 azimuth
 azimuthal
-azlyrics.com
 azure
 b
 b's
@@ -7099,11 +6996,9 @@ babes
 babies
 baboon
 baby
-babycenter.com
 babysat
 babysit
 babysitting
-babytree.com
 baccalaureate
 baccarat
 bacchanalian
@@ -7156,7 +7051,6 @@ badinage
 badland
 badly
 badminton
-badoo.com
 baffle
 bag
 bagatelle
@@ -7169,8 +7063,6 @@ bags
 bah
 bahamas
 bahrain
-baidu.com
-baike.com
 bail
 bailey
 bailiff
@@ -7237,7 +7129,6 @@ baneberry
 baneful
 bang
 bangbus
-banggood.com
 bangkok
 bangladesh
 bangle
@@ -7246,8 +7137,6 @@ banister
 banjo
 bank
 banking
-bankmellat.ir
-bankofamerica.com
 bankrupt
 bankruptcy
 banks
@@ -7333,7 +7222,6 @@ base
 baseball
 baseband
 baseboard
-basecamp.com
 based
 baseline
 baseman
@@ -7395,9 +7283,7 @@ batten
 batteries
 battery
 battle
-battle.net
 battlefield
-battlefield.com
 battlefront
 battleground
 batwing
@@ -7417,8 +7303,6 @@ bazaar
 bazaars
 bb
 bbc
-bbc.co.uk
-bbc.com
 bbs
 bbw
 bc
@@ -7478,7 +7362,6 @@ becomes
 becoming
 bed
 bedazzle
-bedbathandbeyond.com
 bedbug
 bedding
 bedevil
@@ -7508,7 +7391,6 @@ beechwood
 beef
 beefsteak
 beefy
-beeg.com
 beehive
 been
 beep
@@ -7549,7 +7431,6 @@ begrudge
 beguile
 begun
 behalf
-behance.net
 behave
 behavior
 behavioral
@@ -7666,8 +7547,6 @@ bespectacled
 bespoke
 best
 best100tattoos
-bestadbid.com
-bestbuy.com
 bestial
 bestiality
 bestiary
@@ -7680,7 +7559,6 @@ bestsellers
 bestselling
 bestubble
 bet
-bet365.com
 beta
 betatron
 betel
@@ -7718,11 +7596,9 @@ bey
 beyond
 bezel
 bg
-bhaskar.com
 bhikkhuni
 bhikkhunis
 bhoy
-bhphotovideo.com
 bhutan
 bi
 bianco
@@ -7752,7 +7628,6 @@ bide
 bidiagonal
 bidirectional
 bids
-bidverdrd.com
 bien
 biennial
 biennium
@@ -7763,7 +7638,6 @@ bigamy
 bigger
 biggest
 bighorn
-biglobe.ne.jp
 bigot
 bigotry
 biharmonic
@@ -7778,17 +7652,14 @@ bikkies
 bilabial
 bilateral
 bilayer
-bild.de
 bile
 bilge
 bilharziasis
-bilibili.com
 bilinear
 bilingual
 bilk
 bill
 billboard
-billdesk.com
 billet
 billfold
 billiard
@@ -7812,7 +7683,6 @@ binding
 bindle
 bindweed
 bing
-bing.com
 binge
 bingle
 bingo
@@ -7820,7 +7690,6 @@ binocular
 binomial
 binuclear
 bio
-biobiochile.cl
 biochemic
 biodiversity
 biographies
@@ -7871,8 +7740,6 @@ bisque
 bistable
 bistate
 bit
-bitauto.com
-bitbucket.org
 bitch
 bite
 bitnet
@@ -7904,7 +7771,6 @@ blackball
 blackberry
 blackbird
 blackboard
-blackboard.com
 blackbody
 blacken
 blackguard
@@ -7938,7 +7804,6 @@ blasphemy
 blast
 blast furnace
 blast protection
-blastingnews.com
 blastula
 blat
 blatant
@@ -7948,7 +7813,6 @@ blaze powder
 blaze rod
 blazon
 bleach
-bleacherreport.com
 bleak
 bleary
 bleat
@@ -7975,7 +7839,6 @@ blithe
 blitz
 blitzkrieg
 blizzard
-blkget.com
 bloat
 blob
 bloc
@@ -7988,22 +7851,11 @@ blocking
 blocks
 blocky
 blog
-blog-newstime.com
-blog.jp
-blog.me
-blogfa.com
 blogger
-blogger.com
 bloggers
 blogging
 blogging make money
-blogimg.jp
 blogs
-blogspot.com
-blogspot.com.br
-blogspot.in
-blogspot.jp
-blogspot.mx
 bloke
 blond
 blonde
@@ -8021,7 +7873,6 @@ bloodstream
 bloody
 bloom
 bloomberg
-bloomberg.com
 bloop
 blossom
 blot
@@ -8103,7 +7954,6 @@ bodies
 body
 bodybuilder
 bodybuilding
-bodybuilding.com
 bodyguard
 bog
 bogey
@@ -8118,7 +7968,6 @@ boil
 boisterous
 bokken
 bokkens
-bola.net
 bold
 boldface
 bole
@@ -8130,7 +7979,6 @@ bolometer
 bolster
 bolt
 bomb
-bomb01.com
 bombard
 bombast
 bombastic
@@ -8148,7 +7996,6 @@ bone meal
 bones
 bonfire
 bong
-bongacams.com
 bongo
 bonito
 bonnet
@@ -8166,7 +8013,6 @@ bookcase
 bookend
 bookie
 booking
-booking.com
 bookings
 bookish
 bookkeep
@@ -8177,7 +8023,6 @@ bookkeepings
 booklet
 bookmark
 bookmarks
-bookmyshow.com
 bookplate
 books
 bookseller
@@ -8294,7 +8139,6 @@ bowwowed
 bowwowing
 bowwows
 box
-box.com
 boxcar
 boxed
 boxes
@@ -8307,7 +8151,6 @@ boycott
 boyish
 boys
 bp
-bp.blogspot.com
 br
 bra
 braai
@@ -8408,7 +8251,6 @@ breeds
 breeze
 breezy
 breiing
-breitbart.com
 brekkie
 brekkies
 brekky
@@ -8454,7 +8296,6 @@ brigantine
 bright
 brighten
 brighton
-brightonclick.com
 brilliant
 brim
 brimful
@@ -8560,9 +8401,7 @@ bryophyta
 bryophyte
 bryozoa
 bs
-bs.to
 bt
-bt.com
 bub
 bubble
 bubonic
@@ -8715,7 +8554,6 @@ bushwhack
 bushy
 business
 businesses
-businessinsider.com
 businessman
 businessmen
 businesswoman
@@ -8762,15 +8600,12 @@ butyrate
 butyric
 buxom
 buy
-buy.tmall.com
 buyer
 buyers
 buying
 buys
 buzz
 buzzard
-buzzfeed.com
-buzzfil.net
 buzzing
 buzzword
 buzzy
@@ -8792,7 +8627,6 @@ byword
 c
 c's
 ca
-ca.gov
 caa
 caaed
 caaing
@@ -8839,7 +8673,6 @@ cafeteria
 cage
 cagey
 cahoot
-caijing.com.cn
 caiman
 cairn
 cajole
@@ -9014,7 +8847,6 @@ caper
 capillary
 capita
 capital
-capitalone.com
 capitol
 capitulate
 capo
@@ -9270,13 +9102,9 @@ cayenne
 cayman
 cb
 cbs
-cbsnews.com
-cbssports.com
 cc
 ccd
-cctv.com
 cd
-cdiscount.com
 cdna
 cds
 cdt
@@ -9426,7 +9254,6 @@ chancy
 chandelier
 chandler
 change
-change.org
 changeable
 changed
 changelog
@@ -9441,7 +9268,6 @@ chant
 chantey
 chantry
 chaos
-chaoshi.tmall.com
 chaotic
 chap
 chaparral
@@ -9489,7 +9315,6 @@ chartreuse
 chartroom
 charts
 chase
-chase.com
 chasm
 chassis
 chaste
@@ -9500,7 +9325,6 @@ chateau
 chateaux
 chattel
 chatty
-chaturbate.com
 chauffeur
 chauvinism
 chauvinist
@@ -9614,11 +9438,6 @@ chimney
 chimpanzee
 chin
 china
-china.com
-china.com.cn
-chinadaily.com.cn
-chinaso.com
-chinaz.com
 chinch
 chinchilla
 chine
@@ -9628,7 +9447,6 @@ chinquapin
 chintz
 chintzy
 chip
-chip.de
 chipboard
 chipmunk
 chips
@@ -9694,8 +9512,6 @@ chorus fruit
 choryza
 chose
 chosen
-chosun.com
-chouftv.ma
 chow
 chowder
 chris
@@ -9720,7 +9536,6 @@ chromium
 chromosomal
 chromosome
 chromosphere
-chron.com
 chronic
 chronicle
 chronicles
@@ -9763,7 +9578,6 @@ churn
 chute
 chutney
 ci
-ci123.com
 cia
 cialis
 ciao
@@ -9820,7 +9634,6 @@ circumvent
 circumvention
 circus
 cisco
-cisco.com
 cistern
 cit
 citadel
@@ -9828,8 +9641,6 @@ citation
 citations
 cite
 cited
-citi.com
-citibank.co.in
 cities
 citizen
 citizenry
@@ -9851,7 +9662,6 @@ civilization
 civvies
 civvy
 cj
-ck101.com
 cl
 clad
 cladophora
@@ -9932,10 +9742,8 @@ cleveland
 clever
 cliche
 click
-clickadu.com
 clicking
 clicks
-clien.net
 client
 clientele
 clients
@@ -9959,7 +9767,6 @@ clink
 clinton
 clip
 clipboard
-clipconverter.cc
 clips
 clique
 clitoris
@@ -10006,7 +9813,6 @@ clothing
 cloture
 cloud
 cloudburst
-cloudfront.net
 clouds
 cloudy
 clout
@@ -10030,17 +9836,9 @@ clutter
 cm
 cms
 cn
-cnbc.com
-cnblogs.com
 cnet
-cnet.com
 cnetcom
-cnmo.com
 cnn
-cnn.com
-cnnic.cn
-cntv.cn
-cnzz.com
 co
 coach
 coaches
@@ -10076,7 +9874,6 @@ cobweb
 coca
 cocaine
 coccidiosis
-coccoc.com
 cochineal
 cochlea
 cock
@@ -10095,7 +9892,6 @@ cocktail
 cocky
 coco
 cocoa
-cocolog-nifty.com
 coconut
 cocoon
 cod
@@ -10267,7 +10063,6 @@ combining
 combo
 combustible
 combustion
-comcast.net
 come
 comeback
 comedian
@@ -10301,7 +10096,6 @@ commensurate
 comment
 commentary
 commentator
-commentcamarche.net
 commented
 comments
 commerce
@@ -10682,7 +10476,6 @@ consequently
 conservation
 conservatism
 conservative
-conservativetribune.com
 conservator
 conservatory
 conserve
@@ -10721,7 +10514,6 @@ conspiratorial
 conspire
 const
 constant
-constantcontact.com
 constantly
 constellate
 consternate
@@ -10913,7 +10705,6 @@ cookery
 cookie
 cookies
 cooking
-cookpad.com
 cooky
 cool
 coolant
@@ -11029,7 +10820,6 @@ correspondence
 correspondent
 corresponding
 corridor
-corriere.it
 corrigenda
 corrigendum
 corrigible
@@ -11065,7 +10855,6 @@ cosmos
 cosponsor
 cost
 costa
-costco.com
 costs
 costume
 costumes
@@ -11157,7 +10946,6 @@ courage
 courageous
 courier
 course
-coursera.org
 courses
 court
 courteous
@@ -11218,7 +11006,6 @@ coypu
 cozen
 cozy
 cp
-cpasbien.cm
 cpu
 cr
 craal
@@ -11244,7 +11031,6 @@ crag
 craggy
 craig
 craigslist
-craigslist.org
 cram
 cramp
 crampon
@@ -11299,8 +11085,6 @@ credenza
 credible
 credit
 credit card
-credit-agricole.fr
-creditkarma.com
 creditor
 credits
 credo
@@ -11454,13 +11238,10 @@ crystallite
 crystallographer
 crystallography
 cs
-csdn.net
-csgolounge.com
 csnet
 css
 cst
 ct
-ctrip.com
 cu
 cub
 cuba
@@ -11557,7 +11338,6 @@ curves
 curvilinear
 cushion
 cusp
-custhelp.com
 custodial
 custodian
 custody
@@ -11644,11 +11424,7 @@ daffy
 dagger
 daguerreotype
 dahlia
-daikynguyenvn.com
 daily
-dailymail.co.uk
-dailymotion.com
-dailypakistan.com.pk
 dainty
 dairy
 dairyman
@@ -11723,7 +11499,6 @@ datura
 daub
 daughter
 daughters
-daum.net
 daunt
 dauphin
 dauphine
@@ -11748,7 +11523,6 @@ daze
 dazzle
 db
 dc
-dcinside.com
 dd
 ddr
 de
@@ -12012,12 +11786,10 @@ delivery
 deliveryman
 deliverymen
 dell
-dell.com
 delouse
 delphine
 delphinium
 delta
-delta.com
 deltoid
 delude
 deluge
@@ -12251,7 +12023,6 @@ desuetude
 desultory
 detach
 detail
-detail.tmall.com
 detailed
 details
 detain
@@ -12280,7 +12051,6 @@ deterrent
 deterring
 detest
 detestation
-detik.com
 detonable
 detonate
 detour
@@ -12311,7 +12081,6 @@ developmental
 developments
 develops
 deviant
-deviantart.com
 deviate
 deviation
 device
@@ -12409,7 +12178,6 @@ dictatorial
 diction
 dictionaries
 dictionary
-dictionary.com
 dictum
 did
 didactic
@@ -12422,7 +12190,6 @@ diehard
 dieldrin
 dielectric
 diem
-diep.io
 dieresis
 dies
 diesel
@@ -12462,11 +12229,9 @@ digestible
 digestion
 digestive
 digging
-digikala.com
 digit
 digital
 digitalis
-digitaltrends.com
 dignify
 dignitary
 dignity
@@ -12531,7 +12296,6 @@ diploma
 diplomacy
 diplomat
 diplomatic
-diply.com
 dipole
 dir
 dire
@@ -12546,7 +12310,6 @@ directorate
 directories
 directors
 directory
-directrev.com
 directrices
 directrix
 dirge
@@ -12585,8 +12348,6 @@ discount
 discounted
 discounts
 discover
-discover.com
-discovercard.com
 discovered
 discovery
 discreet
@@ -12602,7 +12363,6 @@ discriminatory
 discs
 discus
 discuss
-discuss.com.hk
 discussant
 discussed
 discusses
@@ -12658,7 +12418,6 @@ dispute
 disputes
 disquietude
 disquisition
-disqus.com
 disrupt
 disruption
 disruptive
@@ -12707,7 +12466,6 @@ div
 diva
 divalent
 divan
-divar.ir
 dive
 diverge
 divergent
@@ -12747,8 +12505,6 @@ dj
 dk
 dl
 dm
-dmm.co.jp
-dmm.com
 dna
 dns
 do
@@ -12839,7 +12595,6 @@ donated
 donation
 donations
 done
-donga.com
 donkey
 donna
 donnybrook
@@ -12851,7 +12606,6 @@ doom
 doomsday
 door
 doorbell
-doorblog.jp
 doorkeep
 doorkeeper
 doorknob
@@ -12874,9 +12628,7 @@ dossier
 dot
 dote
 double
-doubleclick.net
 doubleheader
-doublepimp.com
 doublet
 doubleton
 doubloon
@@ -12889,7 +12641,6 @@ doughnut
 douglas
 dour
 douse
-douyu.com
 dove
 dovekie
 dover
@@ -12981,7 +12732,6 @@ dread
 dreadful
 dreadnought
 dream
-dream.co.id
 dreamboat
 dreams
 dreamt
@@ -13014,7 +12764,6 @@ drinks
 drip
 drippy
 drive
-drive2.ru
 driven
 driver
 drivers
@@ -13024,15 +12773,12 @@ driving
 drizzle
 drizzly
 droll
-drom.ru
 dromedary
 drone
 drool
 droop
 droopy
 drop
-dropbooks.tv
-dropbox.com
 drophead
 droplet
 dropout
@@ -13049,7 +12795,6 @@ drowse
 drowsy
 drub
 drudge
-drudgereport.com
 drudgery
 drug
 drugging
@@ -13083,7 +12828,6 @@ ducat
 duchess
 duck
 duckbilled
-duckduckgo.com
 duckling
 duckweed
 duct
@@ -13132,10 +12876,8 @@ dunk
 duo
 duodenal
 duodenum
-duolingo.com
 duopolist
 duopoly
-duowan.com
 dupe
 duplex
 duplicable
@@ -13203,8 +12945,6 @@ dystrophy
 e
 e'er
 e's
-e-hentai.org
-e.g
 ea
 each
 eager
@@ -13245,7 +12985,6 @@ easier
 easily
 east
 eastbound
-eastday.com
 easter
 eastern
 easternmost
@@ -13260,16 +12999,7 @@ eau
 eave
 eavesdrop
 eavesdropping
-ebates.com
 ebay
-ebay-kleinanzeigen.de
-ebay.co.uk
-ebay.com
-ebay.com.au
-ebay.de
-ebay.fr
-ebay.in
-ebay.it
 ebb
 ebony
 ebook
@@ -13417,7 +13147,6 @@ ejector
 eke
 ekka
 ekkas
-eksisozluk.com
 el
 elaborate
 elan
@@ -13471,9 +13200,7 @@ elevate
 elevation
 eleven
 elevenfold
-elevenia.co.id
 eleventh
-elfagr.org
 elfin
 elicit
 elide
@@ -13497,12 +13224,9 @@ ellipsometer
 elliptic
 ellis
 elm
-elmogaz.com
-elmundo.es
 elongate
 elope
 eloquent
-elpais.com
 else
 elsewhere
 eluate
@@ -13590,7 +13314,6 @@ emitted
 emitter
 emitting
 emma
-emol.com
 emolument
 emotion
 emotional
@@ -13694,13 +13417,11 @@ enemy
 energetic
 energy
 enervate
-enet.com.cn
 enfant
 enforceable
 enforcement
 enforcible
 eng
-engadget.com
 engage
 engaged
 engagement
@@ -13739,7 +13460,6 @@ enrollee
 enrollment
 ensconce
 ensemble
-ensonhaber.com
 enstatite
 ensure
 ensures
@@ -13795,7 +13515,6 @@ enzymatic
 enzyme
 enzymology
 eohippus
-eonline.com
 eos
 eosine
 ep
@@ -13897,14 +13616,11 @@ eric
 ericsson
 erik
 ermine
-ero-advertising.com
-ero-video.net
 erode
 erodible
 erosible
 erosion
 erosive
-eroterest.net
 erotic
 erotica
 erp
@@ -13937,7 +13653,6 @@ escorts
 escritoire
 escrow
 escutcheon
-eskimi.com
 esophagi
 esoteric
 especial
@@ -13945,8 +13660,6 @@ especially
 espionage
 esplanade
 espn
-espn.go.com
-espncricinfo.com
 espousal
 espouse
 esprit
@@ -14008,8 +13721,6 @@ ethylenediaminetetraacetate
 ethylenediaminetetraacetates
 etiology
 etiquette
-etsy.com
-ettoday.net
 etude
 etymology
 eu
@@ -14033,7 +13744,6 @@ euphoric
 eur
 eureka
 euro
-europa.eu
 europe
 european
 europium
@@ -14066,7 +13776,6 @@ evenhanded
 evening
 evensong
 event
-eventbrite.com
 eventful
 eventide
 events
@@ -14076,7 +13785,6 @@ eventuate
 ever
 evergreen
 everlasting
-evernote.com
 every
 everybody
 everyday
@@ -14100,7 +13808,6 @@ evolution
 evolutionary
 evolve
 evzone
-ew.com
 ewe
 ex
 exacerbate
@@ -14122,7 +13829,6 @@ examples
 exams
 exasperate
 exasperater
-exblog.jp
 excavate
 exceed
 excel
@@ -14224,7 +13930,6 @@ existential
 existing
 exists
 exit
-exoclick.com
 exodus
 exogamous
 exogamy
@@ -14259,7 +13964,6 @@ expectorant
 expectorate
 expects
 expedia
-expedia.com
 expedient
 expedite
 expedition
@@ -14385,7 +14089,6 @@ extrapolate
 extras
 extraterrestrial
 extraterritorial
-extratorrent.cc
 extravagant
 extravaganza
 extrema
@@ -14423,7 +14126,6 @@ eyes
 eyesight
 eyesore
 eyewitness
-eyny.com
 ez
 f
 f's
@@ -14443,7 +14145,6 @@ facebook
 facebook friends
 facebook login
 facebook yahoo
-facebook.com
 faced
 faceplate
 faces
@@ -14513,7 +14214,6 @@ familiar
 families
 familism
 family
-familydoctor.com.cn
 famine
 famish
 famous
@@ -14521,14 +14221,11 @@ fan
 fanatic
 fanciful
 fancy
-fandango.com
 fanfare
-fanfiction.net
 fanfold
 fang
 fangled
 fanout
-fanpage.gr
 fans
 fantasia
 fantasist
@@ -14555,7 +14252,6 @@ farmland
 farms
 faro
 farsighted
-farsnews.com
 farther
 farthest
 fascicle
@@ -14582,7 +14278,6 @@ father
 fathers
 fathom
 fatigue
-fatosdesconhecidos.com.br
 fatten
 fatty
 fatuous
@@ -14604,10 +14299,8 @@ fax
 fay
 faze
 fb
-fbcdn.net
 fbi
 fc
-fc2.com
 fcc
 fd
 fda
@@ -14644,13 +14337,11 @@ fed
 federal
 federate
 federation
-fedex.com
 fee
 feeble
 feed
 feedback
 feeding
-feedly.com
 feeds
 feel
 feeling
@@ -14756,7 +14447,6 @@ fiddlehead
 fiddlestick
 fide
 fidelity
-fidelity.com
 fidget
 fiducial
 fief
@@ -14799,10 +14489,8 @@ filbert
 filch
 file
 filed
-filehippo.com
 filename
 files
-files.wordpress.com
 filet
 filial
 filibuster
@@ -14922,7 +14610,6 @@ fist
 fisticuff
 fisting
 fit
-fitbit.com
 fitful
 fitness
 fits
@@ -14930,7 +14617,6 @@ fitted
 fitting
 five
 fivefold
-fiverr.com
 fix
 fixate
 fixed
@@ -14972,7 +14658,6 @@ flashback
 flashers
 flashing
 flashlight
-flashx.tv
 flashy
 flask
 flat
@@ -15018,7 +14703,6 @@ flexural
 flexure
 flick
 flickr
-flickr.com
 flies
 flight
 flights
@@ -15031,7 +14715,6 @@ flintlock
 flinty
 flip
 flipflop
-flipkart.com
 flippant
 flirt
 flirtation
@@ -15172,7 +14855,6 @@ font
 fonts
 foo
 food
-foodnetwork.com
 foods
 foodstuff
 fool
@@ -15207,14 +14889,12 @@ forbade
 forbear
 forbearance
 forbes
-forbes.com
 forbid
 forbidden
 forbidding
 forbore
 forborne
 force
-force.com
 forced
 forceful
 forces
@@ -15333,7 +15013,6 @@ fox
 foxglove
 foxhole
 foxhound
-foxnews.com
 foxtail
 foxtrot
 foxy
@@ -15390,7 +15069,6 @@ frederick
 free
 free photography stock
 free tv shows
-free.fr
 freeboot
 freebsd
 freedman
@@ -15404,7 +15082,6 @@ freeload
 freely
 freeman
 freemen
-freepik.com
 freestone
 freethink
 freeware
@@ -15454,7 +15131,6 @@ frisky
 fritillary
 fritter
 friv
-friv.com
 frivolity
 frivolous
 frizzle
@@ -15593,7 +15269,6 @@ fx
 fy
 g
 g's
-g2a.com
 ga
 gab
 gabardine
@@ -15657,15 +15332,9 @@ gambol
 game
 gamecock
 gamecube
-gamefaqs.com
-gameforge.com
-gamepedia.com
-gamer.com.tw
-gamersky.com
 games
 gamesmanship
 gamespot
-gamespot.com
 gamete
 gamin
 gaming
@@ -15684,7 +15353,6 @@ gannet
 gantlet
 gantry
 gap
-gap.com
 gape
 gaps
 gar
@@ -15703,7 +15371,6 @@ garish
 garland
 garlic
 garmin
-garmin.com
 garner
 garnet
 garnish
@@ -15750,18 +15417,14 @@ gave
 gavel
 gavotte
 gawk
-gawker.com
 gawky
 gay
 gays
 gaze
 gazebo
 gazelle
-gazeta.pl
-gazetaexpress.com
 gazette
 gazpacho
-gazzetta.it
 gb
 gba
 gbp
@@ -15771,7 +15434,6 @@ gd
 gdp
 ge
 gear
-gearbest.com
 gecko
 gee
 geek
@@ -15816,7 +15478,6 @@ genii
 genital
 genitive
 genius
-genius.com
 genome
 genotype
 genre
@@ -15840,7 +15501,6 @@ geocentric
 geochemical
 geochemistry
 geochronology
-geocities.jp
 geode
 geodesic
 geodesy
@@ -15884,11 +15544,9 @@ gestural
 gesture
 get
 getaway
-getpocket.com
 gets
 getting
 geyser
-gfycat.com
 gg
 ghana
 ghast
@@ -15926,7 +15584,6 @@ gigahertz
 gigantic
 gigavolt
 gigawatt
-gigazine.net
 gigging
 giggle
 gila
@@ -15943,7 +15600,6 @@ gingham
 ginkgo
 ginmill
 ginseng
-giphy.com
 giraffe
 gird
 girdle
@@ -15955,19 +15611,14 @@ girls
 girt
 girth
 gis
-gismeteo.ru
 gist
-github.com
-github.io
 give
 giveaway
-givemesport.com
 given
 gives
 giveth
 giving
 gizmo
-gizmodo.com
 gizzard
 gjetost
 gl
@@ -15992,7 +15643,6 @@ glare
 glasgow
 glass
 glass pane
-glassdoor.com
 glasses
 glassine
 glassware
@@ -16021,7 +15671,6 @@ gloat
 glob
 global
 globe
-globo.com
 globular
 globule
 globulin
@@ -16068,13 +15717,9 @@ glycol
 glyph
 gm
 gmail
-gmanetwork.com
-gmarket.co.kr
 gmbh
 gmc
 gmt
-gmw.cn
-gmx.net
 gnarl
 gnash
 gnat
@@ -16086,10 +15731,8 @@ gnomonic
 gnostic
 gnu
 go
-go.com
 goad
 goal
-goal.com
 goals
 goat
 gob
@@ -16099,7 +15742,6 @@ gobiid
 gobiids
 goblet
 god
-godaddy.com
 goddess
 godfather
 godhead
@@ -16111,7 +15753,6 @@ godsend
 godson
 godwit
 goes
-gofundme.com
 gog
 goggle
 gogo
@@ -16134,11 +15775,9 @@ gondola
 gone
 gong
 gonna
-goo.ne.jp
 goober
 good
 goodbye
-goodreads.com
 goods
 goodwill
 goody
@@ -16146,73 +15785,6 @@ goof
 goofy
 google
 google maps
-google.ae
-google.at
-google.az
-google.be
-google.bg
-google.by
-google.ca
-google.ch
-google.cl
-google.cn
-google.co.id
-google.co.il
-google.co.in
-google.co.jp
-google.co.kr
-google.co.nz
-google.co.th
-google.co.uk
-google.co.ve
-google.co.za
-google.com
-google.com.ar
-google.com.au
-google.com.br
-google.com.co
-google.com.do
-google.com.ec
-google.com.eg
-google.com.hk
-google.com.kw
-google.com.mx
-google.com.my
-google.com.ng
-google.com.pe
-google.com.ph
-google.com.pk
-google.com.sa
-google.com.sg
-google.com.tr
-google.com.tw
-google.com.ua
-google.com.vn
-google.cz
-google.de
-google.dk
-google.dz
-google.es
-google.fi
-google.fr
-google.gr
-google.hr
-google.hu
-google.ie
-google.it
-google.kz
-google.lk
-google.lt
-google.nl
-google.no
-google.pl
-google.pt
-google.ro
-google.rs
-google.ru
-google.se
-google.sk
-googleusercontent.com
 goose
 gooseberry
 gopher
@@ -16449,7 +16021,6 @@ groundwater
 groundwork
 group
 groupoid
-groupon.com
 groups
 grouse
 grout
@@ -16474,7 +16045,6 @@ grunt
 gryphon
 gs
 gsm
-gsmarena.com
 gst
 gt
 gtk
@@ -16567,7 +16137,6 @@ guy
 guyana
 guys
 guzzle
-gyazo.com
 gym
 gymnasium
 gymnast
@@ -16595,7 +16164,6 @@ haanepoots
 haar
 haars
 habeas
-haber7.com
 haberdashery
 habit
 habitant
@@ -16669,7 +16237,6 @@ halt
 halvah
 halve
 ham
-hamariweb.com
 hamburg
 hamburger
 hamilton
@@ -16727,7 +16294,6 @@ handwaving
 handwrite
 handwritten
 handy
-handycafe.com
 handyman
 handymen
 hang
@@ -16744,8 +16310,6 @@ hank
 hans
 hansen
 hansom
-hao123.com
-haosou.com
 hap
 haphazard
 haploid
@@ -16839,8 +16403,6 @@ hatchet
 hatchway
 hate
 hateful
-hatena.ne.jp
-hatenablog.com
 hater
 hath
 hatred
@@ -16875,13 +16437,9 @@ hazel
 hazelnut
 hazy
 hb
-hbogo.com
 hc
-hclips.com
 hd
-hdfcbank.com
 hdtv
-hdzog.com
 he
 he'd
 he'll
@@ -17030,7 +16588,6 @@ henry
 hentai
 hepatica
 hepatitis
-hepsiburada.com
 heptane
 her
 herald
@@ -17079,7 +16636,6 @@ heroin
 heroine
 heroism
 heron
-heroquizz.com
 herpes
 herpetology
 herringbone
@@ -17088,7 +16644,6 @@ hertz
 hesitant
 hesitate
 hesitater
-hespress.com
 heterocyclic
 heterodyne
 heterogamous
@@ -17112,7 +16667,6 @@ hexane
 hey
 heyday
 hh
-hh.ru
 hi
 hiatus
 hibachi
@@ -17172,10 +16726,8 @@ hilltop
 hilly
 hilt
 hilton
-hilton.com
 hilum
 him
-himado.in
 himself
 hind
 hindmost
@@ -17233,7 +16785,6 @@ hiv
 hive
 hk
 hl
-hm.com
 ho
 hoagie
 hoagy
@@ -17300,7 +16851,6 @@ homebound
 homebuilder
 homebuilding
 homecoming
-homedepot.com
 homeland
 homeless
 homemade
@@ -17378,7 +16928,6 @@ hoop
 hoopla
 hoosegow
 hoot
-hootsuite.com
 hooves
 hop
 hope
@@ -17453,16 +17002,12 @@ hotbox
 hotel
 hotelman
 hotels
-hotels.com
 hotelscom
 hotfoot
 hothead
 hothouse
 hotmail
-hotmovs.com
-hotnewhiphop.com
 hotrod
-hotstar.com
 hottest
 hough
 hound
@@ -17487,7 +17032,6 @@ housewives
 housework
 housing
 houston
-houzz.com
 hove
 hovel
 hover
@@ -17499,12 +17043,10 @@ howl
 howsoever
 howsomever
 howto
-howtogeek.com
 hoy
 hoyden
 hoydenish
 hp
-hp.com
 hq
 hr
 href
@@ -17514,14 +17056,11 @@ ht
 html
 http
 hu
-huaban.com
-huanqiu.com
 hub
 hubbub
 hubby
 hubcap
 hubris
-hubspot.com
 huck
 huckleberry
 huckster
@@ -17529,7 +17068,6 @@ huddle
 hudson
 hue
 huff
-huffingtonpost.com
 hug
 huge
 hugging
@@ -17541,7 +17079,6 @@ hulk
 hull
 hullaballoo
 hullabaloo
-hulu.com
 hum
 human
 humane
@@ -17591,7 +17128,6 @@ hurrah
 hurray
 hurricane
 hurried
-hurriyet.com.tr
 hurry
 hurt
 hurtle
@@ -17693,7 +17229,6 @@ hyundai
 hz
 i
 i's
-i.e
 ia
 iambic
 ian
@@ -17701,7 +17236,6 @@ ibex
 ibid
 ibis
 ibm
-ibm.com
 ic
 ice
 ice spikes
@@ -17711,11 +17245,8 @@ icecap
 iceland
 iceman
 ichneumon
-icicibank.com
 icicle
 icky
-icloud.com
-icolor.com.cn
 icon
 iconoclasm
 iconoclast
@@ -17756,7 +17287,6 @@ idiot
 idiotic
 idle
 idly
-idnes.cz
 idol
 idolatry
 ids
@@ -17765,10 +17295,8 @@ idyllic
 ie
 ieee
 if
-ifeng.com
 iffy
 igloo
-ign.com
 igneous
 ignite
 ignition
@@ -17783,7 +17311,6 @@ ii
 iii
 iiwi
 iiwis
-ikea.com
 il
 ileum
 iliac
@@ -17829,9 +17356,7 @@ imbibe
 imbroglio
 imbrue
 imbue
-imdb.com
 img
-imgur.com
 imitable
 imitate
 immaculate
@@ -17958,7 +17483,6 @@ impregnable
 impregnate
 impresario
 impress
-impress.co.jp
 impressed
 impressible
 impression
@@ -17990,7 +17514,6 @@ impunity
 impure
 imputation
 impute
-imzog.com
 in
 inability
 inaccessible
@@ -18078,7 +17601,6 @@ incognito
 incoherent
 incombustible
 income
-incometaxindiaefiling.gov.in
 incoming
 incommensurable
 incommensurate
@@ -18146,7 +17668,6 @@ indecision
 indecisive
 indecomposable
 indeed
-indeed.com
 indefatigable
 indefensible
 indefinable
@@ -18159,7 +17680,6 @@ indentation
 indenture
 independence
 independent
-independent.co.uk
 independently
 indescribable
 indestructible
@@ -18170,15 +17690,10 @@ index
 indexed
 indexes
 india
-india.com
-indiamart.com
 indian
 indiana
 indianapolis
-indianexpress.com
-indianrail.gov.in
 indians
-indiatimes.com
 indicant
 indicate
 indicated
@@ -18360,7 +17875,6 @@ information
 informational
 informative
 informed
-infoseek.co.jp
 infra
 infract
 infrared
@@ -18371,7 +17885,6 @@ infuriate
 infuse
 infusible
 infusion
-infusionsoft.com
 infusoria
 ing
 ingather
@@ -18467,7 +17980,6 @@ inputs
 inputting
 inquest
 inquire
-inquirer.net
 inquiries
 inquiry
 inquisition
@@ -18526,7 +18038,6 @@ inspire
 inspired
 instable
 instagram
-instagram.com
 install
 installation
 installations
@@ -18552,13 +18063,11 @@ institution
 institutional
 institutions
 instruct
-instructables.com
 instruction
 instructional
 instructions
 instructor
 instructors
-instructure.com
 instrument
 instrumental
 instrumentation
@@ -18595,7 +18104,6 @@ integration
 integrity
 integument
 intel
-intel.com
 intellect
 intellectual
 intelligence
@@ -18635,7 +18143,6 @@ interfere
 interference
 interferometer
 interferon
-interia.pl
 interim
 interior
 interject
@@ -18652,7 +18159,6 @@ internescine
 internet
 internet marketing
 internet marketing advertising
-internethaber.com
 internetreal
 internship
 interpolate
@@ -18694,7 +18200,6 @@ intimater
 intimidate
 intl
 into
-intoday.in
 intolerable
 intolerant
 intonate
@@ -18727,7 +18232,6 @@ intrude
 intrusion
 intrusive
 intuit
-intuit.com
 intuition
 intuitive
 inundate
@@ -18763,7 +18267,6 @@ investigator
 investigators
 investigatory
 investing
-investing.com
 investment
 investments
 investor
@@ -18816,7 +18319,6 @@ ipod
 ips
 ipsilateral
 ipso
-iqiyi.com
 ir
 ira
 iran
@@ -18824,7 +18326,6 @@ iraq
 iraqi
 irate
 irc
-irctc.co.in
 ire
 ireland
 iridium
@@ -18877,11 +18378,9 @@ irritant
 irritate
 irruption
 irs
-irs.gov
 is
 isa
 isaac
-isanalyze.com
 isbn
 isentropic
 isinglass
@@ -18914,7 +18413,6 @@ issuant
 issue
 issued
 issues
-issuu.com
 ist
 istanbul
 isthmus
@@ -18933,7 +18431,6 @@ items
 iterate
 itinerant
 itinerary
-itmedia.co.jp
 its
 itsa
 itself
@@ -18948,7 +18445,6 @@ ja
 jaap
 jaaps
 jab
-jabong.com
 jack
 jackal
 jackanapes
@@ -18993,7 +18489,6 @@ janitorial
 january
 japan
 japanese
-japanpost.jp
 jar
 jargon
 jason
@@ -19001,7 +18496,6 @@ jasper
 jaundice
 jaunty
 java
-java.com
 javascript
 javelin
 jaw
@@ -19010,9 +18504,7 @@ jay
 jazz
 jazzy
 jc
-jcpenney.com
 jd
-jd.com
 je
 je BOLLE KANKER MOEDER
 jealous
@@ -19061,9 +18553,7 @@ jigsaw
 jill
 jilt
 jim
-jimdo.com
 jimmy
-jin115.com
 jingle
 jinx
 jitter
@@ -19140,7 +18630,6 @@ jp
 jpeg
 jpg
 jr
-jrj.com.cn
 js
 juan
 jubilant
@@ -19205,7 +18694,6 @@ jurisprudential
 juror
 jury
 just
-justdial.com
 justice
 justiciable
 justify
@@ -19224,7 +18712,6 @@ juxtaposition
 jvc
 k
 k's
-k618.cn
 ka
 kaal
 kaama
@@ -19232,7 +18719,6 @@ kaamas
 kaas
 kai
 kaiser
-kakaku.com
 kale
 kaleidescope
 kaleidoscope
@@ -19244,7 +18730,6 @@ kangaroo
 kansas
 kaolin
 kaolinite
-kapanlagi.com
 kapok
 kappa
 karaoke
@@ -19253,8 +18738,6 @@ karen
 karl
 karma
 karyatid
-kaskus.co.id
-kat.cr
 kate
 kathy
 katie
@@ -19264,13 +18747,11 @@ kava
 kawaii
 kawaiis
 kay
-kayak.com
 kayo
 kazakhstan
 kazoo
 kb
 kde
-kdnet.net
 keddah
 keel
 keelson
@@ -19328,7 +18809,6 @@ kibitz
 kick
 kickback
 kickoff
-kickstarter.com
 kid
 kiddie
 kidnap
@@ -19338,7 +18818,6 @@ kidney
 kids
 kierkegaardian
 kijiji
-kijiji.ca
 kill
 killdeer
 killed
@@ -19372,14 +18851,11 @@ kingston
 kink
 kinkajou
 kinky
-kinogo.co
-kinopoisk.ru
 kinsman
 kinsmen
 kiosk
 kirk
 kiss
-kissanime.to
 kissing
 kit
 kitchen
@@ -19441,20 +18917,15 @@ ko
 koala
 kodak
 kohlrabi
-kohls.com
 koinonia
 kola
 kolkhoz
 kombu
-kompas.com
 kong
-kooora.com
-korabia.com
 korea
 korean
 korhaan
 kosher
-kotaku.com
 kraal
 kraaled
 kraaling
@@ -19490,7 +18961,6 @@ laagers
 laari
 laaris
 lab
-labanquepostale.fr
 label
 labeled
 labels
@@ -19508,7 +18978,6 @@ labradorite
 labs
 labyrinth
 lac
-lacaixa.es
 lace
 lacerate
 lacewing
@@ -19600,7 +19069,6 @@ lantern
 lanthanide
 lanthanum
 lap
-lapatilla.com
 lapel
 lapelled
 lapidary
@@ -19651,7 +19119,6 @@ latest
 latex
 lath
 lathe
-latimes.com
 latin
 latina
 latinas
@@ -19715,7 +19182,6 @@ layoff
 layout
 layperson
 layup
-lazada.co.id
 laze
 lazy
 lazybones
@@ -19725,7 +19191,6 @@ lc
 lcd
 ld
 le
-le.com
 lea
 leach
 leachate
@@ -19743,7 +19208,6 @@ leaf
 leaflet
 leafy
 league
-leagueoflegends.com
 leak
 leakage
 leaky
@@ -19772,7 +19236,6 @@ leaves
 leaving
 lebanon
 lebensraum
-leboncoin.fr
 lecher
 lechery
 lectern
@@ -19796,7 +19259,6 @@ leftward
 lefty
 leg
 legacy
-legacy.com
 legal
 legally
 legate
@@ -19834,7 +19296,6 @@ lemma
 lemming
 lemon
 lemonade
-lemonde.fr
 lemur
 len
 lend
@@ -19846,11 +19307,9 @@ lengthen
 lengthwise
 lengthy
 lenient
-lenovo.com
 lens
 lenses
 lent
-lenta.ru
 lenticular
 lentil
 leo
@@ -19863,7 +19322,6 @@ leper
 lepidolite
 lepidopterist
 leprosy
-lequipe.fr
 les
 lesbian
 lesbians
@@ -19929,7 +19387,6 @@ libelous
 liberal
 liberate
 liberia
-libero.it
 libertarian
 libertine
 liberty
@@ -19964,12 +19421,9 @@ lies
 lieu
 lieutenant
 life
-life.tw
 lifeblood
 lifeboat
-lifebuzz.com
 lifeguard
-lifehacker.com
 lifelong
 lifespan
 lifestyle
@@ -19999,7 +19453,6 @@ likelihood
 likely
 liken
 likes
-likes.com
 likewise
 lil
 lilac
@@ -20033,7 +19486,6 @@ linda
 linden
 lindsay
 line
-line.me
 lineage
 lineal
 linear
@@ -20056,7 +19508,6 @@ liniment
 link
 linkage
 linked
-linkedin.com
 linking
 links
 linoleic
@@ -20071,7 +19522,6 @@ lip
 lipid
 lips
 lipstick
-liputan6.com
 liquefaction
 liquefy
 liqueur
@@ -20082,8 +19532,6 @@ lisa
 lisle
 lisp
 list
-list-manage.com
-list.tmall.com
 listed
 listen
 listening
@@ -20124,23 +19572,14 @@ liturgy
 lituus
 lituuses
 live
-live.com
 livecam
 lived
-livedoor.biz
-livedoor.com
-livedoor.jp
-liveinternet.ru
-livejasmin.com
-livejournal.com
-liveleak.com
 liven
 liver
 liverpool
 liverwort
 livery
 lives
-livescore.com
 livesex
 livestock
 liveth
@@ -20161,7 +19600,6 @@ lo
 load
 loaded
 loading
-loading-delivery2.com
 loads
 loaf
 loam
@@ -20334,7 +19772,6 @@ low
 lowboy
 lowdown
 lower
-lowes.com
 lowest
 lowland
 lows
@@ -20347,7 +19784,6 @@ lp
 ls
 lt
 ltd
-ltn.com.tw
 lu
 lubricant
 lubricate
@@ -20391,7 +19827,6 @@ lummox
 lump
 lumpish
 lumpy
-lun.com
 lunacy
 lunar
 lunary
@@ -20489,7 +19924,6 @@ macromolecule
 macrophage
 macroscopic
 macrostructure
-macys.com
 mad
 madagascar
 madam
@@ -20551,9 +19985,7 @@ maiden
 maidenhair
 maidservant
 mail
-mail.ru
 mailbox
-mailchimp.com
 mailed
 mailing
 mailman
@@ -20581,7 +20013,6 @@ major
 majority
 make
 make money blogging
-makemytrip.com
 maker
 makers
 makes
@@ -20631,7 +20062,6 @@ malta
 maltose
 maltreat
 maltster
-mama.cn
 mambo
 mamma
 mammal
@@ -20691,7 +20121,6 @@ manner
 mannitol
 manometer
 manor
-manoramaonline.com
 manpower
 manse
 manservant
@@ -20722,14 +20151,12 @@ manzanita
 map
 maple
 mapping
-mapquest.com
 maps
 mar
 marathon
 maraud
 marble
 marc
-marca.com
 march
 marco
 marconiing
@@ -20767,7 +20194,6 @@ marketeer
 marketing
 marketplace
 markets
-marketwatch.com
 marketwise
 marking
 markka
@@ -20776,7 +20202,6 @@ markkas
 marks
 marksman
 marksmen
-marktplaats.nl
 marlin
 marmalade
 marmoset
@@ -20790,7 +20215,6 @@ marriage
 marriageable
 married
 marriott
-marriott.com
 marrow
 marrowbone
 marry
@@ -20822,7 +20246,6 @@ mascara
 masculine
 maser
 mash
-mashable.com
 mask
 masochism
 masochist
@@ -20851,9 +20274,7 @@ mastodon
 masturbating
 masturbation
 mat
-mataharimall.com
 match
-match.com
 matchbook
 matched
 matches
@@ -20917,7 +20338,6 @@ mayapple
 maybe
 mayfly
 mayhem
-mayoclinic.org
 mayonnaise
 mayor
 mayoral
@@ -20927,9 +20347,7 @@ maze
 mazurka
 mb
 mba
-mbc.net
 mc
-mcafee.com
 mcdonald
 md
 me
@@ -20960,7 +20378,6 @@ measures
 measuring
 meat
 meaty
-meaww.com
 mechanic
 mechanical
 mechanics
@@ -20973,8 +20390,6 @@ medal
 medallion
 meddle
 media
-media.tumblr.com
-mediafire.com
 medial
 median
 mediate
@@ -20998,7 +20413,6 @@ meditate
 meditation
 mediterranean
 medium
-medium.com
 medlar
 medley
 medline
@@ -21009,10 +20423,7 @@ meetinghouse
 meetings
 meets
 meetup
-meetup.com
 mega
-mega.co.nz
-mega.nz
 megabit
 megabyte
 megahertz
@@ -21097,10 +20508,6 @@ mentor
 menu
 menus
 meow
-mercadolibre.com.ar
-mercadolibre.com.mx
-mercadolibre.com.ve
-mercadolivre.com.br
 mercantile
 mercedes
 mercenary
@@ -21113,7 +20520,6 @@ mercurial
 mercuric
 mercury
 mercy
-merdeka.com
 mere
 merely
 meretricious
@@ -21146,7 +20552,6 @@ message
 messages
 messaging
 messenger
-messenger.com
 messiah
 messianic
 messieurs
@@ -21219,7 +20624,6 @@ mg
 mh
 mhz
 mi
-mi.com
 mia
 miami
 miaow
@@ -21241,9 +20645,6 @@ micron
 microphone
 microscopy
 microsoft
-microsoft.com
-microsoftonline.com
-microsoftstore.com
 microwave
 mid
 midband
@@ -21292,7 +20693,6 @@ mike
 mil
 mila
 milan
-milanuncios.com
 milch
 mild
 mildew
@@ -21329,7 +20729,6 @@ millionfold
 millions
 millionth
 millipede
-milliyet.com.tr
 mills
 millstone
 milord
@@ -21355,7 +20754,6 @@ minds
 mine
 minecart
 minecraft
-minecraft.net
 minefield
 mineral
 mineralogy
@@ -21394,7 +20792,6 @@ mins
 minstrel
 minstrelsy
 mint
-mint.com
 minuend
 minuet
 minus
@@ -21409,7 +20806,6 @@ miraculous
 mirage
 mire
 mirror
-mirror.co.uk
 mirrors
 mirth
 misanthrope
@@ -21428,7 +20824,6 @@ mishegaasen
 misnomer
 misogynist
 misogyny
-misrjournal.com
 miss
 missed
 misshapen
@@ -21447,7 +20842,6 @@ mistletoe
 mistress
 misty
 mit
-mit.edu
 mitchell
 mite
 miterwort
@@ -21462,14 +20856,12 @@ mitten
 mix
 mixed
 mixer
-mixi.jp
 mixing
 mixture
 mixup
 mj
 ml
 mlb
-mlb.com
 mls
 mm
 mn
@@ -21482,7 +20874,6 @@ mob drops
 mob spawner
 mobcap
 mobile
-mobile.de
 mobiles
 mobility
 mobster
@@ -21559,7 +20950,6 @@ momentous
 moments
 momentum
 mommy
-momoshop.com.tw
 moms
 mon
 monaco
@@ -21576,7 +20966,6 @@ monel
 monetarism
 monetary
 money
-moneycontrol.com
 moneymake
 moneywort
 mongolia
@@ -21752,7 +21141,6 @@ moving
 mow
 mozambique
 mozilla
-mozilla.org
 mozzarella
 mp
 mpeg
@@ -21768,7 +21156,6 @@ msgid
 msgstr
 msie
 msn
-msn.com
 mt
 mtv
 mu
@@ -21907,7 +21294,6 @@ mv
 mw
 mx
 my
-myanimelist.net
 myanmar
 mycelium
 mycobacteria
@@ -21918,12 +21304,8 @@ myel
 myeline
 myeloid
 myers
-myfitnesspal.com
 mylar
 mynah
-mynavi.jp
-mynet.com
-myntra.com
 myocardial
 myocardium
 myofibril
@@ -21946,10 +21328,8 @@ mystique
 myth
 mythic
 mythology
-myway.com
 n
 n's
-n121adserv.com
 na
 naam
 naams
@@ -21982,9 +21362,7 @@ nameplate
 names
 namesake
 namespace
-nametests.com
 namibia
-namu.wiki
 nancy
 nano
 nanosecond
@@ -22026,7 +21404,6 @@ naturals
 nature
 naturopath
 naughty
-naukri.com
 nauplii
 naupliiform
 nausea
@@ -22038,8 +21415,6 @@ nav
 naval
 nave
 navel
-naver.com
-naver.jp
 navigable
 navigate
 navigation
@@ -22053,13 +21428,10 @@ nawab
 nay
 nb
 nba
-nba.com
 nbc
-nbcnews.com
 nc
 ncaa
 nd
-ndtv.com
 ne
 near
 nearby
@@ -22126,7 +21498,6 @@ nematocyst
 nematode
 nemesis
 neo
-neobux.com
 neoclassic
 neodymium
 neolithic
@@ -22151,7 +21522,6 @@ nested
 nestle
 net
 netflix
-netflix.com
 nether
 nether fortress
 nether portal
@@ -22162,7 +21532,6 @@ netherlands
 netherrack
 netherworld
 netscape
-netteller.com
 nettle
 nettlesome
 network
@@ -22199,7 +21568,6 @@ newbie
 newborn
 newcastle
 newcomer
-newegg.com
 newel
 newer
 newest
@@ -22228,13 +21596,10 @@ newton
 newwaver
 newwavers
 next
-nextdoor.com
 nextel
-nexusmods.com
 nfl
 ng
 nh
-nhk.or.jp
 nhl
 nhs
 ni
@@ -22254,10 +21619,8 @@ nickname
 nicole
 nicotinamide
 nicotine
-nicovideo.jp
 niece
 nifty
-nifty.com
 niger
 nigeria
 niggardly
@@ -22280,13 +21643,9 @@ nights
 nightshade
 nightshirt
 nighttime
-nih.gov
 nihilism
 nihilist
 nike
-nike.com
-nikkei.com
-nikkeibp.co.jp
 nikon
 nil
 nilpotent
@@ -22321,7 +21680,6 @@ nitrogenous
 nitroglycerine
 nitrous
 nitty
-niuche.com
 nj
 nl
 nm
@@ -22376,7 +21734,6 @@ noon
 noontime
 noose
 nor
-nordstrom.com
 norfolk
 norm
 normal
@@ -22396,7 +21753,6 @@ northward
 northwest
 northwestern
 norton
-norton.com
 norway
 norwegian
 nos
@@ -22447,18 +21803,15 @@ novels
 novelty
 november
 novice
-novinky.cz
 novitiate
 novo
 now
 nowadays
 nowhere
 nowise
-nownews.com
 noxious
 nozzle
 np
-npr.org
 nr
 nroff
 ns
@@ -22531,15 +21884,11 @@ nv
 nvidia
 nw
 ny
-nyaa.se
 nyc
-nydailynews.com
 nylon
 nymph
 nymphomania
 nymphomaniac
-nypost.com
-nytimes.com
 nz
 o
 o'clock
@@ -22699,7 +22048,6 @@ odyssey
 oe
 oecd
 oedipal
-oeeee.com
 oem
 oenology
 oersted
@@ -22712,14 +22060,12 @@ offense
 offensive
 offer
 offered
-offerhaus.link
 offering
 offerings
 offers
 offertory
 offhand
 office
-office.com
 officeholder
 officemate
 officer
@@ -22763,11 +22109,8 @@ oilseed
 oily
 oint
 ok
-ok.ru
 okapi
 okay
-okcupid.com
-okezone.com
 oklahoma
 okra
 ol
@@ -22788,10 +22131,6 @@ oligopoly
 olive
 oliver
 olivine
-olx.com.br
-olx.in
-olx.pl
-olx.ua
 olympic
 olympics
 olympus
@@ -22819,22 +22158,17 @@ omnivore
 omnivorous
 on
 once
-onclickads.net
 oncology
 oncoming
 one
-onedio.com
 onerous
 ones
 oneself
-onet.pl
 onetime
 oneupmanship
 ongoing
 onion
 online
-onlinecreditcenter6.com
-onlinesbi.com
 onlooker
 onlooking
 only
@@ -22846,7 +22180,6 @@ ons
 onset
 onslaught
 ontario
-ontests.me
 onto
 ontogeny
 ontology
@@ -22868,7 +22201,6 @@ open
 opened
 opening
 openings
-openload.co
 opens
 opera
 operable
@@ -22931,11 +22263,9 @@ opulent
 opus
 or
 oracle
-oracle.com
 oracular
 oral
 orange
-orange.fr
 orangeroot
 orangutan
 orate
@@ -23051,7 +22381,6 @@ otherworld
 otiose
 ottawa
 otter
-otto.de
 ou
 oubaas
 oubaases
@@ -23059,13 +22388,11 @@ ouch
 ought
 oughtn't
 ounce
-ouo.io
 our
 ours
 ourselves
 oust
 out
-outbrain.com
 outcome
 outcomes
 outdoor
@@ -23100,7 +22427,6 @@ overcome
 overhead
 overnight
 overseas
-overstock.com
 overt
 overture
 overview
@@ -23142,7 +22468,6 @@ oxygen
 oxygenate
 oyster
 oz
-ozock.com
 ozone
 p
 p's
@@ -23241,20 +22566,16 @@ pan
 panacea
 panama
 panasonic
-panasonic.jp
 pancake
 pancreas
 pancreatic
 panda
-panda.tv
 pandemic
 pandemonium
 pander
-pandora.com
 pane
 panel
 panels
-panet.co.il
 pang
 panhandle
 panic
@@ -23274,7 +22595,6 @@ pantheist
 pantheon
 panther
 panties
-pantip.com
 pantomime
 pantomimic
 pantothenic
@@ -23361,7 +22681,6 @@ paregoric
 parent
 parentage
 parental
-parentanswercentre.com
 parentheses
 parenthesis
 parenthetic
@@ -23470,7 +22789,6 @@ pasture
 pasty
 pat
 patch
-patch.com
 patches
 patchwork
 patchy
@@ -23547,16 +22865,11 @@ payment
 payments
 payoff
 paypal
-paypal.com
 payroll
 pays
-paytm.com
-paytm.in
 pb
 pc
-pch.com
 pci
-pcmag.com
 pcs
 pct
 pd
@@ -23687,7 +23000,6 @@ penury
 peon
 peony
 people
-people.com
 peoples
 pep
 pepper
@@ -23956,7 +23268,6 @@ phosphorous
 phosphorus
 phosphorylate
 photo
-photobucket.com
 photogenic
 photograph
 photographer
@@ -23971,7 +23282,6 @@ photon
 photos
 photoshop
 php
-php.net
 phpbb
 phrase
 phrasemake
@@ -24094,7 +23404,6 @@ pineapple
 ping
 pinhead
 pinhole
-pinimg.com
 pinion
 pink
 pinkie
@@ -24108,7 +23417,6 @@ pins
 pinscher
 pint
 pintail
-pinterest.com
 pinto
 pinwheel
 pinxter
@@ -24154,11 +23462,8 @@ pity
 pivot
 pivotal
 pix
-pixabay.com
 pixel
 pixels
-pixiv.net
-pixnet.net
 pixy
 pizza
 pizzicato
@@ -24261,7 +23566,6 @@ playpen
 playroom
 plays
 playstation
-playstation.com
 plaything
 playtime
 playwright
@@ -24343,7 +23647,6 @@ pm
 pmc
 pmid
 pn
-pnc.com
 pneumatic
 pneumococcus
 pneumonia
@@ -24366,9 +23669,7 @@ poesy
 poet
 poetic
 poetry
-pof.com
 pogo
-pogo.com
 pogrom
 poi
 poignant
@@ -24418,7 +23719,6 @@ politician
 politicians
 politicking
 politico
-politico.com
 politics
 polka
 polkadot
@@ -24498,14 +23798,11 @@ pools
 poop
 poor
 pop
-popads.net
-popcash.net
 pope
 popish
 poplar
 poplin
 poppy
-popsugar.com
 populace
 popular
 popularity
@@ -24524,7 +23821,6 @@ pore
 pork
 porkchop
 porn
-pornhub.com
 porno
 pornographer
 pornography
@@ -24674,7 +23970,6 @@ powwows
 pp
 ppc
 ppm
-ppomppu.co.kr
 pr
 praam
 praams
@@ -24820,10 +24115,8 @@ previous
 previously
 prexy
 prey
-prezi.com
 price
 priced
-priceline.com
 prices
 pricing
 prick
@@ -24842,7 +24135,6 @@ primary
 primate
 prime
 primeval
-primewire.ag
 primitive
 primordial
 primp
@@ -24885,7 +24177,6 @@ prix
 prize
 prizes
 prizewinning
-prjcq.com
 pro
 probabilist
 probability
@@ -25126,7 +24417,6 @@ proteolytic
 protest
 protestant
 protestation
-prothom-alo.com
 prothonotary
 proto
 protocol
@@ -25180,7 +24470,6 @@ proximity
 proxy
 proxy dozer
 prozac
-prpops.com
 prude
 prudent
 prudential
@@ -25338,7 +24627,6 @@ pt
 ptarmigan
 pterodactyl
 pts
-ptt.cc
 pty
 pub
 puberty
@@ -25473,7 +24761,6 @@ pussycat
 put
 putative
 putdown
-putlocker.is
 putrefaction
 putrefy
 putrid
@@ -25512,7 +24799,6 @@ qawwalis
 qawwals
 qc
 qld
-qq.com
 qt
 qty
 qua
@@ -25554,7 +24840,6 @@ qualities
 quality
 qualm
 quandary
-quanjing.com
 quanta
 quantify
 quantile
@@ -25626,7 +24911,6 @@ quiescent
 quiet
 quietly
 quietus
-quikr.com
 quill
 quillwort
 quilt
@@ -25653,7 +24937,6 @@ quitting
 quiver
 quixotic
 quiz
-quizlet.com
 quizzed
 quizzes
 quizzical
@@ -25663,7 +24946,6 @@ quod
 quokka
 quokkas
 quonset
-quora.com
 quorum
 quota
 quotation
@@ -25672,7 +24954,6 @@ quote
 quoted
 quotes
 quotient
-qvc.com
 r
 r's
 ra
@@ -25759,13 +25040,11 @@ raj
 rajah
 rake
 rakish
-rakuten.co.jp
 raleigh
 rally
 ralph
 ram
 ramble
-rambler.ru
 rambunctious
 ramify
 ramp
@@ -25803,7 +25082,6 @@ rapacious
 rapacity
 rape
 rapid
-rapidgator.net
 rapidly
 rapids
 rapier
@@ -25813,7 +25091,6 @@ rapt
 raptor
 raptorial
 rapture
-rarbg.to
 rare
 rarefy
 rarely
@@ -25862,11 +25139,9 @@ raze
 razor
 razorback
 rb
-rbc.ru
 rc
 rca
 rd
-rdsa2013.com
 re
 reach
 reached
@@ -25893,7 +25168,6 @@ realized
 really
 realm
 realtor
-realtor.com
 realtors
 realty
 ream
@@ -26004,17 +25278,11 @@ redbud
 redcoat
 redden
 reddish
-reddit.com
-reddituploads.com
 redeem
 redemption
 redemptive
-redfin.com
 redhead
-rediff.com
-redirectvoluum.com
 redneck
-rednet.cn
 redolent
 redound
 redpoll
@@ -26024,7 +25292,6 @@ redstone
 redstone circuit
 redstone lamp
 redtop
-redtube.com
 reduce
 reduced
 reduces
@@ -26139,7 +25406,6 @@ rehabilitation
 rehearsal
 reid
 reign
-reimageplus.com
 reimbursable
 reimburse
 rein
@@ -26308,7 +25574,6 @@ reproduction
 reproductive
 reptile
 reptilian
-repubblica.it
 republic
 republican
 republicans
@@ -26336,7 +25601,6 @@ rescue
 research
 researcher
 researchers
-researchgate.net
 reseller
 resemblant
 resemble
@@ -26431,7 +25695,6 @@ ret
 retail
 retailer
 retailers
-retailmenot.com
 retain
 retained
 retaliate
@@ -26475,7 +25738,6 @@ returning
 returns
 reunion
 reuters
-reuters.com
 rev
 reveal
 revealed
@@ -26496,7 +25758,6 @@ reverie
 reversal
 reverse
 reversible
-reverso.net
 revert
 review
 reviewed
@@ -26554,7 +25815,6 @@ rhyme
 rhythm
 rhythmic
 ri
-ria.ru
 rib
 ribald
 ribbon
@@ -26601,7 +25861,6 @@ right
 righteous
 rightful
 rightmost
-rightmove.co.uk
 rights
 rightward
 rigid
@@ -26680,7 +25939,6 @@ roberts
 robertson
 robin
 robinson
-roblox.com
 robot
 robotics
 robots
@@ -26769,7 +26027,6 @@ rotor
 rototill
 rotten
 rotten flesh
-rottentomatoes.com
 rotund
 rotunda
 rouge
@@ -26827,7 +26084,6 @@ rrp
 rs
 rss
 rt
-rt.com
 ru
 rub
 rubbed
@@ -26913,26 +26169,22 @@ ruth
 ruthenium
 ruthless
 rutile
-rutracker.org
 rutty
 rv
 rw
 rwanda
 rx
 ryan
-ryanair.com
 rye
 s
 s's
 sa
 saag
 saags
-sabah.com.tr
 sabbath
 sabbatical
 sable
 sabotage
-sabq.org
 sabra
 sac
 saccharine
@@ -26977,7 +26229,6 @@ sagging
 sagittal
 sago
 saguaro
-sahibinden.com
 said
 sail
 sailboat
@@ -26990,7 +26241,6 @@ sake
 sakkoi
 sakkos
 sakkoses
-sakura.ne.jp
 salaam
 salaamed
 salaaming
@@ -27004,7 +26254,6 @@ salary
 sale
 salem
 sales
-salesforce.com
 salesgirl
 saleslady
 salesman
@@ -27051,7 +26300,6 @@ sample
 samples
 sampling
 samsung
-samsung.com
 samuel
 samurai
 san
@@ -27088,7 +26336,6 @@ sanitarium
 sanitary
 sanitate
 sank
-sankei.com
 sans
 santa
 sanyo
@@ -27163,7 +26410,6 @@ savannah
 savant
 save
 saved
-savefrom.net
 saver
 saves
 saving
@@ -27200,7 +26446,6 @@ says
 sayyid
 sayyids
 sb
-sberbank.ru
 sbjct
 sc
 scab
@@ -27300,7 +26545,6 @@ schooner
 sci
 sciatica
 science
-sciencedirect.com
 sciences
 scientific
 scientist
@@ -27372,7 +26616,6 @@ screwworm
 screwworms
 screwy
 scribble
-scribd.com
 scribe
 scrim
 scrimmage
@@ -27445,7 +26688,6 @@ searched
 searches
 searching
 searchlight
-sears.com
 seas
 seashell
 seashore
@@ -27453,7 +26695,6 @@ seaside
 season
 seasonal
 seasons
-seasonvar.ru
 seat
 seater
 seating
@@ -27493,7 +26734,6 @@ secular
 secure
 secured
 securely
-secureserver.net
 securities
 security
 sedan
@@ -27531,7 +26771,6 @@ seep
 seepage
 seersucker
 sees
-seesaa.net
 seethe
 seething
 sega
@@ -27726,7 +26965,6 @@ sewerage
 sewing
 sewn
 sex
-sex.com
 sexcam
 sexo
 sextarii
@@ -27740,14 +26978,10 @@ sexual
 sexuality
 sexually
 sexy
-seznam.cz
 sf
-sfgate.com
 sforzando
-sfr.fr
 sg
 sh
-sh.st
 shabby
 shack
 shackle
@@ -27794,7 +27028,6 @@ shanghaiing
 shank
 shannon
 shanty
-shaparak.ir
 shape
 shaped
 shapes
@@ -27805,7 +27038,6 @@ sharecropper
 shared
 shareholder
 shareholders
-sharepoint.com
 shares
 shareware
 sharing
@@ -27927,8 +27159,6 @@ shook
 shoot
 shooting
 shop
-shopclues.com
-shopify.com
 shopkeep
 shopper
 shoppercom
@@ -28023,7 +27253,6 @@ shut
 shutdown
 shutoff
 shutout
-shutterstock.com
 shuttle
 shuttlecock
 shy
@@ -28161,7 +27390,6 @@ simultaneity
 simultaneous
 simultaneously
 sin
-sina.com.cn
 since
 sincere
 sine
@@ -28205,7 +27433,6 @@ sister
 sisters
 sit
 site
-siteadvisor.com
 sitemap
 sites
 sitting
@@ -28291,14 +27518,12 @@ skullcap
 skullduggery
 skunk
 sky
-sky.com
 skyhook
 skyjack
 skylark
 skylight
 skyline
 skype
-skype.com
 skyrocket
 skyscrape
 skyward
@@ -28308,7 +27533,6 @@ sl
 slab
 slabs
 slack
-slack.com
 slacken
 sladang
 slag
@@ -28325,7 +27549,6 @@ slapstick
 slash
 slat
 slate
-slate.com
 slater
 slaughter
 slaughterhouse
@@ -28356,11 +27579,9 @@ sleuthhounds
 slew
 slice
 slick
-slickdeals.net
 slid
 slide
 slides
-slideshare.net
 slideshow
 slight
 slightly
@@ -28368,7 +27589,6 @@ slim
 slime
 slime ball
 slime block
-slimspots.com
 slimy
 sling
 slingshot
@@ -28380,7 +27600,6 @@ slippery
 slipshod
 slit
 slither
-slither.io
 sliver
 slivery
 slob
@@ -28492,7 +27711,6 @@ snakebite
 snakeroot
 snap
 snapback
-snapdeal.com
 snapdragon
 snappish
 snappy
@@ -28547,8 +27765,6 @@ snug
 snuggle
 snuggly
 so
-so-net.ne.jp
-so.com
 soa
 soak
 soap
@@ -28586,12 +27802,9 @@ softball
 softcover
 soften
 softly
-softonic.com
 software
 softwood
 soggy
-sogou.com
-sohu.com
 soignee
 soil
 soiree
@@ -28708,7 +27921,6 @@ sort
 sorted
 sortie
 sorts
-soso.com
 sou
 souffle
 sough
@@ -28720,17 +27932,14 @@ soul speed
 soulful
 souls
 sound
-soundcloud.com
 soundproof
 sounds
 soundtrack
 soup
 soupy
-souq.com
 sour
 sourberry
 source
-sourceforge.net
 sources
 sourdough
 sourwood
@@ -28746,7 +27955,6 @@ southland
 southpaw
 southward
 southwest
-southwest.com
 southwestern
 souvenir
 sovereign
@@ -28761,7 +27969,6 @@ sox
 soy
 soya
 soybean
-sozcu.com.tr
 sp
 spa
 space
@@ -28781,7 +27988,6 @@ spangle
 spaniel
 spanish
 spank
-spankbang.com
 spanking
 spar
 sparc
@@ -28867,7 +28073,6 @@ speed
 speedboat
 speedometer
 speeds
-speedtest.net
 speedup
 speedwell
 speedy
@@ -28899,7 +28104,6 @@ spider
 spider eye
 spiderwort
 spidery
-spiegel.de
 spies
 spigot
 spike
@@ -28992,7 +28196,6 @@ sportswriter
 sportswriting
 sporty
 spot
-spotify.com
 spotlight
 spots
 spotty
@@ -29043,7 +28246,6 @@ spy
 spyglass
 spyware
 sq
-sq.cn
 sql
 squabble
 squad
@@ -29053,7 +28255,6 @@ squall
 squamous
 squander
 square
-squarespace.com
 squash
 squashberry
 squashy
@@ -29100,8 +28301,6 @@ stableman
 stablemen
 staccato
 stack
-stackexchange.com
-stackoverflow.com
 stadia
 stadium
 staff
@@ -29164,7 +28363,6 @@ stapedii
 staph
 staphylococcus
 staple
-staples.com
 star
 starboard
 starch
@@ -29195,7 +28393,6 @@ stash
 stasis
 stat
 state
-state.gov
 stated
 statement
 statements
@@ -29244,8 +28441,6 @@ stealth
 stealthy
 steam
 steamboat
-steamcommunity.com
-steampowered.com
 steamy
 stearate
 stearic
@@ -29354,7 +28549,6 @@ stockkeepers
 stockpile
 stockroom
 stocks
-stockstar.com
 stocky
 stodgy
 stoic
@@ -29450,7 +28644,6 @@ strawworms
 stray
 streak
 stream
-streamcloud.eu
 streaming
 streamline
 streams
@@ -29541,7 +28734,6 @@ stuffy
 stukkend
 stultify
 stumble
-stumbleupon.com
 stump
 stumpage
 stumpy
@@ -29574,7 +28766,6 @@ subbookkeeper
 subbookkeepers
 subcommittee
 subdivision
-subito.it
 subject
 subjects
 subjunctive
@@ -29591,7 +28782,6 @@ submitted
 submitting
 subpoena
 subrogation
-subscene.com
 subscribe
 subscriber
 subscribers
@@ -29740,7 +28930,6 @@ sunfish
 sunflower
 sung
 sunglasses
-suning.com
 sunk
 sunken
 sunlight
@@ -30681,7 +29870,6 @@ supertrucks
 supertwist
 supertwists
 superuser
-superuser.com
 superusers
 supervene
 supervened
@@ -30804,7 +29992,6 @@ surtout
 surveillance
 surveillant
 survey
-surveymonkey.com
 surveyor
 surveys
 survival
@@ -30842,7 +30029,6 @@ swab
 swabby
 swachh
 swag
-swagbucks.com
 swain
 swallow
 swallowtail
@@ -30998,7 +30184,6 @@ syntactic
 syntax
 synthesis
 synthetic
-syosetu.com
 syphilis
 syphilitic
 syracuse
@@ -31017,16 +30202,12 @@ systemwide
 syzygy
 t
 t's
-t-mobile.com
-t-online.de
-t.co
 ta
 taal
 taals
 taata
 taatas
 tab
-tabelog.com
 tabernacle
 table
 tableau
@@ -31041,7 +30222,6 @@ tabletop
 tablets
 tabloid
 taboo
-taboola.com
 tabs
 tabu
 tabula
@@ -31093,7 +30273,6 @@ talcum
 tale
 talent
 talented
-taleo.net
 tales
 talisman
 talismanic
@@ -31144,7 +30323,6 @@ tantrum
 tanzania
 tao
 tao quan
-taobao.com
 tap
 tapa
 tape
@@ -31164,11 +30342,9 @@ tarantara
 tarantula
 tardy
 target
-target.com
 targeted
 targets
 tariff
-taringa.net
 tarnish
 taro
 tarpaper
@@ -31256,7 +30432,6 @@ teaspoon
 teaspoonful
 teat
 tech
-techcrunch.com
 technetium
 technic
 technical
@@ -31281,7 +30456,6 @@ teen
 teenage
 teens
 teensy
-teepr.com
 teet
 teeth
 teethe
@@ -31298,13 +30472,9 @@ telecommunicate
 telecommunications
 teleconference
 telegram
-telegram.me
-telegram.org
 telegraph
-telegraph.co.uk
 telegraphy
 telekinesis
-telekom.com
 telemeter
 teleology
 teleost
@@ -31404,7 +30574,6 @@ tern
 ternary
 terpsichorean
 terrace
-terraclicks.com
 terracotta
 terrain
 terramycin
@@ -31480,29 +30649,21 @@ that'd
 that'll
 thatch
 thats
-thatviralfeed.com
 thaw
 the
 theater
 theaters
 theatre
 theatric
-thedailybeast.com
 thee
-thefreedictionary.com
 theft
-theguardian.com
-thehindu.com
 thehun
 their
 theism
 theist
-thekitchn.com
-theladbible.com
 them
 thematic
 theme
-themeforest.net
 themes
 themselves
 then
@@ -31519,7 +30680,6 @@ theoretician
 theories
 theorist
 theory
-thepiratebay.org
 therapeutic
 therapist
 therapy
@@ -31548,16 +30708,11 @@ thermo
 thermophilic
 thermostat
 thesaurus
-thesaurus.com
 these
 theses
 thesis
 thespian
-thesportbible.com
 theta
-thethao247.vn
-theverge.com
-thewatchseries.to
 they
 they'd
 they'll
@@ -31598,7 +30753,6 @@ thirtyfold
 this
 this date
 this'll
-thisav.com
 thistle
 thistledown
 thither
@@ -31713,13 +30867,11 @@ thyrotoxic
 thyroxine
 thyself
 ti
-tianya.cn
 tibet
 tibia
 tic
 tick
 ticket
-ticketmaster.com
 tickets
 tickle
 ticklish
@@ -31756,13 +30908,10 @@ till
 tilt
 tilth
 tim
-tim.it
 timber
 timberland
 timbre
 time
-time.com
-timeanddate.com
 timeline
 timely
 timeout
@@ -31806,7 +30955,6 @@ tired
 tires
 tiresome
 tissue
-tistory.com
 tit
 titanate
 titanic
@@ -31827,12 +30975,9 @@ titten
 titular
 tizzy
 tm
-tmall.com
 tmp
-tmz.com
 tn
 to
-to8to.com
 toad
 toady
 toast
@@ -31841,7 +30986,6 @@ tobago
 toccata
 today
 today'll
-todayhumor.co.kr
 todd
 toddle
 toddler
@@ -31861,7 +31005,6 @@ toilet
 toilsome
 tokamak
 token
-tokopedia.com
 toktokkie
 toktokkies
 tokyo
@@ -31885,7 +31028,6 @@ tome
 tommy
 tomography
 tomorrow
-tomshardware.com
 ton
 tonal
 tone
@@ -31926,7 +31068,6 @@ topgallant
 topheavy
 topic
 topics
-topix.com
 topless
 topmost
 topnotch
@@ -31940,7 +31081,6 @@ tops
 topsoil
 tor
 torah
-torcache.net
 torch
 tore
 tori
@@ -31958,7 +31098,6 @@ torque
 torr
 torrent
 torrential
-torrentz.eu
 torrid
 torsion
 torso
@@ -32033,13 +31172,11 @@ trackbacks
 tracked
 tracker
 tracking
-trackingclick.net
 tracks
 tract
 tractor
 tracy
 trade
-tradeadexchange.com
 trademark
 trademarks
 tradeoff
@@ -32238,7 +31375,6 @@ trekkers
 trekking
 trekkings
 trellis
-trello.com
 trembl
 tremble
 tremendous
@@ -32274,7 +31410,6 @@ tribesmen
 tribulate
 tribunal
 tribune
-tribunnews.com
 tributary
 tribute
 trichloroacetic
@@ -32322,8 +31457,6 @@ triode
 trioxide
 trip
 tripadvisor
-tripadvisor.co.uk
-tripadvisor.com
 tripartite
 tripe
 triphammer
@@ -32393,7 +31526,6 @@ trudge
 true
 truffle
 truism
-trulia.com
 truly
 trump
 trumpery
@@ -32421,7 +31553,6 @@ ts
 tsar
 tsarina
 tset
-tsite.jp
 tsotsitaal
 tsotsitaals
 tsunami
@@ -32431,17 +31562,14 @@ tu
 tub
 tuba
 tube
-tube8.com
 tuberculin
 tuberculosis
-tuberel.com
 tuberous
 tubes
 tubular
 tubule
 tuck
 tucson
-tudou.com
 tue
 tuesday
 tuff
@@ -32456,7 +31584,6 @@ tulle
 tulsa
 tum
 tumble
-tumblr.com
 tumbrel
 tumor
 tumult
@@ -32525,7 +31652,6 @@ tutelage
 tutor
 tutorial
 tutorials
-tutorialspoint.com
 tutu
 tuxedo
 tv
@@ -32550,7 +31676,6 @@ twigging
 twiki
 twilight
 twill
-twimg.com
 twin
 twine
 twinge
@@ -32564,16 +31689,12 @@ twisted
 twisty
 twit
 twitch
-twitch.tv
 twitchy
 twitter
-twitter.com
 two
 twofold
-twoo.com
 twosome
 tx
-txxx.com
 ty
 tycoon
 tying
@@ -32608,13 +31729,9 @@ tyrant
 tyrosine
 u
 u's
-uber.com
 ubiquitous
 ubiquity
 uc
-udemy.com
-udn.com
-uefa.com
 uganda
 ugh
 ugly
@@ -32630,7 +31747,6 @@ ulcerate
 ulna
 ulterior
 ultimate
-ultimate-guitar.com
 ultimately
 ultimatum
 ultra
@@ -32642,7 +31758,6 @@ umber
 umbilical
 umbilici
 umbilicus
-umblr.com
 umbra
 umbrage
 umbrella
@@ -32715,7 +31830,6 @@ unitarian
 unitary
 unite
 united
-united.com
 units
 unity
 univ
@@ -32746,7 +31860,6 @@ unwithheld
 unwithholden
 unwithholding
 unwrap
-uol.com.br
 up
 upbeat
 upbraid
@@ -32774,9 +31887,7 @@ upland
 uplift
 upload
 uploaded
-uploaded.net
 upon
-upornia.com
 upper
 upperclassman
 upperclassmen
@@ -32790,7 +31901,6 @@ uproar
 uproarious
 uproot
 ups
-ups.com
 upset
 upsetting
 upshot
@@ -32809,26 +31919,21 @@ upstream
 upsurge
 upswing
 uptake
-uptobox.com
-uptodown.com
 uptown
 uptrend
 upturn
 upward
 upwell
 upwind
-upwork.com
 ur
 uracil
 urania
 uranium
 uranyl
 urban
-urbandictionary.com
 urbane
 urbanite
 urchin
-urdupoint.com
 urea
 uremia
 urethane
@@ -32849,12 +31954,9 @@ urushiol
 urw
 us
 usa
-usaa.com
 usable
 usage
-usatoday.com
 usb
-usbank.com
 usc
 usd
 usda
@@ -32869,7 +31971,6 @@ usgs
 usher
 using
 usps
-usps.com
 usr
 usual
 usually
@@ -32900,7 +32001,6 @@ uttermost
 uv
 uw
 uzbekistan
-uzone.id
 v
 v's
 va
@@ -32988,7 +32088,6 @@ varnish
 varsity
 vary
 varying
-varzesh3.com
 vascular
 vase
 vasectomy
@@ -33084,8 +32183,6 @@ verisimilitude
 veritable
 verity
 verizon
-verizon.com
-verizonwireless.com
 vermeil
 vermiculite
 vermilion
@@ -33151,7 +32248,6 @@ vic
 vicar
 vicarious
 vice
-vice.com
 viceroy
 vicinal
 vicinity
@@ -33168,7 +32264,6 @@ victrola
 victual
 vid
 video
-videomega.tv
 videos
 videotape
 vids
@@ -33202,7 +32297,6 @@ villain
 villainous
 villas
 villein
-vimeo.com
 vinaigrette
 vincent
 vindicate
@@ -33225,7 +32319,6 @@ violin
 vip
 viper
 viral
-viralthread.com
 virgin
 virginal
 virginia
@@ -33288,10 +32381,6 @@ vivisection
 vivo
 vixen
 viz
-vk.com
-vk.me
-vnexpress.net
-voc.com.cn
 vocable
 vocabularian
 vocabulary
@@ -33302,7 +32391,6 @@ vocate
 vocational
 vociferous
 vodka
-vodlocker.com
 vogue
 voice
 voiceband
@@ -33357,14 +32445,12 @@ vouch
 vouchsafe
 vow
 vowel
-vox.com
 voyage
 voyeur
 voyeurweb
 voyuer
 vp
 vpn
-vporn.com
 vs
 vsnet
 vt
@@ -33376,7 +32462,6 @@ vulture
 vying
 w
 w's
-w3schools.com
 wa
 waac
 waacs
@@ -33424,7 +32509,6 @@ wakeup
 wal
 wale
 wales
-walgreens.com
 walk
 walked
 walker
@@ -33448,7 +32532,6 @@ walls
 wally
 walmart
 walmart stores
-walmart.com
 walnut
 walrus
 walt
@@ -33520,7 +32603,6 @@ washhouse
 washhouses
 washing
 washington
-washingtonpost.com
 washout
 washy
 wasn't
@@ -33568,14 +32650,11 @@ watertight
 waterway
 watery
 watson
-watsons.tmall.com
 watt
 wattage
 wattle
-wattpad.com
 watts
 wav
-wav.tv
 wave
 waveform
 wavefront
@@ -33591,7 +32670,6 @@ waxwork
 waxy
 way
 waybill
-wayfair.com
 waylaid
 waylay
 wayne
@@ -33622,33 +32700,26 @@ wearisome
 weary
 weasel
 weather
-weather.com
-weather.gov
 weatherbeaten
 weatherproof
 weatherstrip
 weatherstripping
 weave
 web
-web.de
 webcam
 webcams
 webcast
 weber
-webex.com
-weblio.jp
 weblog
 weblogs
 webmaster
 webmasters
-webmd.com
 webpage
 websbiggest
 webshots
 website
 websites
 webster
-webtretho.com
 wed
 wedding
 weddings
@@ -33656,7 +32727,6 @@ wedge
 wedlock
 wednesday
 wee
-weebly.com
 weed
 weedy
 week
@@ -33666,7 +32736,6 @@ weekends
 weekly
 weeks
 weep
-weibo.com
 weigh
 weight
 weight loss
@@ -33684,7 +32753,6 @@ wellbeing
 wellington
 wellness
 wells
-wellsfargo.com
 wellwisher
 welsh
 welt
@@ -33702,13 +32770,11 @@ west
 westbound
 westerly
 western
-westernjournalism.com
 westernmost
 westminster
 westward
 wet
 wetland
-wetransfer.com
 whack
 whale
 whalebone
@@ -33721,7 +32787,6 @@ what're
 whatever
 whatnot
 whats
-whatsapp.com
 whatsoever
 wheat
 whee
@@ -33789,7 +32854,6 @@ white
 whiteface
 whitehead
 whiten
-whitepages.com
 whitetail
 whitewash
 whither
@@ -33848,13 +32912,7 @@ wiggly
 wigmake
 wigwam
 wiki
-wikia.com
-wikihow.com
-wikimedia.org
 wikipedia
-wikipedia.org
-wikiwiki.jp
-wiktionary.org
 wild
 wildcat
 wildcatter
@@ -33865,7 +32923,6 @@ wildflower
 wildlife
 wile
 wiley
-wiley.com
 wilful
 will
 willful
@@ -33995,10 +33052,8 @@ withy
 witness
 witnesses
 witty
-wittyfeed.com
 wive
 wives
-wix.com
 wizard
 wm
 wma
@@ -34055,14 +33110,10 @@ woody
 woodyard
 wool
 woolgather
-woot.com
 wop
 worcester
 word
 wordpress
-wordpress.com
-wordpress.org
-wordreference.com
 words
 wordy
 wore
@@ -34115,10 +33166,7 @@ wound
 wove
 woven
 wow
-wowhead.com
 wp
-wp.com
-wp.pl
 wr
 wrack
 wraith
@@ -34168,17 +33216,13 @@ wrote
 wrought
 wry
 ws
-wsj.com
 wt
 wto
 wu
 wukkas
-wunderground.com
 wv
 ww
 www
-www.gov.uk
-wwwpromoter.com
 wx
 wy
 wynn
@@ -34188,48 +33232,33 @@ x
 x's
 xanax
 xbox
-xbox.com
-xcar.com.cn
-xda-developers.com
-xe.com
 xenon
 xenophobia
 xerography
 xerox
-xfinity.com
-xhamster.com
 xhtml
 xi
-xinhuanet.com
 xl
 xml
 xnxx
-xnxx.com
 xp
-xunlei.com
-xvideos.com
 xx
 xxx
 xylem
 xylene
 xylophone
-xywy.com
 y
 y's
-y8.com
 ya
 yaar
 yaars
 yacht
 yachtsman
 yachtsmen
-yadi.sk
 yah
 yahoo
 yahoo google
 yahoo mail
-yahoo.co.jp
-yahoo.com
 yak
 yakka
 yakkas
@@ -34238,15 +33267,10 @@ yakker
 yakkers
 yakking
 yale
-yallakora.com
 yam
 yamaha
-yandex.com.tr
-yandex.ru
-yandex.ua
 yang
 yank
-yaolan.com
 yap
 yapping
 yard
@@ -34281,7 +33305,6 @@ yellowwoods
 yellowwort
 yellowworts
 yelp
-yelp.com
 yemen
 yen
 yeoman
@@ -34289,7 +33312,6 @@ yeomanry
 yeomen
 yes
 yeshiva
-yesky.com
 yesterday
 yesteryear
 yet
@@ -34303,11 +33325,9 @@ yikkers
 yin
 yip
 yipping
-yjc.ir
 yn
 yo
 yodel
-yodobashi.com
 yoga
 yoghurt
 yogi
@@ -34317,7 +33337,6 @@ yokel
 yokked
 yokking
 yolk
-yomiuri.co.jp
 yon
 yond
 yore
@@ -34329,35 +33348,24 @@ you'd
 you'll
 you're
 you've
-youboy.com
-youdao.com
-youjizz.com
-youku.com
-youm7.com
 young
 younger
 youngish
 youngster
-youporn.com
 your
 yours
 yourself
 yourselves
 youth
-youth.cn
 youthful
 youthhead
 youthheads
 youthhood
 youthhoods
 youtube
-youtube-mp3.org
-youtube.com
 yow
 yr
 yrs
-ytimg.com
-yts.ag
 ytterbium
 yttrium
 yu
@@ -34381,8 +33389,6 @@ zag
 zagging
 zambia
 zap
-zappos.com
-zara.com
 zazen
 zdnet
 zeal
@@ -34391,7 +33397,6 @@ zealot
 zealous
 zebra
 zen
-zendesk.com
 zenith
 zero
 zeroes
@@ -34399,8 +33404,6 @@ zeroth
 zest
 zesty
 zeta
-zhanqi.tv
-zhihu.com
 zig
 zigging
 zigzag
@@ -34409,25 +33412,19 @@ zikkurat
 zikkurats
 zilch
 zillion
-zillow.com
 zimbabwe
 zinc
 zing
-zing.vn
 zinnia
 zip
 zipper
-zippyshare.com
 zircon
 zirconium
 zither
 zloty
 zodiac
 zodiacal
-zoho.com
-zol.com.cn
 zoloft
-zomato.com
 zombie
 zombie horse
 zombie pigman
@@ -34436,7 +33433,6 @@ zombie villager
 zombiism
 zombiisms
 zone
-zone-telechargement.com
 zones
 zoning
 zoo
@@ -34449,7 +33445,6 @@ zounds
 zshops
 zu
 zucchini
-zulily.com
 zulu
 zum
 zus

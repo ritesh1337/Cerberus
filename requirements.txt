@@ -5,3 +5,4 @@ selenium
 undetected_chromedriver
 argparse
 tabulate
+dnspython

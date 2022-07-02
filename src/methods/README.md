@@ -96,6 +96,7 @@ Core.methods.update({
     - These 2 are REQUIRED, and should be imported at ANY cost:
         - `import time`: needed to calculate the stop time
         - `from src.core import Core`: needed for some core variables
+    - For this tutorial we will be using the `requests` library
 
 3. Now, we can begin on the actual DDoS'ing function
     - The function should accept 3 arguments:
@@ -107,7 +108,7 @@ Core.methods.update({
         # bla bla license here
 
         # our imports
-        import time
+        import time, requests
         from src.core import Core
 
         # our attack function
@@ -125,7 +126,7 @@ Core.methods.update({
         # bla bla license here
 
         # our imports
-        import time
+        import time, requests
         from src.core import Core
 
         # our attack function
@@ -150,7 +151,7 @@ Core.methods.update({
         # bla bla license here
 
         # our imports
-        import time
+        import time, requests
         from src.core import Core
 
         # our attack function

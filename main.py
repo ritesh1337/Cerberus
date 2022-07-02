@@ -29,6 +29,7 @@ try:
     import cloudscraper, selenium, undetected_chromedriver # cloudflare bypass
     import argparse # needed for command line argument parsing
     import tabulate # pretty tables
+    import dns.resolver # dns watertorture attack
 except Exception as e:
     print(' - Error, it looks like i\'m missing some modules. Did you try "pip install -r requirements"?')
     print(f' - Stacktrace: \n{str(e).rstrip()}')
@@ -45,6 +46,8 @@ try:
     import netaddr # stuff with ip addresses
     import sqlite3 # database
     import textwrap # for the argparser module
+    import ssl # secure socket layer stuff
+    import asyncio # asynchronous stuff
     from timeit import default_timer as timer
     from http.client import HTTPConnection # setting the "HTTP/" value
     from urllib3.exceptions import InsecureRequestWarning # to disable that annoying "Insecure request!" warning
@@ -241,7 +244,7 @@ SOFTWARE.
     s_start = timer()
     while 1:
         try:
-            #utils().clear()
+            utils().clear()
 
             sent = str(Core.infodict[attack_id]['req_sent'])
             failed = str(Core.infodict[attack_id]['req_fail'])
@@ -259,7 +262,7 @@ SOFTWARE.
             Core.killattack = True
             break
     
-    #utils().clear()
+    utils().clear()
     print(' + Killing all threads, hold on.')
     for thread in threadbox:
         thread.join()

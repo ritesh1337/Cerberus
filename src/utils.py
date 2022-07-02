@@ -59,6 +59,7 @@ class HTTPAdapter(requests.adapters.HTTPAdapter):
 class utils():
     def __init__(self):
         self.tor_gateways = [
+            'onion.dog',
             'onion.city',
             'onion.cab',
             'onion.direct',
