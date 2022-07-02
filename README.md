@@ -30,7 +30,7 @@ Cerberus is a layer 7 network stress testing tool that has a wide variety of nor
 It's written in Python3 and is usable on all systems with Python installed.
 
 # Notes
-- Cloudflare bypass won't be added, since i can't get it to work anymore. If you want to add it, go ahead and open a pull request
+- Cloudflare bypass can't solve v2 challenges, so is therefore pretty much useless
 
 # Depencies
 - Python 3.6 or higher

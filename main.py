@@ -24,9 +24,9 @@ SOFTWARE.
 
 # import all non-stdlib modules, just to check if they are actually installed
 try:
-    from requests.cookies import RequestsCookieJar # for sending the actual requests
+    import requests # for sending the actual requests
     from colorama import Fore, init # fancy colors :O
-    import cloudscraper, selenium, undetected_chromedriver # cloudflare bypass
+    import cloudscraper # cloudflare bypass
     import argparse # needed for command line argument parsing
     import tabulate # pretty tables
     import dns.resolver # dns watertorture attack
@@ -232,6 +232,7 @@ SOFTWARE.
             
             threadbox.append(kaboom)
             kaboom.start()
+            Core.threadcount += 1
 
         except KeyboardInterrupt:
             Core.attackrunning = False
@@ -252,11 +253,13 @@ SOFTWARE.
             sent = str(Core.infodict[attack_id]['req_sent'])
             failed = str(Core.infodict[attack_id]['req_fail'])
             total = str(Core.infodict[attack_id]['req_total'])
+            threads = str(Core.threadcount)
 
             print(f' + Target(s): {", ".join(Core.targets)}')
             print(f' + Sent: {sent}')
             print(f' + Failed: {failed}')
             print(f' + Total: {total}')
+            print(f' + Threads alive: {threads}')
 
             time.sleep(2)
 
