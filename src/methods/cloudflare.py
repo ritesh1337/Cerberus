@@ -27,7 +27,7 @@ from src.core import Core
 from src.utils import *
 from src.useragent import *
 
-session = requests.session()
+# TODO: remove the junk called cloudscraper and use a different solution, such as https://github.com/vvanglro/cf_clearance
 
 keyword = choice(keywords)
 headers = {

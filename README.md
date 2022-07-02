@@ -17,12 +17,13 @@ S*S.    S*S.    S*S    S%S  S*S    S*S  S*S.    S*S    S%S  S*S.     .S*S    .S*
 
 <!-- yes i did steal some of these from MHDDoS, lel -->
 <p align="center">
+    <img alt="button-code-size-mb" src="https://img.shields.io/github/languages/code-size/Nexuzzzz/Cerberus" />
     <img alt="button-license" src="https://img.shields.io/github/license/Nexuzzzz/Cerberus">
     <img alt="button-file-count" src="https://img.shields.io/github/directory-file-count/Nexuzzzz/Cerberus">
-    <a href="https://github.com/Nexuzzzz/Cerberus/network/members"><img alt="button-forks" src="https://img.shields.io/github/forks/Nexuzzzz/Cerberus"></a>
-    <a href="#"><img alt="button-last-commit" src="https://img.shields.io/github/last-commit/Nexuzzzz/Cerberus/main"></a>
-    <a href="https://github.com/Nexuzzzz/Cerberus/stargazers"><img alt="button-stars" src="https://img.shields.io/github/stars/Nexuzzzz/Cerberus"></a>
-    <a href="https://github.com/Nexuzzzz/Cerberus/issues"><img alt="button-issues" src="https://img.shields.io/github/issues/Nexuzzzz/Cerberus"></a>
+    <img alt="button-forks" src="https://img.shields.io/github/forks/Nexuzzzz/Cerberus">
+    <img alt="button-stars" src="https://img.shields.io/github/stars/Nexuzzzz/Cerberus">
+    <img alt="button-issues" src="https://img.shields.io/github/issues/Nexuzzzz/Cerberus">
+    <img alt="button-last-commit" src="https://img.shields.io/github/last-commit/Nexuzzzz/Cerberus/main">
 </p>
 
 # Cerberus
