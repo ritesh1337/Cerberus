@@ -22,7 +22,7 @@ SOFTWARE.
 
 '''
 
-import time, requests
+import time, requests, re
 from src.core import Core
 from src.utils import *
 from src.useragent import *

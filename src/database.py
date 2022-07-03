@@ -22,7 +22,7 @@ SOFTWARE.
 
 '''
 
-import os, sqlite3
+import os, sqlite3, hashlib
 from src.core import *
 from src.utils import *
 
@@ -79,12 +79,18 @@ class database():
         # and now we make the tables
         self.query('''CREATE TABLE logs (timestamp txt,
             identifier txt,
-            target txt,
-            attack_vector txt,
-            workers int
+            target_url txt,
+            duration int,
+            method txt,
+            workers int,
+            proxy_file str,
+            proxy_proto str,
+            bypass_cache bool,
+            yes_to_all bool,
+            http_ver str
         )''', commit=True)
 
-        self.disconnect()
+        self.disconnect() # and finally we disconnect
     
     def parse_log(self, log) -> dict:
         '''
@@ -94,9 +100,15 @@ class database():
         return {
             'timestamp': utils().unix2posix(log[0]), # converts the timestamp from a unix one, to a human readable one
             'identifier': log[1], # attack identifier
-            'target': log[2], # target url
-            'attack_vector': log[3], # method
-            'workers': log[4] # amount of threads
+            'target_url': log[2], # target url(s)
+            'duration': log[3], # attack duration
+            'method': log[4], # method
+            'workers': log[5], # amount of threads
+            'proxy_file': log[6], # file with proxies
+            'proxy_proto': log[7], # proxy protocol
+            'bypass_cache': log[8] == 1, # bypass caching systems
+            'yes_to_all': log[9] == 1, # ignore prompts
+            'http_ver': str(log[10]) # http versiom
         }
     
     def save_log(self, log) -> None:
@@ -105,8 +117,20 @@ class database():
         '''
 
         self.query(
-            'INSERT INTO logs VALUES (?, ?, ?, ?, ?)', # query
-            (utils().posix2unix(log['timestamp']), utils().make_id(), log['target'], log['attack_vector'], log['workers']), # arguments
+            'INSERT INTO logs VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', # query
+            (
+                utils().posix2unix(log['timestamp']), 
+                Core.attack_id, 
+                log['target'],
+                log['duration'],
+                log['attack_vector'], 
+                log['workers'],
+                log['proxy_file'],
+                log['proxy_proto'],
+                log['bypass_cache'],
+                log['yes_to_all'],
+                log['http_ver']
+            ), # arguments
             True # save after we insert this data in the table
         )
     
@@ -123,3 +147,17 @@ class database():
             logs.append(self.parse_log(row))
         
         return logs
+    
+    def get_log(self, identifier) -> tuple:
+        '''
+        Gets a single log from the database
+        '''
+
+        if self.db is None:
+            self.connect()
+
+        logs = []
+        for row in self.query('SELECT * FROM logs WHERE identifier=?', (identifier,)).fetchall():
+            logs.append(self.parse_log(row))
+        
+        return logs[0]

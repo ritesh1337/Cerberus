@@ -22,8 +22,7 @@ SOFTWARE.
 
 '''
 
-import time, requests
-from random import choice
+import time, requests, re
 from urllib.parse import urlparse
 from src.core import Core
 from src.utils import *

@@ -76,84 +76,7 @@ except Exception as e:
 init(autoreset=True) # makes it so i don't need to do Fore.RESET at the end of every print()
 urllib3.disable_warnings(InsecureRequestWarning) # disables the warning
 
-utils().print_banner()
-if len(sys.argv) <= 1: # no arguments? just show all logs
-
-    if len(database().get_logs()) == 0:
-        print('\n - No running attacks.')
-
-    else:
-        print('\n' + utils().table(
-            [(row['timestamp'], row['identifier'], row['target'], row['attack_vector'], row['bypass_cache']) for row in database().get_logs()], 
-            ['Timestamp', 'ID', 'Target', 'Method', 'Bypass cache?']
-        ))
-
-    print(f'\n\n + To view the commands, try this: python3 {sys.argv[0]} -h')
-    print('\n + Tip: you can easily re-launch an attack by using the ID like this:')
-    print(f'python3 {sys.argv[0]} --launch-from-id <attack id here>\n')
-
-else: # parse the arguments with argparse
-
-    parser = ArgumentParser(width=100, description='''Cerberus is a layer 7 network stress testing tool that has a wide variety of normal and exotic attack vectors.
-It's written in Python3 and is usable on all systems with Python installed.''',
-                            epilog='''Copyright (c) 2022 Nexus/Nexuzzzz
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-''', argument_default=argparse.SUPPRESS, allow_abbrev=False)
-
-    # add arguments
-    parser.add_argument('-t',       '--target',          action='store',      dest='target_url',    metavar='target url',   type=str,    help='Target url(s) to attack, seperated by ","', default=None)
-    parser.add_argument('-d',       '--attack-duration', action='store',      dest='duration',      metavar='duration',     type=int,    help='Attack length in seconds', default=100)
-    parser.add_argument('-w',       '--workers',         action='store',      dest='workers',       metavar='workers',      type=int,    help='Number of threads/workers to spawn', default=40)
-    parser.add_argument('-m',       '--method',          action='store',      dest='method',        metavar='method',       type=str,    help='Attack method/vector to use', default='GET')
-    parser.add_argument(            '--proxy-file',      action='store',      dest='proxy_file',    metavar='location',     type=str,    help='Location of the proxy file to use', default=None)
-    parser.add_argument(            '--proxy-proto',     action='store',      dest='proxy_proto',   metavar='protocol',     type=str,    help='Proxy protocol (SOCKS4, SOCKS5, HTTP)', default='SOCKS5')
-    #parser.add_argument(            '--driver-engine',   action='store',      dest='driver_engine', metavar='driver engine',type=str,    help='Driver engine to use (CHROME for Chrome, GECKO for Firefox)', default='CHROME')
-    parser.add_argument('-logs',    '--list-logs',       action='store_true', dest='list_logs',                                          help='List all attack logs', default=False)
-    parser.add_argument('-methods', '--list-methods',    action='store_true', dest='list_methods',                                       help='List all the attack methods', default=False)
-    parser.add_argument('-bc',      '--bypass-cache',    action='store_true', dest='bypass_cache',                                       help='Try to bypass any caching systems to ensure we hit the main servers', default=True)
-    parser.add_argument('-y',       '--yes-to-all',      action='store_true', dest='yes_to_all',                                         help='Skip any user prompts, and just launch the attack', default=False)
-    parser.add_argument(            '--http-version',    action='store',      dest='http_ver',      metavar='http version', type=str,    help='Set the HTTP protocol version', default='1.1')
-    args = vars(parser.parse_args()) # parse the arguments
-
-    if args['list_logs']:
-
-        if len(database().get_logs()) == 0:
-            print('\n - No running attacks.')
-
-        else:
-            print('\n' + utils().table(
-                [(row['timestamp'], row['identifier'], row['target'], row['attack_vector'], row['bypass_cache']) for row in database().get_logs()], 
-                ['Timestamp', 'ID', 'Target', 'Method', 'Bypass cache?']
-            ))
-
-        print('\n\n + Tip: you can easily re-launch an attack by using the ID like this:')
-        sys.exit(f' + python3 {sys.argv[0]} --launch-from-id <attack id here>\n')
-    
-    if args['list_methods']:
-        print('\n')
-
-        for method, items in Core.methods.items():
-            print(f'{method}: {items["info"]}')
-
-        sys.exit('\n')
-
+def main(args):
     if not args['target_url']: # check if the "-t/--target-url" argument has been passed
         sys.exit('\n - Please specify your target.\n')
     
@@ -168,7 +91,6 @@ SOFTWARE.
     
     Core.bypass_cache = args['bypass_cache']
     Core.proxy_proto = args['proxy_proto']
-    #Core.driver_engine = args['driver_engine']
 
     if args['proxy_file']:
         Core.proxy_pool = []
@@ -180,7 +102,7 @@ SOFTWARE.
         
         if Core.proxy_pool == []:
             sys.exit(f'\n - Error, no proxies collected, maybe wrong file?\n')
-    
+
     print(' + Current attack configuration:')
 
     if not Core.targets:
@@ -202,14 +124,35 @@ SOFTWARE.
         if not input('\n + Correct? (Y/n) ').lower().startswith('y'):
             sys.exit('\n')
 
-    print('\n + Creating unique identifier for attack')
-    attack_id = utils().make_id()
+    if not args.get('IS_FROM_ID'): # skip if we are running the attack from a pre-existing id
+        print('\n + Creating unique identifier for attack')
+        tohash = args['target_url'] + str(args['duration']) + args['method'] + str(args['workers']) + str(args['bypass_cache']) + str(args['yes_to_all'])
+        Core.attack_id = attack_id = hashlib.sha1(tohash.encode()).hexdigest()
+
+        print('\n + Saving attack configuration in database')
+        database().save_log({
+            'timestamp': datetime.now().strftime('%m/%d/%Y, %H:%M:%S'),
+            'target': args['target_url'],
+            'duration': args['duration'],
+            'attack_vector': args['method'],
+            'workers': args['workers'],
+            'proxy_file': args['proxy_file'],
+            'proxy_proto': args['proxy_proto'],
+            'bypass_cache': args['bypass_cache'],
+            'yes_to_all': args['yes_to_all'],
+            'http_ver': args['http_ver']
+        })
+    else:
+        attack_id = args['UNIQUE_ATTACK_ID']
+    
+    print(f' + Attack ID: {attack_id}')
+
     Core.infodict[attack_id] = {
         'req_sent': 0, # requests sent (OPTIONAL)
         'req_fail': 0, # requests failed (OPTIONAL)
         'conn_opened': 0, # connections opened (OPTIONAL)
-        'identities_changed': 0, # amount of times we shwitched identities
-        'total': 0 # total amount of requests/packets sent (REQUIRED)
+        'identities_changed': 0, # amount of times we shwitched identities (OPTINAL)
+        'req_total': 0 # total amount of requests/packets sent (REQUIRED)
     }
 
     # before we create the session, we need to set the HTTP protocol version
@@ -260,7 +203,7 @@ SOFTWARE.
             sent = str(Core.infodict[attack_id].get('req_sent'))
             failed = str(Core.infodict[attack_id].get('req_fail'))
             conn_opened = str(Core.infodict[attack_id].get('conn_opened'))
-            total = str(Core.infodict[attack_id].get('total'))
+            total = str(Core.infodict[attack_id].get('req_total'))
             ids_changed = str(Core.infodict[attack_id].get('identities_changed'))
             threads = str(Core.threadcount)
 
@@ -298,3 +241,94 @@ SOFTWARE.
     sent = str(Core.infodict[attack_id]['req_sent'])
     print(f' + Average Requests Per Second: {str(float(sent)/float(s_took))}')
     print(' + Attack finished.')
+
+if __name__ == '__main__':
+    utils().print_banner() # print banner
+
+    if len(sys.argv) <= 1: # no arguments? just show all logs
+
+        if len(database().get_logs()) == 0:
+            print('\n - No running attacks.')
+
+        else:
+            print('\n' + utils().table(
+                [(row['timestamp'], row['identifier'], row['target_url'], row['duration'], row['method'], row['bypass_cache'], row['yes_to_all'], row['http_ver']) for row in database().get_logs()], 
+                ['Timestamp', 'ID', 'Target', 'Duration', 'Method', 'Bypass cache?', 'Skip prompts', 'HTTP version']
+            ))
+
+        print(f'\n\n + To view the commands, try this: python3 {sys.argv[0]} -h')
+        print('\n + Tip: you can easily re-launch an attack by using the ID like this:')
+        print(f'python3 {sys.argv[0]} --launch-from-id <attack id here>\n')
+
+    else: # parse the arguments with argparse
+
+        parser = ArgumentParser(width=100, description='''Cerberus is a layer 7 network stress testing tool that has a wide variety of normal and exotic attack vectors.
+    It's written in Python3 and is usable on all systems with Python installed.''',
+                                epilog='''Copyright (c) 2022 Nexus/Nexuzzzz
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
+    ''', argument_default=argparse.SUPPRESS, allow_abbrev=False)
+
+        # add arguments
+        parser.add_argument('-t',       '--target',          action='store',      dest='target_url',    metavar='target url',   type=str,    help='Target url(s) to attack, seperated by ","', default=None)
+        parser.add_argument('-d',       '--attack-duration', action='store',      dest='duration',      metavar='duration',     type=int,    help='Attack length in seconds', default=100)
+        parser.add_argument('-w',       '--workers',         action='store',      dest='workers',       metavar='workers',      type=int,    help='Number of threads/workers to spawn', default=40)
+        parser.add_argument('-m',       '--method',          action='store',      dest='method',        metavar='method',       type=str,    help='Attack method/vector to use', default='GET')
+        parser.add_argument(            '--proxy-file',      action='store',      dest='proxy_file',    metavar='location',     type=str,    help='Location of the proxy file to use', default=None)
+        parser.add_argument(            '--proxy-proto',     action='store',      dest='proxy_proto',   metavar='protocol',     type=str,    help='Proxy protocol (SOCKS4, SOCKS5, HTTP)', default='SOCKS5')
+        #parser.add_argument(            '--driver-engine',   action='store',      dest='driver_engine', metavar='driver engine',type=str,    help='Driver engine to use (CHROME for Chrome, GECKO for Firefox)', default='CHROME')
+        parser.add_argument('-logs',    '--list-logs',       action='store_true', dest='list_logs',                                          help='List all attack logs', default=False)
+        parser.add_argument('-methods', '--list-methods',    action='store_true', dest='list_methods',                                       help='List all the attack methods', default=False)
+        parser.add_argument('-bc',      '--bypass-cache',    action='store_true', dest='bypass_cache',                                       help='Try to bypass any caching systems to ensure we hit the main servers', default=True)
+        parser.add_argument('-y',       '--yes-to-all',      action='store_true', dest='yes_to_all',                                         help='Skip any user prompts, and just launch the attack', default=False)
+        parser.add_argument(            '--http-version',    action='store',      dest='http_ver',      metavar='http version', type=str,    help='Set the HTTP protocol version', default='1.1')
+        parser.add_argument('-id',      '--launch-from-id',  action='store',      dest='launch_from_id',metavar='attack id',    type=str,    help='Attack ID to use, to parse attack configuration from', default=None)
+        args = vars(parser.parse_args()) # parse the arguments
+
+        if args['list_logs']:
+
+            if len(database().get_logs()) == 0:
+                print('\n - No running attacks.')
+
+            else:
+                print('\n' + utils().table(
+                    [(row['timestamp'], row['identifier'], row['target_url'], row['duration'], row['method'], row['bypass_cache'], row['yes_to_all'], row['http_ver']) for row in database().get_logs()], 
+                    ['Timestamp', 'ID', 'Target', 'Duration', 'Method', 'Bypass cache?', 'Skip prompts', 'HTTP version']
+                ))
+
+            print('\n\n + Tip: you can easily re-launch an attack by using the ID like this:')
+            sys.exit(f' + python3 {sys.argv[0]} --launch-from-id <attack id here>\n')
+        
+        if args['list_methods']:
+            print('\n')
+
+            for method, items in Core.methods.items():
+                print(f'{method}: {items["info"]}')
+
+            sys.exit('\n')
+
+        if args['launch_from_id']: # id has been specified
+            attack_id = args['launch_from_id']
+            print(f' + Parsing attack configuration from ID {attack_id}')
+
+            args = database().get_log(attack_id)
+            args['IS_FROM_ID'] = True
+            args['UNIQUE_ATTACK_ID'] = attack_id
+        
+        main(args)

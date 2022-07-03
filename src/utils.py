@@ -28,7 +28,7 @@ from binascii import hexlify
 from netaddr import IPNetwork
 from datetime import datetime, timedelta
 from tabulate import tabulate
-from os.path import join, dirname, abspath
+from os.path import join
 from urllib.parse import quote, urlparse
 
 from src.core import *
@@ -116,7 +116,7 @@ class utils():
         self.content_types = ['multipart/form-data', 'application/x-url-encoded']
         self.accepts = ['text/plain', '*/*', '/', 'application/json', 'text/html', 'application/xhtml+xml', 'application/xml', 'image/webp', 'image/*', 'image/jpeg', 'application/x-ms-application', 'image/gif', 'application/xaml+xml', 'image/pjpeg', 'application/x-ms-xbap', 'application/x-shockwave-flash', 'application/msword']
     
-    def launch_tor(self, torrc=os.path.join('src','files','Tor','torrc')) -> None:
+    def launch_tor(self, torrc=join('src','files','Tor','torrc')) -> None:
         '''
         Launches TOR
         '''
@@ -124,13 +124,15 @@ class utils():
         if Core.is_tor_active:
             return
 
-        args = [os.path.join('src','files','Tor','tor.exe'), '-f', torrc] if os.name == 'nt' else ['tor','-f',torrc]
+        args = [join('src','files','Tor','tor.exe'), '-f', torrc] if os.name == 'nt' else ['tor','-f',torrc]
         with open(os.devnull, 'w') as devnull:
             subprocess.Popen(
                 args, # command line options
                 stdin=devnull, stdout=devnull, stderr=devnull, # redirect everything to os.devnull
                 **Popen_kwargs # extra arguments, look at line 38-49 for more info
             ) # launches TOR
+        
+        Core.is_tor_active = True
 
     def randhex(self, size=2) -> str:
         '''
