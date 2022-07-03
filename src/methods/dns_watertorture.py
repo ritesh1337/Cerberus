@@ -59,7 +59,6 @@ def flood(attack_id, url, stoptime) -> None:
             continue
         
         try:
-
             dns.resolver.resolve(f'{choice(keywords).replace(" ",".").lower()}.{domain}', 'A')
 
             Core.infodict[attack_id]['req_sent'] += 1

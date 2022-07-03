@@ -22,7 +22,7 @@ SOFTWARE.
 
 '''
 
-import re, requests, socket, os, urllib3
+import sys, requests, socket, os, urllib3, subprocess
 from random import getrandbits, choice, randint, shuffle
 from binascii import hexlify
 from netaddr import IPNetwork
@@ -35,10 +35,23 @@ from src.core import *
 from src.useragent import *
 from src.referer import *
 
-with open(join(dirname(abspath(__file__)), 'files', 'keywords.txt'), buffering=(16*1024*1024)) as file:
+# https://stackoverflow.com/questions/13243807/popen-waiting-for-child-process-even-when-the-immediate-child-has-terminated/13256908#13256908
+Popen_kwargs = {}
+if sys.platform.lower() == 'windows':
+    CREATE_NEW_PROCESS_GROUP = 0x00000200  # note: could get it from subprocess
+    DETACHED_PROCESS = 0x00000008          # 0x8 | 0x200 == 0x208
+    Popen_kwargs.update(creationflags=DETACHED_PROCESS | CREATE_NEW_PROCESS_GROUP)  
+
+elif sys.version_info < (3, 2):  # assume posix
+    Popen_kwargs.update(preexec_fn=os.setsid)
+
+else:  # Python 3.2+ and Unix
+    Popen_kwargs.update(start_new_session=True)
+
+with open(join('src', 'files', 'keywords.txt'), buffering=(16*1024*1024)) as file:
     keywords = file.read().splitlines()
 
-with open(join(dirname(abspath(__file__)), 'files', 'openredirects.txt'), buffering=(16*1024*1024)) as file:
+with open(join('src', 'files', 'openredirects.txt'), buffering=(16*1024*1024)) as file:
     openredirects = file.read().splitlines()
 
 class HTTPAdapter(requests.adapters.HTTPAdapter):
@@ -103,7 +116,27 @@ class utils():
         self.content_types = ['multipart/form-data', 'application/x-url-encoded']
         self.accepts = ['text/plain', '*/*', '/', 'application/json', 'text/html', 'application/xhtml+xml', 'application/xml', 'image/webp', 'image/*', 'image/jpeg', 'application/x-ms-application', 'image/gif', 'application/xaml+xml', 'image/pjpeg', 'application/x-ms-xbap', 'application/x-shockwave-flash', 'application/msword']
     
-    def randhex(self, size=2):
+    def launch_tor(self, torrc=os.path.join('src','files','Tor','torrc')) -> None:
+        '''
+        Launches TOR
+        '''
+
+        if Core.is_tor_active:
+            return
+
+        args = [os.path.join('src','files','Tor','tor.exe'), '-f', torrc] if os.name == 'nt' else ['tor','-f',torrc]
+        with open(os.devnull, 'w') as devnull:
+            subprocess.Popen(
+                args, # command line options
+                stdin=devnull, stdout=devnull, stderr=devnull, # redirect everything to os.devnull
+                **Popen_kwargs # extra arguments, look at line 38-49 for more info
+            ) # launches TOR
+
+    def randhex(self, size=2) -> str:
+        '''
+        Creates a random junk hex string
+        '''
+
         return "".join([f'\\x{choice("0123456789ABCDEF")}{choice("0123456789ABCDEF")}' for _ in range(size)])
 
     def get_proxy(self, force_give=False) -> str:

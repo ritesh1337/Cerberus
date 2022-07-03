@@ -100,7 +100,6 @@ def flood(attack_id, url, stoptime) -> None:
         Core.infodict[attack_id]['req_total'] += 1
     Core.threadcount -= 1
 
-# add the method to the methods dictionary
 Core.methods.update({
     'DDG': {
         'info': 'HTTP GET DDoSGuard bypass',

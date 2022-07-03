@@ -1,0 +1,7 @@
+# Cerberus TOR configuration file, DO NOT EDIT!
+
+SocksPort 9049 # crate a SOCKS5 proxy on this port
+
+ControlPort 9052 # open up a control password for the STEM controller
+HashedControlPassword 16:77FB965F24C566B5605B0069D1CCE39D8D58F3B57C050BF9951016B0B9 # password, by default its "cerberus"
+CookieAuthentication 1

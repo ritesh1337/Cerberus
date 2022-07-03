@@ -49,6 +49,7 @@ try:
     import textwrap # for the argparser module
     import ssl # secure socket layer stuff
     import asyncio # asynchronous stuff
+    import re # regex
     from timeit import default_timer as timer
     from http.client import HTTPConnection # setting the "HTTP/" value
     from urllib3.exceptions import InsecureRequestWarning # to disable that annoying "Insecure request!" warning
@@ -203,7 +204,13 @@ SOFTWARE.
 
     print('\n + Creating unique identifier for attack')
     attack_id = utils().make_id()
-    Core.infodict[attack_id] = {'req_sent': 0, 'req_fail': 0, 'req_total': 0}
+    Core.infodict[attack_id] = {
+        'req_sent': 0, # requests sent (OPTIONAL)
+        'req_fail': 0, # requests failed (OPTIONAL)
+        'conn_opened': 0, # connections opened (OPTIONAL)
+        'identities_changed': 0, # amount of times we shwitched identities
+        'total': 0 # total amount of requests/packets sent (REQUIRED)
+    }
 
     # before we create the session, we need to set the HTTP protocol version
     HTTPConnection._http_vsn_str = f'HTTP/{args["http_ver"]}'
@@ -250,14 +257,20 @@ SOFTWARE.
         try:
             utils().clear()
 
-            sent = str(Core.infodict[attack_id]['req_sent'])
-            failed = str(Core.infodict[attack_id]['req_fail'])
-            total = str(Core.infodict[attack_id]['req_total'])
+            sent = str(Core.infodict[attack_id].get('req_sent'))
+            failed = str(Core.infodict[attack_id].get('req_fail'))
+            conn_opened = str(Core.infodict[attack_id].get('conn_opened'))
+            total = str(Core.infodict[attack_id].get('total'))
+            ids_changed = str(Core.infodict[attack_id].get('identities_changed'))
             threads = str(Core.threadcount)
 
-            print(f' + Target(s): {", ".join(Core.targets)}')
-            print(f' + Sent: {sent}')
-            print(f' + Failed: {failed}')
+            print(f'\n + Target(s): {", ".join(Core.targets)}')
+
+            if sent != '0': print(f' + Requests sent: {sent}')
+            if failed != '0': print(f' + Requests failed: {failed}')
+            if conn_opened != '0': print(f' + Connections opened: {conn_opened}')
+            if ids_changed != '0': print(f' + Identities changed: {ids_changed}')
+
             print(f' + Total: {total}')
             print(f' + Threads alive: {threads}')
 
@@ -269,10 +282,16 @@ SOFTWARE.
             break
     
     utils().clear()
+    if args["workers"] > 500:
+        print(' + You selected a LOT of threads, this can take a long time. \nIf you want to just quit the progrem without ending the threads the proper way Press CTRL-C')
+    
     print(' + Killing all threads, hold on.')
     for thread in threadbox:
-        thread.join()
-    s_took = "%.2f" % (timer() - s_start)
+        try: thread.join()
+        except KeyboardInterrupt: sys.exit('\n + Bye!\n')
+        except Exception as e: print(f' - Failed to kill thread: {str(e).rstrip()}')
+
+    s_took = "%.2f" % (timer() - s_start) # count after we stopped all threads, because some threads might still be sending some rogue requests
     
     print(' + Threads killed')
     

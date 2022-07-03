@@ -42,7 +42,7 @@ It's written in Python3 and is usable on all systems with Python installed.
 If you want to contribute, you can do so by 
 - Creating a new method, more information can be found in `src/methods`
 - Creating a pull request
-- Donate:
+- Donating to me:
    - XMR: `4BFpJ8hEUBBUE8vKUq6arUhRNkmQbPFMG38tDJHroAiTcENF2oCjYgoeHRJg6ULcs42EZ1ynCGj6RVhBTBQ3BcRmKAP1ZRb`
 
 # License

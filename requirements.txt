@@ -5,3 +5,5 @@ argparse
 tabulate
 dnspython
 websocket-client
+stem
+python-socks

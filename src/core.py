@@ -35,6 +35,10 @@ class Core:
     session = None
     ddosguard_cookies_grabbed = False
     blazingfast_ids_grabbed = False
+    target_host = None
+    target_port = None
+    is_tor_active = False
+    change_identity = 0 # once the counter reached 2000 we will change to a new tor circuit
     #cloudflare_cookies_grabbed = False
     #driver_engine = None
     proxy_pool = []

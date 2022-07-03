@@ -51,8 +51,8 @@ def flood(attack_id, url, stoptime) -> None:
     if not Core.recursive_urls: # no urls have been scraped yet
         try:
             urls += scrapeurls(url, Core.session.get(url, headers=utils().buildheaders(url)).text) # append the scraped urls
-        except Exception:
-            urls += [f'{url.strip("/")}/robots.txt',f'{url.strip("/")}/index.html',f'{url.strip("/")}/favicon.ico']
+        except Exception: # ignore the error, and leave the list empty
+            pass
         
         if urls == []: # no urls found? just add some random urls
             urls += [f'{url.strip("/")}/robots.txt',f'{url.strip("/")}/index.html',f'{url.strip("/")}/favicon.ico']

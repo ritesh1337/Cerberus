@@ -53,10 +53,7 @@ def flood(attack_id, url, stoptime) -> None:
                 cert=None
             )
 
-            #if req.status_code == 302: # impossible to reach, due to the ReadTimeout exception
             Core.infodict[attack_id]['req_sent'] += 1
-            #else:
-            #    Core.infodict[attack_id]['req_fail'] += 1
 
         except requests.exceptions.ReadTimeout: 
             Core.infodict[attack_id]['req_sent'] += 1
@@ -66,7 +63,6 @@ def flood(attack_id, url, stoptime) -> None:
 
         Core.infodict[attack_id]['req_total'] += 1
     Core.threadcount -= 1
-
 
 Core.methods.update({
     'OPENREDIRECT': {
