@@ -232,31 +232,34 @@ class utils():
         Creates a POST body
         '''
 
-        if length == 0:
-            length = randint(20,200)
+        if not Core.post_buffer:
+            if length == 0:
+                length = randint(20,200)
 
-        headers = {}
-        if randint(0,1) == 0: # json payload
-            json_data = '{'
+            headers = {}
+            if randint(0,1) == 0: # json payload
+                json_data = '{'
 
-            for _ in range(length):
-                json_data += f'"{choice([self.randstr(randint(5, 20)), choice(keywords)])}": "{self.randstr(randint(40, 60))}",'
+                for _ in range(length):
+                    json_data += f'"{choice([self.randstr(randint(5, 20)), choice(keywords)])}": "{self.randstr(randint(40, 60))}",'
+                
+                json_data += '}'
+
+                data = json_data        
+                headers.update({'Content-Type': 'application/json'})
+
+            else: # url encoded payload 
+                url_encoded_data = f'{choice([self.randstr(randint(5, 20)), choice(keywords)])}={choice([self.randstr(randint(5, 20)), choice(keywords)])}'
+
+                while len(url_encoded_data) < length:
+                    url_encoded_data += f'&{choice([self.randstr(randint(5, 20)), choice(keywords)])}={choice([self.randstr(randint(5, 20)), choice(keywords)])}'
+
+                data = url_encoded_data
+                headers.update({'Content-Type': 'application/x-www-form-urlencoded'})
             
-            json_data += '}'
-
-            data = json_data        
-            headers.update({'Content-Type': 'application/json'})
-
-        else: # url encoded payload 
-            url_encoded_data = f'{choice([self.randstr(randint(5, 20)), choice(keywords)])}={choice([self.randstr(randint(5, 20)), choice(keywords)])}'
-
-            while len(url_encoded_data) < length:
-                url_encoded_data += f'&{choice([self.randstr(randint(5, 20)), choice(keywords)])}={choice([self.randstr(randint(5, 20)), choice(keywords)])}'
-
-            data = url_encoded_data
-            headers.update({'Content-Type': 'application/x-www-form-urlencoded'})
-        
-        return (headers, data)
+            return (headers, data)
+        else:
+            return ({'Content-Type': 'application/x-www-form-urlencoded'}, Core.post_buffer)
     
     def randip(self) -> str:
         '''
@@ -334,6 +337,7 @@ class utils():
         if randint(0,1) == 1: headers.update({'Cookie': self.buildcookie()}) # adds a fake cookie
         if randint(0,1) == 1: headers.update({choice(['Via','Client-IP','X-Forwarded-For','Real-IP']): self.randip() }) # fakes the source ip
         if randint(0,1) == 1: headers.update({'DNT': '1'})
+        if Core.random_headers: headers.update(choice(Core.random_headers))
         
         return headers
     

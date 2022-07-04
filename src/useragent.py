@@ -29,6 +29,7 @@ Python module to generate random useragents
 from random import randint, choice
 from json import load
 from os.path import dirname, abspath, join
+from src.core import *
 
 with open(join(dirname(abspath(__file__)), 'files', 'agents.json'), buffering=(16*1024*1024)) as file:
     agents = load(file)
@@ -38,44 +39,48 @@ def getAgent() -> str:
     Creates the useragent
     '''
 
-    browsers = ['chrome', 'firefox', 'opera', 'edge', 'explorer', 'brave']
-    other = ['pyrequests','curl','wget']
+    if not Core.useragent_list:
 
-    agent = ''
-    if randint(0,3) != 1:
+        browsers = ['chrome', 'firefox', 'opera', 'edge', 'explorer', 'brave']
+        other = ['pyrequests','curl','wget']
 
-        i = randint(0,3)
-        if i == 0: agent = f'Mozilla/{choice(agents["mozilla"])}'
-        elif i == 1 or i == 2: agent = f'Opera/{choice(agents["operav"])}'
-        else: agent = 'Mozilla/5.0'
+        agent = ''
+        if randint(0,3) != 1:
 
-        browser = choice(browsers)
+            i = randint(0,3)
+            if i == 0: agent = f'Mozilla/{choice(agents["mozilla"])}'
+            elif i == 1 or i == 2: agent = f'Opera/{choice(agents["operav"])}'
+            else: agent = 'Mozilla/5.0'
 
-        if browser != 'explorer':
-            agent = f'{agent} ({choice(agents["os"])})'
+            browser = choice(browsers)
 
-        if 'Opera' in agent:
-            browser = 'opera'
-            agent = f'{agent} Presto/{choice(agents["presto"])} Version/{choice(agents["opera"])}'
+            if browser != 'explorer':
+                agent = f'{agent} ({choice(agents["os"])})'
+
+            if 'Opera' in agent:
+                browser = 'opera'
+                agent = f'{agent} Presto/{choice(agents["presto"])} Version/{choice(agents["opera"])}'
+
+            else:
+                if browser in ['opera', 'firefox']: agent = f'{agent} Gecko/{choice(agents["gecko"])}'
+                elif browser == 'explorer': agent = f'{agent} ({choice(agents["os"])} Trident/{str(randint(1, 7))}.0)'
+                else: agent = f'{agent} AppleWebKit/{choice(agents["kits"])} (KHTML, like Gecko)'
+
+            if 'Gecko' in agent and browser == 'opera': agent = f'{agent} Opera {choice(agents["opera"])}'
+            if browser == 'chrome': agent = f'{agent} Chrome/{choice(agents["chrome"])} Safari/{choice(agents["safari"])}'
+            elif browser == 'firefox': agent = f'{agent} Firefox/{choice(agents["firefox"])}'
+            elif browser == 'edge': agent = f'{agent} Chrome/{choice(agents["chrome"])} Safari/{choice(agents["safari"])} Edge/{choice(agents["edge"])}'
+            elif browser == 'brave': agent = f'{agent} Brave Chrome/{choice(agents["chrome"])} Safari/{choice(agents["safari"])}'
+            else: pass
 
         else:
-            if browser in ['opera', 'firefox']: agent = f'{agent} Gecko/{choice(agents["gecko"])}'
-            elif browser == 'explorer': agent = f'{agent} ({choice(agents["os"])} Trident/{str(randint(1, 7))}.0)'
-            else: agent = f'{agent} AppleWebKit/{choice(agents["kits"])} (KHTML, like Gecko)'
-
-        if 'Gecko' in agent and browser == 'opera': agent = f'{agent} Opera {choice(agents["opera"])}'
-        if browser == 'chrome': agent = f'{agent} Chrome/{choice(agents["chrome"])} Safari/{choice(agents["safari"])}'
-        elif browser == 'firefox': agent = f'{agent} Firefox/{choice(agents["firefox"])}'
-        elif browser == 'edge': agent = f'{agent} Chrome/{choice(agents["chrome"])} Safari/{choice(agents["safari"])} Edge/{choice(agents["edge"])}'
-        elif browser == 'brave': agent = f'{agent} Brave Chrome/{choice(agents["chrome"])} Safari/{choice(agents["safari"])}'
-        else: pass
-
+            agent = {
+                'pyrequests': f'python-requests/{choice(agents["pyrequests"])}',
+                'curl': f'Curl/{choice(agents["curl"])}',
+                'wget': f'Wget/{choice(agents["wget"])}',
+                'apt': choice([f'Debian APT-HTTP/{choice(["0","1"])}.{str(randint(1,9))} ({choice(agents["apt"])})', f'Debian APT-HTTP/{choice(["0","1"])}.{str(randint(1,9))} ({choice(agents["apt"])}) non-interactive'])
+            }.get(choice(other))
     else:
-        agent = {
-            'pyrequests': f'python-requests/{choice(agents["pyrequests"])}',
-            'curl': f'Curl/{choice(agents["curl"])}',
-            'wget': f'Wget/{choice(agents["wget"])}',
-            'apt': choice([f'Debian APT-HTTP/{choice(["0","1"])}.{str(randint(1,9))} ({choice(agents["apt"])})', f'Debian APT-HTTP/{choice(["0","1"])}.{str(randint(1,9))} ({choice(agents["apt"])}) non-interactive'])
-        }.get(choice(other))
+        agent = choice(Core.useragent_list)
 
     return agent

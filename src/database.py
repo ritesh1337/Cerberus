@@ -80,6 +80,8 @@ class database():
         self.query('''CREATE TABLE logs (timestamp txt,
             identifier txt,
             target_url txt,
+            referer txt,
+            useragent txt,
             duration int,
             method txt,
             workers int,
@@ -87,7 +89,8 @@ class database():
             proxy_proto str,
             bypass_cache bool,
             yes_to_all bool,
-            http_ver str
+            http_ver str,
+            random_headers str
         )''', commit=True)
 
         self.disconnect() # and finally we disconnect
@@ -101,14 +104,17 @@ class database():
             'timestamp': utils().unix2posix(log[0]), # converts the timestamp from a unix one, to a human readable one
             'identifier': log[1], # attack identifier
             'target_url': log[2], # target url(s)
-            'duration': log[3], # attack duration
-            'method': log[4], # method
-            'workers': log[5], # amount of threads
-            'proxy_file': log[6], # file with proxies
-            'proxy_proto': log[7], # proxy protocol
-            'bypass_cache': log[8] == 1, # bypass caching systems
-            'yes_to_all': log[9] == 1, # ignore prompts
-            'http_ver': str(log[10]) # http versiom
+            'referer_list': log[3], # referer(s)
+            'useragent_list': log[4], # useragent(s)
+            'duration': log[5], # attack duration
+            'method': log[6], # method
+            'workers': log[7], # amount of threads
+            'proxy_file': log[8], # file with proxies
+            'proxy_proto': log[9], # proxy protocol
+            'bypass_cache': log[10] == 1, # bypass caching systems
+            'yes_to_all': log[11] == 1, # ignore prompts
+            'http_ver': str(log[12]), # http version
+            'random_headers': log[13]
         }
     
     def save_log(self, log) -> None:
@@ -117,11 +123,13 @@ class database():
         '''
 
         self.query(
-            'INSERT INTO logs VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', # query
+            'INSERT INTO logs VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', # query
             (
                 utils().posix2unix(log['timestamp']), 
                 Core.attack_id, 
                 log['target'],
+                log['referer'],
+                log['useragent'],
                 log['duration'],
                 log['attack_vector'], 
                 log['workers'],
@@ -129,7 +137,8 @@ class database():
                 log['proxy_proto'],
                 log['bypass_cache'],
                 log['yes_to_all'],
-                log['http_ver']
+                log['http_ver'],
+                log['random_headers']
             ), # arguments
             True # save after we insert this data in the table
         )

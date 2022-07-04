@@ -45,4 +45,9 @@ class Core:
     proxy_pool = []
     proxy_proto = None
     targets = None
+    referer_list = None
+    headers = None
+    post_buffer = None
+    random_headers = None
+    useragent_list = None
     recursive_urls = None
