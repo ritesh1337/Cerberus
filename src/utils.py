@@ -23,7 +23,7 @@ SOFTWARE.
 '''
 
 import sys, requests, socket, os, urllib3, subprocess
-from random import getrandbits, choice, randint, shuffle
+from random import getrandbits, choice, randint, shuffle, randrange
 from binascii import hexlify
 from netaddr import IPNetwork
 from datetime import datetime, timedelta
@@ -290,7 +290,7 @@ class utils():
         ])
 
         # add a expiration date to the cookie
-        if randint(0,2) == 0:
+        if randrange(2) == 0:
             cookie += f'; Expires={datetime.now().strftime("%a, %w %b %Y %X %p")};'
 
         return cookie
@@ -310,7 +310,7 @@ class utils():
             {'User-Agent': getAgent()}
         ])
 
-        if randint(0,2) == 1:
+        if randrange(2) == 1:
             headers.update({
                 'X-Forwarded-Proto': 'Http',
                 'X-Forwarded-Host': f'{urlparse(url).netloc}, {self.randip()}',
@@ -323,7 +323,7 @@ class utils():
             'Accept-Language':  ', '.join([ choice(self.accept_langs) for _ in range( randint(1, 3) ) ]),
         })
         
-        if randint(0,2) == 1:
+        if randrange(2) == 1:
             headers.update({
                 'Sec-Fetch-Dest': 'document',
                 'Sec-Fetch-Mode': 'navigate',
@@ -332,11 +332,11 @@ class utils():
                 'Sec-Gpc': '1'
             })
 
-        if randint(0,1) == 1: headers.update({'Upgrade-Insecure-Requests': '1'})        
-        if randint(0,1) == 1: headers.update({'Referer': self.buildblock(getReferer())})        
-        if randint(0,1) == 1: headers.update({'Cookie': self.buildcookie()}) # adds a fake cookie
-        if randint(0,1) == 1: headers.update({choice(['Via','Client-IP','X-Forwarded-For','Real-IP']): self.randip() }) # fakes the source ip
-        if randint(0,1) == 1: headers.update({'DNT': '1'})
+        if randrange(2) == 1: headers.update({'Upgrade-Insecure-Requests': '1'})        
+        if randrange(2) == 1: headers.update({'Referer': self.buildblock(getReferer())})        
+        if randrange(2) == 1: headers.update({'Cookie': self.buildcookie()}) # adds a fake cookie
+        if randrange(2) == 1: headers.update({choice(['Via','Client-IP','X-Forwarded-For','Real-IP']): self.randip() }) # fakes the source ip
+        if randrange(2) == 1: headers.update({'DNT': '1'})
         if Core.random_headers: headers.update(choice(Core.random_headers))
         
         return headers

@@ -82,21 +82,21 @@ def main(args):
         sys.exit('\n - Please specify your target.\n')
     
     if ',' in args['target_url']: Core.targets = args['target_url'].split(',') # multiple targets specified
-    else: Core.targets = args['target_url']
+    else: Core.targets = [args['target_url']]
     
-    if args['referer_list']:
+    if args.get('referer_list'):
         if ',' in args['referer_list']: Core.referer_list = args['referer_list'].split(',')
         elif args['referer_list'] != None:  Core.referer_list = args['referer_list']
         else: Core.referer_list = None
     else: Core.referer_list = None
 
-    if args['useragent_list']:
+    if args.get('useragent_list'):
         if ',' in args['useragent_list']: Core.useragent_list = args['useragent_list'].split(',')
         elif args['useragent_list'] != None: Core.useragent_list = args['useragent_list']
         else: Core.useragent_list = None
     else: Core.useragent_list = None
 
-    if args['random_headers']:
+    if args.get('random_headers'):
         if ',' in args['random_headers']: Core.random_headers = args['random_headers'].split(',')
         elif args['random_headers'] != None: Core.random_headers = args['random_headers']
         else: Core.random_headers = None
@@ -123,8 +123,7 @@ def main(args):
             sys.exit(f'\n - Error, no proxies collected, maybe wrong file?\n')
 
     print(' + Current attack configuration:')
-
-    if not Core.targets: print(f'   - Target: {args["target_url"]}')
+    if not Core.targets or len(Core.targets) <= 1: print(f'   - Target: {args["target_url"]}')
     else: print(f'   - Targets: {", ".join(Core.targets) if len(Core.targets) < 3 else len(Core.targets)}')
     
     if not Core.referer_list: print(f'   - Referer: randomly chosen')
@@ -136,22 +135,20 @@ def main(args):
     if not Core.random_headers: print(f'   - Random headers: randomly chosen')
     else: print(f'   - Random headers: {", ".join(Core.random_headers) if len(Core.random_headers) < 3 else len(Core.random_headers)}')
 
-    if args['headers']:
+    if args.get('headers'):
         headersdict = {}
         for header in args['headers']:
             key, value = header.split(':', 1)
 
             headersdict.update({key: value})
-
         Core.headers = headersdict
     
-    if args['random_headers']:
+    if args.get('random_headers'):
         rand_headerslist = []
         for header in args['random_headers']:
             key, value = header.split(': ', 1)
 
             rand_headerslist.append({key: value})
-
         Core.random_headers = rand_headerslist
 
     print(f'   - Duration: {utils().Sec2Str(args["duration"])}')
@@ -165,8 +162,10 @@ def main(args):
         print(f'   - Global proxy protocol: {str(Core.proxy_proto)}')
 
     if not args['yes_to_all']:
-        if not input('\n + Correct? (Y/n) ').lower().startswith('y'):
-            sys.exit('\n')
+        try:
+            if not input('\n + Correct? (Y/n) ').lower().startswith('y'):
+                sys.exit('\n')
+        except: sys.exit('\n + Bye!\n')
 
     if not args.get('IS_FROM_ID') and not args.get('IS_FROM_BOOSTER'): # skip if we are running the attack from a pre-existing id or from a hoic booster
         print('\n + Creating unique identifier for attack')
@@ -187,7 +186,7 @@ def main(args):
             'bypass_cache': args['bypass_cache'],
             'yes_to_all': args['yes_to_all'],
             'http_ver': args['http_ver'],
-            'rand_headers': args['rand_headers']
+            'random_headers': args.get('rand_headers')
         })
     else:
         attack_id = args['UNIQUE_ATTACK_ID']
@@ -209,7 +208,8 @@ def main(args):
     Core.session = session
 
     if not args['yes_to_all']:
-        input('\n + Ready? (Press ENTER) ')
+        try: input('\n + Ready? (Press ENTER) ')
+        except: sys.exit('\n + Bye!\n')
 
     print('\n + Building threads, this could take a while.')
     stoptime, threadbox = time.time() + args['duration'], []
@@ -269,7 +269,7 @@ def main(args):
             break
     
     utils().clear()
-    if args["workers"] > 500:
+    if args["workers"] > 100:
         print(' + You selected a LOT of threads, this can take a long time. \nIf you want to just quit the progrem without ending the threads the proper way Press CTRL-C')
     
     print(' + Killing all threads, hold on.')
@@ -346,7 +346,7 @@ if __name__ == '__main__':
         parser.add_argument('-id',      '--launch-from-id',  action='store',      dest='launch_from_id',metavar='attack id',        type=str,  help='Attack ID to use, to parse attack configuration from', default=None)
         parser.add_argument(            '--hoic-booster',    action='store',      dest='hoic_booster',  metavar='location',         type=str,  help='HOIC booster file to use when attacking, can result in malicious code execution so make sure its clean!', default=None)
         parser.add_argument(            '--post-data',       action='store',      dest='post_buffer',   metavar='data',             type=str,  help='Data to send with POST floods', default=None)
-        parser.add_argument(            '--rand-headers',    action='store',      dest='rand_headers',  metavar='random header(s)', type=str,  help='Random header(s) to choose when attacking, seperated by ","', default=None)
+        parser.add_argument(            '--rand-headers',    action='store',      dest='random_headers',  metavar='random header(s)', type=str,  help='Random header(s) to choose when attacking, seperated by ","', default=None)
         args = vars(parser.parse_args()) # parse the arguments
 
         if args['list_logs']:

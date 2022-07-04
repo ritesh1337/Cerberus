@@ -51,3 +51,4 @@ class Core:
     random_headers = None
     useragent_list = None
     recursive_urls = None
+    sockets = None
