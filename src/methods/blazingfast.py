@@ -73,7 +73,7 @@ def flood(attack_id, url, stoptime) -> None:
 
 Core.methods.update({
     'BLAZINGFAST': {
-        'info': 'Blazingfast bypass, impersonates the tracking bot which is allowed by default. Credits to 0x44F and mSQL',
+        'info': 'Blazingfast bypass, impersonates the analytics bot which is allowed by default. Credits to 0x44F and mSQL',
         'func': flood
     }
 })

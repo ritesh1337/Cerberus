@@ -268,6 +268,31 @@ class utils():
 
         return '.'.join([str(randint(1,255)) for _ in range(4)])
     
+    def randdate(self) -> str:
+        '''
+        Creates a random date
+        '''
+
+        now = datetime.now() # get the current date
+
+        # add or remove some years
+        if randrange(2) == 0: now += timedelta(days=365*randint(1,40))
+        else: now -= timedelta(days=365*randint(1,40))
+
+        # add or remove some days
+        if randrange(2) == 0: now += timedelta(days=randint(1, 365))
+        else: now -= timedelta(days=randint(1, 365))
+
+        # add or remove some hours
+        if randrange(2) == 0: now += timedelta(hours=randint(1, 24))
+        else: now -= timedelta(hours=randint(1, 24))
+
+        # and add or remove some seconds
+        if randrange(2) == 0: now += timedelta(seconds=randint(1, 60))
+        else: now -= timedelta(seconds=randint(1, 60))
+
+        return now.strftime("%a, %w %b %Y %X GMT")
+    
     def buildcookie(self, size=0) -> str:
         '''
         Creates a random cookie, size is more a limit of the "randomization"
@@ -291,7 +316,7 @@ class utils():
 
         # add a expiration date to the cookie
         if randrange(2) == 0:
-            cookie += f'; Expires={datetime.now().strftime("%a, %w %b %Y %X %p")};'
+            cookie += f'; Expires={self.randdate()};'
 
         return cookie
 
@@ -347,10 +372,8 @@ class utils():
         '''
 
         try:
-            if os.name == 'nt':
-                os.system('cls')
-            else:
-                os.system('clear')
+            if os.name == 'nt': os.system('cls')
+            else: os.system('clear')
         except:
             print('\n'*400)
 
@@ -366,10 +389,8 @@ class utils():
         Checks if the specified IPv4/IPv6 address is valid
         '''
 
-        if bool(self.ipv4regex.match(ip)):
-            return True
-        else:
-            return bool(self.ipv6regex.match(ip))
+        if bool(self.ipv4regex.match(ip)): return True
+        else: return bool(self.ipv6regex.match(ip))
         
     def cidr2iplist(self, cidrange) -> list:
         '''

@@ -40,6 +40,9 @@ class Booster():
         self.final = ''
         
     def get(self) -> str:
+        '''
+        Parses the booster file, and cleans it up
+        '''
 
         new_data = self.contents
         replace_list = [
@@ -69,20 +72,24 @@ class Booster():
         ]
 
         if not 'URL =' in new_data:
-            final.append('global URL; URL = "$TARGETURL"')
+            final.append('global URL; URL = ""') # not sure how to implement this right here, because some attacks use both the static URL one, and the randURLs too
 
         for line in new_data.splitlines():
             newline = line
 
             if '.append' in newline and not newline.endswith(')'): newline += ')'
-            if line.startswith('//'): continue
+            if newline.startswith('//'): continue
             
             final.append(newline)
 
         self.final = '\n'.join(final)
         return self.final
     
-    def args(self):
+    def args(self) -> dict:
+        '''
+        Parses the variables into a nice dictionary
+        '''
+
         exec(self.final) # execute the config, can be very dangerous
 
         try: targets = randURLs

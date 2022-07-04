@@ -30,6 +30,32 @@ S*S.    S*S.    S*S    S%S  S*S    S*S  S*S.    S*S    S%S  S*S.     .S*S    .S*
 Cerberus is a layer 7 network stress testing tool that has a wide variety of normal and exotic attack vectors. <br>
 It's written in Python3 and is usable on all systems with Python installed.
 
+# Attack methods/vectors
+```
+GOLDENEYE: GoldeneEye dos tool, written by Jan Seidl
+MIX: HTTP flood that randomly picks a http method
+PROXY: HTTP GET flood, using a specified file with proxies
+ARME: HTTP HEAD flood which exploits a vulnerability in Apache
+HEAD: HTTP HEAD flood, with basic customizablity
+FAST: HTTP GET flood that just targets "/", good for volumetric attacks
+WEBSOCK: Websocket flood, supports SSL (wss://)
+WATERTORTURE: DNS watertorture attack
+COOKIE: HTTP GET flood with large cookies, tasty!
+LEECH: Exotic bandwidth draining flood, keep the thread count below <5 and use residential proxies for better results
+RECURSIVE: Recursive HTTP GET flood, very nasty
+GHP: HTTP GET/HEAD/POST flood
+BLAZINGFAST: Blazingfast bypass, impersonates the analytics bot which is allowed by default. Credits to 0x44F and mSQL
+CLOUDFLARE: Cloudflare UAM/IUAM bypass using cloudscraper
+POST: HTTP POST flood, with basic customizability
+XERXES: TCP connection flood, abusing the TOR network
+MIMICK: HTTP GET flood that impersonates common web scrapers like Googlebot, Yahoo! Slurp or BaiduSpider
+TOR: HTTP GET flood over TOR
+DDG: HTTP GET DDoSGuard bypass
+OPENREDIRECT: HTTP flood which abuses the Open Redirect vulnerability
+HEX: HTTP GET flood that has a huge HEX string in the Host: header
+GET: HTTP GET flood, with basic customizability
+```
+
 # Notes
 - Cloudflare bypass can't solve v2 challenges, so is therefore pretty much useless
 
