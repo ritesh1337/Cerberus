@@ -3690,3 +3690,4 @@ https://www.luhui.net/?q=allinurl:$TARGET
 https://www.periodfeatures.co.uk/index.php?route=$TARGET
 https://www.paxum.com/payment/faq.php?view=$TARGET
 http://www.afcommerce.com/demostore/admin/index.php?o/!scan$TARGET
+https://www.cubewhois.com/$TARGET

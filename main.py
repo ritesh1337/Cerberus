@@ -66,9 +66,10 @@ try:
     from src.utils import * # import all utilities
     from src.core import * # import the "bridge", basically used to store variables editable by all core modules
     from src.database import * # database stuff
-    from src.argparser import *
-    from src.methods import *
-    from src.booster import *
+    from src.argparser import * # argument parsing
+    from src.methods import * # attack methods
+    from src.booster import * # hoic booster parser
+    from src.proxy import * # proxy scraping
 except Exception as e:
     print(' - Error, failed to import core modules.')
     sys.exit(f' - Stacktrace: \n{str(e).rstrip()}')
@@ -114,7 +115,18 @@ def main(args):
     if args['proxy_file']:
         Core.proxy_pool = []
         if not os.path.isfile(args['proxy_file']):
-            sys.exit(f'\n - Error, "{args["proxy_file"]}" not found\n')
+            print(f'\n - Error, "{args["proxy_file"]}" not found\n')
+
+            if input(' + Would you like to scrape some proxies first? (Y/n) ').lower().startswith('y'):
+                print(f' + Scraping {Core.proxy_proto.upper()} proxies')
+            
+                proxies = Proxy().get_proxies(Core.proxy_proto.lower())
+
+                print(f' + Gathered {len(proxies)} unchecked proxies\n')
+                with open(args['proxy_file'], 'a+') as fd:
+                    [fd.write(f'{proxy}\n') for proxy in proxies]
+            else:
+                sys.exit('\n + Bye!\n')
         
         with open(args['proxy_file'], buffering=(2048*2048)) as fd:
             [Core.proxy_pool.append(x.rstrip()) for x in fd.readlines() if bool(re.match(r'\d+\.\d+\.\d+\.\d+', x))] # sadly no ipv6 supported (yet)
@@ -240,7 +252,7 @@ def main(args):
     Core.attackrunning = True # all threads have launched, lets start the attack
 
     s_start = timer()
-    while 1:
+    while time.time() < stoptime and Core.attackrunning:
         try:
             utils().clear()
 
