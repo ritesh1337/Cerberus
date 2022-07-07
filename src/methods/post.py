@@ -63,7 +63,7 @@ def flood(attack_id, url, stoptime) -> None:
 
 Core.methods.update({
     'POST': {
-        'info': 'HTTP POST flood, with basic customizability',
+        'info': 'HTTP POST flood',
         'func': flood
     }
 })

@@ -26,6 +26,7 @@ from threading import Lock
 
 class Core:
     threadLock = Lock()
+    socklock = Lock()
     methods = {}
     infodict = {}
     attackrunning = False
@@ -37,6 +38,7 @@ class Core:
     blazingfast_ids_grabbed = False
     target_host = None
     target_port = None
+    target_netloc = None
     is_tor_active = False
     attack_id = None
     change_identity = 0 # once the counter reached 2000 we will change to a new tor circuit
@@ -52,3 +54,4 @@ class Core:
     useragent_list = None
     recursive_urls = None
     sockets = None
+    http_proto_ver = None

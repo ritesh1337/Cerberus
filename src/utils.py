@@ -143,7 +143,7 @@ class utils():
 
     def get_proxy(self, force_give=False) -> str:
         '''
-        Gets a random cookie from the "proxy_file" variable that was defined by the user
+        Gets a random proxy from the "proxy_file" variable that was defined by the user
         '''
 
         if force_give and Core.proxy_pool != None or len(Core.proxy_pool) > 0:
@@ -157,6 +157,7 @@ class utils():
         Gets a random Tor2web gateway
         '''
 
+        shuffle(self.tor_gateways)
         return choice(self.tor_gateways)
     
     def buildsession(self) -> requests.session:
@@ -321,7 +322,7 @@ class utils():
         return cookie
 
         
-    def buildheaders(self, url) -> dict:
+    def buildheaders(self, url, if_socket=False) -> dict:
         '''
         Function to generate randomized headers
         '''
@@ -330,8 +331,12 @@ class utils():
         for toshuffle in [self.cache_controls, self.accept_encodings, self.content_types, self.accepts]:
             shuffle(toshuffle)
         
+
         headers = choice([ # chooses between XMLHttpRequest and a random/predefined useragent
             {'User-Agent': urllib3.util.SKIP_HEADER, 'X-Requested-With': 'XMLHttpRequest'},  # SKIP_HEADER makes urllib3 ignore the header, this basically removes the User-Agent header from the list
+            {'User-Agent': getAgent()}
+        ] if not if_socket else [ # if we send it over a socket, we can just strip the User-Agent header
+            {'X-Requested-With': 'XMLHttpRequest'},
             {'User-Agent': getAgent()}
         ])
 
@@ -456,31 +461,17 @@ class utils():
         '''
 
         print(r'''
-                                  O*         oo                                  
-                                 *@#*       *#@o                                 
-                                °@#o@*     *@o#@°                                
-                                O#@*#@o   o@#o@##                                
-                               .@@#o##@###@##*##@.                               
-                                #@##@@#@@@#@@##@#                                
-                               .##@@@#@@#@@##@@##°                               
-                               .######*###*O@####.                               
-                   .°           #@##ooo###oooO#@#.          °                    
-                 .o#@           .O@@#*°@#@°°#@@#.          .@O*.                 
-             .*oO@@@#. ..*°      *#@@@O#@#o@@##o      °°.  .#@@#O*°.             
-          .*#@@@@##@OO##@@O.    .#O#@#@@@@@##@O#°    .O@###oO@#@@@@#O°           
-        °o#@@######Oo#@@##@#O°  O@#o###@@@##@OO@O  °o#@#@@@#o######@@@#*.        
-       oo@#O##@@@@#O#@##@@#@@O o@#@#O@#####@#O@#@*.O@@#@###@#O#@#@@###@#O*       
-      °o°O°###@@@####@@@@@###oo@#@#@O#@@@@@#o#####*o##@@@@@#####@@@#@O°O.o.      
-      *#O°o@#@@@@###O@#@@@##o°###@@##OO####O#@#@##O.O##@@@@#O###@@@@#@**O#°      
-     .#@#@@#@@@@@@@OO@#@@@@##*#@#@@@@#######@#@@#@#o##@@@@#@O#@@@@@@@#@@#@O      
-    o@@#@@@@######O###@@@@#@O*@#@@@@@@@@@@@@#@@@@#@o#@#@@@@##OO#####@@@@@#@#*    
-  .#@@@@####@@@@@#o###@@@@#@O°@#@@@@@@######@@@@@##°#@#@@@@###o#@@@@#####@@@@O   
- o@@@#O####@#######@@#@@@@@#@**@#@@@@@@@@@@@@@@@#@**@#@@@@@#@@@#####@@##O###@@#° 
-.#@#####Oo°.      .°o@@#@@@###o#@#@@@@@@@@@@@@@#@#o##@@@@@@@o°.     .°*OO####@@#.
-  °*oo°              °##@@@@#@#o#@#@@@@@@@@@@@#@#o@@@@@@###°             .*oo**  
-                      #@#@#@@#@#o#@#@@@@@@@@@#@O*###@@@@#@#                      
-                     °*O@#@####@O°o@##@@@@@##@o.#@#@####@O*.                     
-                        O##@@@##@#°o@@#@@@#@@*.#@##@@@@@O                        
-                         °.o##@@@@#**#@###@#**#@@@@@#o°°                         
-                              °oO#@@O*O@@#o*O@@@#o°.                             
-                                  °*oO**O**OO*°.''') # art made using https://image2ascii.com/
+   sSSs    sSSs   .S_sSSs     .S_SSSs      sSSs   .S_sSSs     .S       S.     sSSs  
+ d%%SP   d%%SP  .SS~YS%%b   .SS~SSSSS    d%%SP  .SS~YS%%b   .SS       SS.   d%%SP  
+d%S'    d%S'    S%S   `S%b  S%S   SSSS  d%S'    S%S   `S%b  S%S       S%S  d%S'    
+S%S     S%S     S%S    S%S  S%S    S%S  S%S     S%S    S%S  S%S       S%S  S%|     
+S&S     S&S     S%S    d*S  S%S SSSS%P  S&S     S%S    d*S  S&S       S&S  S&S     
+S&S     S&S_Ss  S&S   .S*S  S&S  SSSY   S&S_Ss  S&S   .S*S  S&S       S&S  Y&Ss    
+S&S     S&S~SP  S&S_sdSSS   S&S    S&S  S&S~SP  S&S_sdSSS   S&S       S&S  `S&&S   
+S&S     S&S     S&S~YSY%b   S&S    S&S  S&S     S&S~YSY%b   S&S       S&S    `S*S  
+S*b     S*b     S*S   `S%b  S*S    S&S  S*b     S*S   `S%b  S*b       d*S     l*S  
+S*S.    S*S.    S*S    S%S  S*S    S*S  S*S.    S*S    S%S  S*S.     .S*S    .S*P  
+ SSSbs   SSSbs  S*S    S&S  S*S SSSSP    SSSbs  S*S    S&S   SSSbs_sdSSS   sSS*S   
+  YSSP    YSSP  S*S    SSS  S*S  SSY      YSSP  S*S    SSS    YSSP~YSSY    YSS'    
+                SP          SP                  SP > Created by  https://github.com/Nexuzzzz                                
+                Y           Y                   Y  > Licensed under the MIT license''')

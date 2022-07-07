@@ -43,8 +43,8 @@ def new_identity() -> None:
 
 def flood(attack_id, url, stoptime) -> None:
 
-    if not Core.target_host: Core.target_host = urlparse(url).netloc # set host if not already set
-    if not Core.target_port: Core.target_port = urlparse(url).port if urlparse(url).port else 80 # set port if not already set
+    if not Core.target_host: Core.target_host = urlparse(url).hostname # set host if not already set
+    if not Core.target_port: Core.target_port = urlparse(url).port if urlparse(url).port else (80 if urlparse(url).scheme == 'http' else 443) # set port if not already set
     
     if not Core.is_tor_active: # TOR dead? (re)launch it
         utils().launch_tor()

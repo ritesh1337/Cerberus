@@ -156,11 +156,9 @@ class Proxy():
         def check(proxy):
             err_counter, socket = 0, None
 
-            print(f'Checking --> {proxy}')
             while 1:
 
                 if err_counter >= 3:
-                    print(f'Bad --> {proxy}')
 
                     if socket:
                         socket.close()
@@ -175,7 +173,6 @@ class Proxy():
                     testhost, testport = choice(self.testing).split(':')
                     socket = proxsocks.from_url(f'{proto}://{proxy}').connect(testhost, testport)
                     
-                    print(f'Good --> {proxy}')
                     with self.lock:
                         self.proxy_dict['good'].append(proxy)
                     

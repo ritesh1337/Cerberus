@@ -58,7 +58,7 @@ def flood(attack_id, url, stoptime) -> None:
 # add the method to the methods dictionary
 Core.methods.update({
     'GET': { # name, which will be used for the "-m/--method" argument
-        'info': 'HTTP GET flood, with basic customizability', # information about the attack
+        'info': 'HTTP GET flood', # information about the attack
         'func': flood # function
     }
 })

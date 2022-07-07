@@ -214,6 +214,7 @@ def main(args):
 
     # before we create the session, we need to set the HTTP protocol version
     HTTPConnection._http_vsn_str = f'HTTP/{args["http_ver"]}'
+    Core.http_proto_ver = args["http_ver"]
 
     print(' + Creating requests session.')
     session = utils().buildsession()
@@ -223,22 +224,28 @@ def main(args):
         try: input('\n + Ready? (Press ENTER) ')
         except: sys.exit('\n + Bye!\n')
 
-    print('\n + Building threads, this could take a while.')
+    print('\n + Launching threads')
     stoptime, threadbox = time.time() + args['duration'], []
-    for _ in range(args["workers"]):
+    method_func = Core.methods[Core.attack_method]['func']
+    Core.attackrunning = True
+
+    for i in range(args["workers"]):
         try:
             kaboom = threading.Thread(
-                target=Core.methods[Core.attack_method]['func'], # parse the function
+                target=method_func, # parse the function
                 args=(
                     attack_id, # attack id
                     choice(Core.targets), # pick a random target from the list
                     stoptime, # stop time
-                )
+                ),
+                name=f'Thread-{str(i+1)}',
+                daemon=False
             )
-            
-            threadbox.append(kaboom)
+
             kaboom.start()
-            Core.threadcount += 1
+            threadbox.append(kaboom)
+
+            print(f' + Launched thread {kaboom.name}', end='\r')
 
         except KeyboardInterrupt:
             Core.attackrunning = False
@@ -246,11 +253,9 @@ def main(args):
             sys.exit('\n + Bye!\n')
         
         except Exception as e:
-            print(f' - Failed to launch thread: {str(e).rstrip()}')
-    
-    print('\n + Starting attack')
-    Core.attackrunning = True # all threads have launched, lets start the attack
+            print(f' - Failed to launching thread {str(Core.threadcount)}: {str(e).rstrip()}')
 
+    print('\n + All threads launched.')
     s_start = timer()
     while time.time() < stoptime and Core.attackrunning:
         try:
@@ -281,7 +286,7 @@ def main(args):
             break
     
     utils().clear()
-    if args["workers"] > 100:
+    if args["workers"] > 500:
         print(' + You selected a LOT of threads, this can take a long time. \nIf you want to just quit the progrem without ending the threads the proper way Press CTRL-C')
     
     print(' + Killing all threads, hold on.')
