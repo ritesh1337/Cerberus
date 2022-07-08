@@ -57,6 +57,7 @@ def flood(attack_id, url, stoptime) -> None:
                 allow_redirects=False,
                 stream=False,
                 cert=None,
+                proxies=utils().get_proxy()
             )
 
             if req.status_code == 204:

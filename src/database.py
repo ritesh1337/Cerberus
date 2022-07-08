@@ -97,7 +97,7 @@ class database():
     
     def parse_log(self, log) -> dict:
         '''
-        Parses a log into a nice and easy2edit dictionary
+        Parses a log into a nice and easy to edit dictionary
         '''
 
         return {
@@ -114,7 +114,7 @@ class database():
             'bypass_cache': log[10] == 1, # bypass caching systems
             'yes_to_all': log[11] == 1, # ignore prompts
             'http_ver': str(log[12]), # http version
-            'random_headers': log[13]
+            'random_headers': log[13] # random other headers
         }
     
     def save_log(self, log) -> None:
@@ -157,7 +157,7 @@ class database():
         
         return logs
     
-    def get_log(self, identifier) -> tuple:
+    def get_log(self, identifier) -> list:
         '''
         Gets a single log from the database
         '''

@@ -304,6 +304,7 @@ def main(args):
     print(' + Attack finished.')
 
 if __name__ == '__main__':
+    utils().clear()
     utils().print_banner() # print banner
 
     if len(sys.argv) <= 1: # no arguments? just show all logs

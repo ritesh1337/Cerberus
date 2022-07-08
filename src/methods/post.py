@@ -48,7 +48,8 @@ def flood(attack_id, url, stoptime) -> None:
                 allow_redirects=False,
                 stream=False,
                 cert=None,
-                data=data
+                data=data,
+                proxies=utils().get_proxy()
             )
 
             Core.infodict[attack_id]['req_sent'] += 1

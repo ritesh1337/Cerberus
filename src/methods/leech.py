@@ -60,7 +60,8 @@ def flood(attack_id, url, stoptime) -> None:
                 timeout=(10,10), 
                 allow_redirects=True,
                 stream=False,
-                cert=None
+                cert=None,
+                proxies=utils().get_proxy()
             )
 
             time.sleep(uniform(80, 160))

