@@ -1,24 +1,20 @@
 '''
 
-Copyright (c) 2022 Nexus/Nexuzzzz
+Cerberus, a layer 7 network stress testing tool that has a wide variety of normal and exotic attack vectors.
+Copyright (C) 2022  Nexus/Nexuzzzz
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 '''
 
@@ -36,9 +32,12 @@ except Exception as e:
     print(f' - Stacktrace: \n{str(e).rstrip()}')
     exit()
 
+import sys # checking the python version
+if sys.version_info[0] < 3 and sys.version_info[1] < 6:
+    sys.exit(' - Error, please run Cerberus with Python 3.6 or higher.') # now that we've import sys, we can exit and print with a single function, awesome!
+
 # import the standard library modules, should have no problems importing them
 try:
-    import sys # checking the python version
     import urllib # url parsing
     import threading # threaded attacks
     import json # parsing json, and creating json objects
@@ -50,16 +49,14 @@ try:
     import ssl # secure socket layer stuff
     import asyncio # asynchronous stuff
     import re # regex
+    import hashlib # hashing
     from timeit import default_timer as timer
     from http.client import HTTPConnection # setting the "HTTP/" value
     from urllib3.exceptions import InsecureRequestWarning # to disable that annoying "Insecure request!" warning
 except Exception as e:
-    print(' - Error, failed to import standard library module.')
+    print(' - Error, failed to import standard library modules.')
     print(f' - Stacktrace: \n{str(e).rstrip()}')
     exit()
-
-if sys.version_info[0] < 3 and sys.version_info[1] < 6:
-    sys.exit(' - Error, please run Cerberus with Python 3.6 or higher.') # now that we've import sys, we can exit and print with a single function, awesome!
 
 # import all custom modules from the "src" directory
 try:
@@ -68,7 +65,6 @@ try:
     from src.database import * # database stuff
     from src.argparser import * # argument parsing
     from src.methods import * # attack methods
-    from src.booster import * # hoic booster parser
     from src.proxy import * # proxy scraping
 except Exception as e:
     print(' - Error, failed to import core modules.')
@@ -87,21 +83,21 @@ def main(args):
     
     if args.get('referer_list'):
         if ',' in args['referer_list']: Core.referer_list = args['referer_list'].split(',')
-        elif args['referer_list'] != None:  Core.referer_list = args['referer_list']
-        else: Core.referer_list = None
-    else: Core.referer_list = None
+        elif args['referer_list']:  Core.referer_list = args['referer_list']
+        else: Core.referer_list = []
+    else: Core.referer_list = []
 
     if args.get('useragent_list'):
         if ',' in args['useragent_list']: Core.useragent_list = args['useragent_list'].split(',')
-        elif args['useragent_list'] != None: Core.useragent_list = args['useragent_list']
-        else: Core.useragent_list = None
-    else: Core.useragent_list = None
+        elif args['useragent_list']: Core.useragent_list = args['useragent_list']
+        else: Core.useragent_list = []
+    else: Core.useragent_list = []
 
     if args.get('random_headers'):
         if ',' in args['random_headers']: Core.random_headers = args['random_headers'].split(',')
-        elif args['random_headers'] != None: Core.random_headers = args['random_headers']
-        else: Core.random_headers = None
-    else: Core.random_headers = None
+        elif args['random_headers']: Core.random_headers = args['random_headers']
+        else: Core.random_headers = []
+    else: Core.random_headers = []
 
     attack_method = args['method'].upper()
     if not Core.methods.get(attack_method): # if the method does not exist
@@ -129,7 +125,7 @@ def main(args):
                 sys.exit('\n + Bye!\n')
         
         with open(args['proxy_file'], buffering=(2048*2048)) as fd:
-            [Core.proxy_pool.append(x.rstrip()) for x in fd.readlines() if bool(re.match(r'\d+\.\d+\.\d+\.\d+', x))] # sadly no ipv6 supported (yet)
+            [Core.proxy_pool.append(x.rstrip()) for x in fd.readlines() if bool(Core.ipregex.match(x))] # sadly no ipv6 supported (yet)
         
         if Core.proxy_pool == []:
             sys.exit(f'\n - Error, no proxies collected, maybe wrong file?\n')
@@ -230,7 +226,9 @@ def main(args):
     Core.attackrunning = True
 
     for i in range(args["workers"]):
+        i+=1
         try:
+
             kaboom = threading.Thread(
                 target=method_func, # parse the function
                 args=(
@@ -238,14 +236,14 @@ def main(args):
                     choice(Core.targets), # pick a random target from the list
                     stoptime, # stop time
                 ),
-                name=f'Thread-{str(i+1)}',
+                name=f'Thread-{str(i)}',
                 daemon=False
             )
 
             kaboom.start()
             threadbox.append(kaboom)
 
-            print(f' + Launched thread {kaboom.name}', end='\r')
+            print(f' + Launched thread {str(i)}', end='\r')
 
         except KeyboardInterrupt:
             Core.attackrunning = False
@@ -253,7 +251,7 @@ def main(args):
             sys.exit('\n + Bye!\n')
         
         except Exception as e:
-            print(f' - Failed to launching thread {str(Core.threadcount)}: {str(e).rstrip()}')
+            print(f' - Failed to launching thread {str(i)}: {str(e).rstrip()}')
 
     print('\n + All threads launched.')
     s_start = timer()
@@ -326,25 +324,20 @@ if __name__ == '__main__':
 
         parser = ArgumentParser(width=100, description='''Cerberus is a layer 7 network stress testing tool that has a wide variety of normal and exotic attack vectors.
     It's written in Python3 and is usable on all systems with Python installed.''',
-                                epilog='''Copyright (c) 2022 Nexus/Nexuzzzz
+                                epilog='''Copyright (C) 2022  Nexus/Nexuzzzz
 
-    Permission is hereby granted, free of charge, to any person obtaining a copy
-    of this software and associated documentation files (the "Software"), to deal
-    in the Software without restriction, including without limitation the rights
-    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-    copies of the Software, and to permit persons to whom the Software is
-    furnished to do so, subject to the following conditions:
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-    The above copyright notice and this permission notice shall be included in all
-    copies or substantial portions of the Software.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-    SOFTWARE.
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
     ''', argument_default=argparse.SUPPRESS, allow_abbrev=False)
 
         # add arguments
@@ -362,7 +355,6 @@ if __name__ == '__main__':
         parser.add_argument('-y',       '--yes-to-all',      action='store_true', dest='yes_to_all',                                           help='Skip any user prompts, and just launch the attack', default=False)
         parser.add_argument(            '--http-version',    action='store',      dest='http_ver',      metavar='http version',     type=str,  help='Set the HTTP protocol version', default='1.1')
         parser.add_argument('-id',      '--launch-from-id',  action='store',      dest='launch_from_id',metavar='attack id',        type=str,  help='Attack ID to use, to parse attack configuration from', default=None)
-        parser.add_argument(            '--hoic-booster',    action='store',      dest='hoic_booster',  metavar='location',         type=str,  help='HOIC booster file to use when attacking, can result in malicious code execution so make sure its clean!', default=None)
         parser.add_argument(            '--post-data',       action='store',      dest='post_buffer',   metavar='data',             type=str,  help='Data to send with POST floods', default=None)
         parser.add_argument(            '--rand-headers',    action='store',      dest='random_headers',  metavar='random header(s)', type=str,  help='Random header(s) to choose when attacking, seperated by ","', default=None)
         args = vars(parser.parse_args()) # parse the arguments
@@ -388,20 +380,6 @@ if __name__ == '__main__':
                 print(f'{method}: {items["info"]}')
 
             sys.exit('\n')
-        
-        if args['hoic_booster']:
-            booster_path = args['hoic_booster']
-            if not os.path.isfile(booster_path):
-                sys.exit(f'\n - Could not find "{booster_path}"\n')
-
-            print('\n + Parsing booster file')
-            booster = Booster(booster_path)
-
-            booster.get()
-            args.update(booster.args())
-
-            args['IS_FROM_BOOSTER'] = True
-            args['UNIQUE_ATTACK_ID'] = utils().make_id()
 
         if args['launch_from_id']: # id has been specified
             attack_id = args['launch_from_id']

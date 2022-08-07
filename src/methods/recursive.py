@@ -1,40 +1,39 @@
 '''
 
-Copyright (c) 2022 Nexus/Nexuzzzz
+Cerberus, a layer 7 network stress testing tool that has a wide variety of normal and exotic attack vectors.
+Copyright (C) 2022  Nexus/Nexuzzzz
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 '''
 
 import time, requests, re
+
 from urllib.parse import urlparse
 from src.core import Core
 from src.utils import *
 from src.useragent import *
 
+
+url_regex = re.compile(r'''(href|src)=["'](.[^"']+)["']''')
 def scrapeurls(target_url, page) -> list:
     '''
     Scrapes all the urls off a page
     '''
 
     urls = []
-    urls_found = re.findall('''(href|src)=["'](.[^"']+)["']''', page)
+    urls_found = url_regex.findall(page)
 
     if urls_found:
         for url in urls_found:
@@ -45,6 +44,7 @@ def scrapeurls(target_url, page) -> list:
     return urls
 
 def flood(attack_id, url, stoptime) -> None:
+    url=url.strip("/")
 
     urls = []
     if not Core.recursive_urls: # no urls have been scraped yet
@@ -54,7 +54,7 @@ def flood(attack_id, url, stoptime) -> None:
             pass
         
         if urls == []: # no urls found? just add some random urls
-            urls += [f'{url.strip("/")}/robots.txt',f'{url.strip("/")}/index.html',f'{url.strip("/")}/favicon.ico']
+            urls += [f'{url}/robots.txt',f'{url}/index.html',f'{url}/favicon.ico']
 
         Core.recursive_urls = urls
 

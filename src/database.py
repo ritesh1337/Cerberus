@@ -1,28 +1,25 @@
 '''
 
-Copyright (c) 2022 Nexus/Nexuzzzz
+Cerberus, a layer 7 network stress testing tool that has a wide variety of normal and exotic attack vectors.
+Copyright (C) 2022  Nexus/Nexuzzzz
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 '''
 
-import os, sqlite3, hashlib
+import os, sqlite3
+
 from src.core import *
 from src.utils import *
 
@@ -31,9 +28,13 @@ class database():
         self.db, self.cursor = None, None
         self.connect()
     
-    def connect(self) -> object:
+    def connect(self) -> None:
         '''
-        Returns a sqlite database object, and cursor object
+        connect() -> nothing
+
+        Sets the SQLite3 database, and cursor for future usage
+
+        :returns None: Nothing
         '''
 
         if not os.path.isfile(os.path.join('database', 'db.db')):
@@ -49,26 +50,47 @@ class database():
     
     def disconnect(self) -> None:
         '''
+        disconnect() -> nothing
+
         Disconnects from the database
+
+        :returns None: Nothing
         '''
+
+        if not self.db:
+            return
 
         self.db.commit()
         self.db.close()
     
     def query(self, query, args=None, commit=False) -> list:
         '''
+        query(query, extra arguments, commit after finished) -> list
+
         Executes a single query
+
+        :param query str: Query to execute
+        :param args tuple: Tuple of arguments to pass
+        :param commit bool: Wether to commit when finished
+        :returns list: Output
         '''
+
+        output = []
         with Core.threadLock:
             output = self.cursor.execute(query) if args is None else self.cursor.execute(query, args)
 
             if commit:
                 self.db.commit()
+
         return output
     
     def make(self) -> None:
         '''
+        make() -> nothing
+
         Creates a new database
+
+        :returns None: Nothing
         '''
 
         with open(os.path.join('database', 'db.db'), 'w+') as fd: # first, we create the file
@@ -97,7 +119,12 @@ class database():
     
     def parse_log(self, log) -> dict:
         '''
+        parse_log(log tuple) -> dictionary
+
         Parses a log into a nice and easy to edit dictionary
+
+        :param log tuple: Tuple of items
+        :returns dict: Parsed dictionary
         '''
 
         return {
@@ -119,7 +146,12 @@ class database():
     
     def save_log(self, log) -> None:
         '''
+        save_log(log dictionary) -> nothing
+
         Saves a dictionary into the database
+
+        :param log dictionary: Dictionary with items
+        :returns None: Nothing
         '''
 
         self.query(
@@ -145,7 +177,11 @@ class database():
     
     def get_logs(self) -> list:
         '''
+        get_logs() -> list of logs
+
         Gets all the logs from the database
+
+        :returns list: List of logs
         '''
 
         if self.db is None: # maybe not connected yet
@@ -159,7 +195,12 @@ class database():
     
     def get_log(self, identifier) -> list:
         '''
+        get_log(log identifier) -> list
+
         Gets a single log from the database
+
+        :param identifier str: The logs unique identifier
+        :returns list: List of logs that matched the identifier
         '''
 
         if self.db is None:

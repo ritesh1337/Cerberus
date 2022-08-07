@@ -1,28 +1,25 @@
 '''
 
-Copyright (c) 2022 Nexus/Nexuzzzz
+Cerberus, a layer 7 network stress testing tool that has a wide variety of normal and exotic attack vectors.
+Copyright (C) 2022  Nexus/Nexuzzzz
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 '''
 
 import sys, requests, socket, os, urllib3, subprocess
+
 from random import getrandbits, choice, randint, shuffle, randrange
 from binascii import hexlify
 from netaddr import IPNetwork
@@ -30,6 +27,8 @@ from datetime import datetime, timedelta
 from tabulate import tabulate
 from os.path import join
 from urllib.parse import quote, urlparse
+from stem import Signal
+from stem.control import Controller
 
 from src.core import *
 from src.useragent import *
@@ -116,9 +115,27 @@ class utils():
         self.content_types = ['multipart/form-data', 'application/x-url-encoded']
         self.accepts = ['text/plain', '*/*', '/', 'application/json', 'text/html', 'application/xhtml+xml', 'application/xml', 'image/webp', 'image/*', 'image/jpeg', 'application/x-ms-application', 'image/gif', 'application/xaml+xml', 'image/pjpeg', 'application/x-ms-xbap', 'application/x-shockwave-flash', 'application/msword']
     
+    def new_identity(self) -> None:
+        '''
+        new_identity() -> nothing
+
+        Changes the current TOR circuit
+
+        :returns None: Nothing
+        '''
+
+        with Controller.from_port(port=9052) as controller:
+            controller.authenticate(password='cerberus')
+            controller.signal(Signal.NEWNYM)
+
     def launch_tor(self, torrc=join('src','files','Tor','torrc')) -> None:
         '''
+        launch_tor(torrc location) -> Nothing
+
         Launches TOR
+
+        :param torrc str: Torrc location
+        :returns None: Nothing
         '''
 
         if Core.is_tor_active:
@@ -136,33 +153,48 @@ class utils():
 
     def randhex(self, size=2) -> str:
         '''
+        randhex(size) -> hex string
+
         Creates a random junk hex string
+
+        :param size int: Size
+        :returns str: The generated hex string
         '''
 
         return "".join([f'\\x{choice("0123456789ABCDEF")}{choice("0123456789ABCDEF")}' for _ in range(size)])
 
-    def get_proxy(self, is_requests=True, force_give=False) -> str:
+    def get_proxy(self, is_requests=True, force_give=False) -> dict | str:
         '''
+        get_proxy(is for requests, force give) -> dictionary if for requests, else string
+
         Gets a random proxy from the "proxy_file" variable that was defined by the user
+
+        :param is_requests bool: Wether to return a dictionary usable for the Requests module
+        :param force_give bool: Not used anymore
         '''
 
-        if force_give and Core.proxy_pool != None or len(Core.proxy_pool) > 0:
-            proxy = f'{Core.proxy_proto.lower()}://{choice(Core.proxy_pool)}'
-        else: proxy = None
-
+        proxy = f'{Core.proxy_proto.lower()}://{choice(Core.proxy_pool)}'
         return {'http': proxy, 'https': proxy} if is_requests else proxy
 
     def tor_gateway(self) -> str:
         '''
+        tor_gateway() -> gateway
+
         Gets a random Tor2web gateway
+
+        :returns str: Randomly picked gateway
         '''
 
         shuffle(self.tor_gateways)
         return choice(self.tor_gateways)
     
-    def buildsession(self) -> requests.session:
+    def buildsession(self) -> requests.Session:
         '''
-        Creates a requests.session object
+        buildession() -> requests Session
+
+        Creates a requests.Session object
+
+        :returns requests.Session: Modified requests session object
         '''
 
         adapter = HTTPAdapter(socket_options=[
@@ -176,20 +208,31 @@ class utils():
         session.mount("http://", adapter)
         session.mount("https://", adapter)
         session.verify = False
-        session.timeout = (5,0.1)
 
         return session
     
     def randstr(self, strlen, chars='qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM') -> str:
         '''
+        randstr(length, allowed characters) -> string
+
         Function to generate a random string
+
+        :param strlen int: Length of the string
+        :param chars str or list: List of characters to pick from
+        :returns str: The string
         '''
         
         return ''.join(choice(chars) for _ in range(strlen))
     
     def buildblock(self, url, include=True) -> str:
         '''
+        buildblock(url, include the url) -> url with junk data
+
         Function to generate a block of junk, that gets added to the target url
+
+        :param url str: Url to append data to
+        :param include bool: Wether to return the original url aswell
+        :returns str: Url with junk data appended to it
         '''
 
         if url is None: return url
@@ -219,7 +262,11 @@ class utils():
         
     def buildarme(self) -> str:
         '''
+        buildarme() -> payload
+
         Builds the payload for the ARME flood, with a random size greater than 1300
+
+        :returns str: ARME payload
         '''
 
         prefix = 'bytes=0-'
@@ -230,7 +277,12 @@ class utils():
         
     def builddata(self, length=0) -> tuple:
         '''
+        builddata(length) -> (headers, post data)
+
         Creates a POST body
+
+        :param length int: Approx. length of the payload
+        :returns tuple: Headers and post payload
         '''
 
         if not Core.post_buffer:
@@ -264,14 +316,23 @@ class utils():
     
     def randip(self) -> str:
         '''
+        randip() -> random generated IPv4 addresss
+
         Creates a random IPv4 address
+
+        :returns str: The IP address
         '''
 
         return '.'.join([str(randint(1,255)) for _ in range(4)])
     
-    def randdate(self) -> str:
+    def randdate(self, strf_format="%a, %w %b %Y %X GMT") -> str:
         '''
+        randdate(format) -> randomly generated date
+
         Creates a random date
+
+        :param strf_format str: Format to pass to "strftime()"
+        :returns str: Datetime object, parsed into the specified "strf_format"
         '''
 
         now = datetime.now() # get the current date
@@ -292,11 +353,16 @@ class utils():
         if randrange(2) == 0: now += timedelta(seconds=randint(1, 60))
         else: now -= timedelta(seconds=randint(1, 60))
 
-        return now.strftime("%a, %w %b %Y %X GMT")
+        return now.strftime(strf_format)
     
     def buildcookie(self, size=0) -> str:
         '''
+        buildcookie(size) -> cookie
+
         Creates a random cookie, size is more a limit of the "randomization"
+        
+        :param size int: Approx. size of the cookie
+        :returns str: The cookie, tasty
         '''
 
         def giveint():
@@ -322,9 +388,15 @@ class utils():
         return cookie
 
         
-    def buildheaders(self, url, if_socket=False) -> dict:
+    def buildheaders(self, url, if_socket=False) -> dict | str:
         '''
+        buildheaders(url, if socket) -> headers
+
         Function to generate randomized headers, which in result makes the attack unfingerprintable
+
+        :param url str: Url to grab certain information from
+        :param if_socket bool: Wether to return the data in format thats easy to use with raw sockets
+        :returns dict or str: Dictionary if `if_socket` is False, else string
         '''
 
         # we shuffle em
@@ -380,12 +452,23 @@ class utils():
         else: pass
 
         if Core.random_headers: headers.update(choice(Core.random_headers))
-        
+
+        if if_socket:
+            socket_headers = ''
+            for key, value in headers:
+                socket_headers += f'{key}: {value}\r\n'
+            
+            return socket_headers
+            
         return headers
     
     def clear(self) -> None:
         '''
+        clear() -> Nothing
+
         Clears the screen
+
+        :returns None: Nothing
         '''
 
         try:
@@ -396,50 +479,84 @@ class utils():
 
     def make_id(self) -> str:
         '''
+        make_id() -> random id
+
         Helper function to make attack ID's
+
+        :returns str: The random ID
         '''
 
         return hexlify(getrandbits(128).to_bytes(16, 'little')).decode() # make a simple 32 characters long ID
     
     def valid_ip(self, ip) -> bool:
         '''
+        valid_ip(ipv4 or ipv6 address) -> true if valid, false if invalid
+
         Checks if the specified IPv4/IPv6 address is valid
+
+        :param ip str: IPv4 or IPv6 address
+        :returns bool: True if its a valid IP address, False if otherwise
         '''
 
-        if bool(self.ipv4regex.match(ip)): return True
-        else: return bool(self.ipv6regex.match(ip))
+        return bool(Core.ipregex.match(ip))
         
     def cidr2iplist(self, cidrange) -> list:
         '''
+        cidr2iplist(cidrange) -> list of IP address
+
         Converts a CID range to a list of IP's
+
+        :param cidrange str: CID range
+        :returns str: List of IP addresses, parsed from the given range
         '''
 
         return [str(ip) for ip in IPNetwork(cidrange)]
 
     def unix2posix(self, timestamp) -> str:
         '''
+        unix2posix(unix timestamp) -> posix timestamp
+
         Converts the specified UNIX timestamp into a POSIX one
+
+        :param timestamp float: UNIX timestamp
+        :returns str: UNIX timestamp, converted to a POSIX one
         '''
 
         return datetime.fromtimestamp(timestamp).strftime('%m/%d/%Y, %H:%M:%S')
     
     def posix2unix(self, timestamp) -> float:
         '''
+        posix2unix(posix timestamp) -> unix timestamp
+
         Converts the specified POSIX timestamp into a UNIX one
+
+        :param timestamp str: POSIX timestamp
+        :returns float: UNIX timestamp
         '''
 
         return datetime.timestamp(datetime.strptime(timestamp, "%m/%d/%Y, %H:%M:%S"))
     
     def table(self, rows, headers) -> str:
         '''
+        table(list of rows, list of headers) -> table
+
         Creates a nice looking table
+
+        :param rows list: List of Rows
+        :param headers list: List of headers
+        :returns str: The table
         '''
 
         return tabulate(rows, headers=headers, tablefmt='simple')
     
-    def Sec2Str(self, sec, hide=True) -> str: # found it on stackoverflow, cheers Timothy C. Quinn
+    def Sec2Str(self, sec) -> str: # found it on stackoverflow, cheers Timothy C. Quinn
         '''
+        Sec2Str(seconds) -> output
+
         Turns seconds into days, hours, minutes and seconds and puts that into a single string
+
+        :param seconds int: Seconds to convert
+        :returns str: The seconds, converted into days/hours/minutes and seconds
         '''
 
         td = timedelta(seconds=sec)
@@ -469,7 +586,11 @@ class utils():
     
     def print_banner(self) -> None:
         '''
+        print_banner() -> Nothing
+
         Prints the banner
+
+        :returns None: Nothing
         '''
 
         print(r'''
@@ -486,5 +607,5 @@ S*S.    S*S.    S*S    S%S  S*S    S*S  S*S.    S*S    S%S  S*S.     .S*S    .S*
  SSSbs   SSSbs  S*S    S&S  S*S SSSSP    SSSbs  S*S    S&S   SSSbs_sdSSS   sSS*S   
   YSSP    YSSP  S*S    SSS  S*S  SSY      YSSP  S*S    SSS    YSSP~YSSY    YSS'    
                 SP          SP                  SP > Created by  https://github.com/Nexuzzzz                                
-                Y           Y                   Y  > Licensed under the MIT license
+                Y           Y                   Y  > Licensed under GPLV3
 ''')

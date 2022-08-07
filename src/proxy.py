@@ -1,31 +1,29 @@
 '''
 
-Copyright (c) 2022 Nexus/Nexuzzzz
+Cerberus, a layer 7 network stress testing tool that has a wide variety of normal and exotic attack vectors.
+Copyright (C) 2022  Nexus/Nexuzzzz
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 '''
 
 import requests, json, re, os, threading, time
+
 from python_socks.sync import Proxy as proxsocks
 from random import choice, shuffle
 from threading import Lock
+
 from src.useragent import *
 
 class Proxy():
@@ -145,15 +143,60 @@ class Proxy():
         self.threads = []
         self.protolist = ['http','socks4','socks5']
         self.threadcounter = 0
+        self.urls = {
+            'http': self.http_sources,
+            'socks4': self.socks4_sources,
+            'socks5': self.socks5_sources
+        }
 
         [shuffle(x) for x in [self.http_sources, self.socks4_sources, self.socks5_sources, self.testing]]
     
-    def check_proxies(self, proto='http', file=None) -> dict:
+    def get(self, url) -> str:
         '''
-        Filters proxies in a dictionary
+        get(proxy url) -> page output
+
+        Grabs the given sites page, and returns it
+
+        :param url str: Url to request
+        :returns str: Page contents
         '''
 
-        def check(proxy):
+        try:
+            req = requests.get(
+                url, 
+                headers=Core.default_headers,
+                allow_redirects=False,
+                verify=False,
+                timeout=5
+            )
+        except Exception:
+            return ''
+
+        return req.text
+    
+    def check_proxies(self, proto='http', file=None) -> dict:
+        '''
+        check_proxies(protocol, filename) -> proxies sorted in a dict by status
+
+        Filters proxies in a dictionary
+
+        :param proto str: Proxy protocol (HTTP, SOCKS4 or SOCKS5)
+        :param file str: File to save to
+        :returns dict: Dictionary with the good and bad proxies sorted
+        '''
+
+        if not file:
+            file = f'{proto}.txt'
+
+        def check(proxy) -> None:
+            '''
+            check(proxy) -> None
+
+            Checks the proxy's status
+
+            :param proxy str: Proxy in the `ip:port` format
+            '''
+
             err_counter, socket = 0, None
 
             while 1:
@@ -214,7 +257,12 @@ class Proxy():
     
     def get_proxies(self, proto='http') -> list:
         '''
+        get_proxies(protocol) -> list of proxies
+
         Scrapes proxies
+
+        :param proto str: Proxy protocol (HTTP, SOCKS4 or SOCKS5)
+        :returns list: List of scraped proxies
         '''
         
         proto = proto.lower() # just incase
@@ -222,26 +270,26 @@ class Proxy():
 
         # protocol specific urls that need different parsing (such as json or regex)
         if proto == 'http':
-            page = requests.get('https://cool-proxy.net/proxies.json')
-            for line in page.text.splitlines():
+            page = self.get('https://cool-proxy.net/proxies.json')
+            for line in page.splitlines():
                 line = json.loads(line)
 
                 try: proxies.append(f'{line["ip"]}:{str(line["port"])}')
                 except Exception: pass
 
-        page = requests.get('http://proxylist.fatezero.org/proxy.list')
-        for line in page.text.splitlines():
+        page = self.get('http://proxylist.fatezero.org/proxy.list')
+        for line in page.splitlines():
             line = json.loads(line)
             if 'http' in line['type'].lower():
                 try: proxies.append(f'{line["host"]}:{str(line["port"])}')
                 except Exception: pass
         
-        page = requests.get('https://raw.githubusercontent.com/stamparm/aux/master/fetch-some-list.txt').text
+        page = self.get('https://raw.githubusercontent.com/stamparm/aux/master/fetch-some-list.txt')
         for obj in json.loads(page):
             if proto in obj['proto']:
                 proxies.append(f'{obj["ip"]}:{obj["port"]}')
         
-        page = requests.get('https://scrapingant.com/proxies').text
+        page = self.get('https://scrapingant.com/proxies')
         for line in re.findall(r'<tr><td>\d+\.\d+\.\d+\.\d+<\/td><td>\d+<\/td><td>.*?<\/td>', page):
             line=line.replace('<tr><td>','').replace('</td>','')
 
@@ -250,9 +298,9 @@ class Proxy():
             if proto in ptype.lower():
                 proxies.append(f'{ip}:{port}')
         
-        page = requests.get('https://hidemy.name/en/proxy-list/#list', headers={'User-Agent': getAgent()})
+        page = self.get('https://hidemy.name/en/proxy-list/#list')
         try:
-            part = page.text.split("<tbody>")[1].split("</tbody>")[0].split("<tr><td>")
+            part = page.split("<tbody>")[1].split("</tbody>")[0].split("<tr><td>")
 
             for line in part:
                 proxtype = None
@@ -271,29 +319,30 @@ class Proxy():
         except Exception:
             pass
 
-        page = requests.get('https://raw.githubusercontent.com/stamparm/aux/master/fetch-some-list.txt').text
+        page = self.get('https://raw.githubusercontent.com/stamparm/aux/master/fetch-some-list.txt')
         for obj in json.loads(page):
             if proto in obj['proto'].lower():
                 proxies.append(f'{obj["ip"]}:{obj["port"]}')
         
-        page = requests.get('https://raw.githubusercontent.com/proxyips/proxylist/main/proxylistfull.json').text
+        page = self.get('https://raw.githubusercontent.com/proxyips/proxylist/main/proxylistfull.json')
         for obj in json.loads(page):
             if proto in obj['Type'].lower():
                 proxies.append(f'{obj["Ip"]}:{obj["Port"]}')
-        
-        urls = {
-            'http': self.http_sources,
-            'socks4': self.socks4_sources,
-            'socks5': self.socks5_sources
-        }
 
-        for url in urls.get(proto):
+        http_sources = self.urls.get(proto)
+        if not http_sources:
+            return []
+
+        for url in http_sources:
             try:
-                proxlist = requests.get(url, timeout=6).text
-                for ipfound in re.findall(r'\d+\.\d+\.\d+\.\d+\:\d+', proxies):
-                    if ipfound != None and len(ipfound) != 0 and not ipfound.rstrip() in proxlist:
-                        proxies.append(ipfound.rstrip())
-            except:
+                contents = self.get(url)
+                for ipfound in Core.ipregex.findall(contents):
+                    ipfound = ipfound.rstrip()
+
+                    if ipfound and len(ipfound) != 0 and not ipfound in proxies:
+                        proxies.append(ipfound)
+
+            except Exception:
                 pass
         
         final = []

