@@ -38,9 +38,20 @@ def flood(attack_id, url, stoptime) -> None:
 
     socket = None
 
-    try: proxy = Proxy.from_url('socks5://127.0.0.1:9049') # set the proxy to the port in "src/files/Tor/torrc"
-    except Exception:
-        utils().launch_tor() # launch tor
+    connected = False
+    for _ in range(20): # try to restart TOR atleast 20 times
+        if connected: break
+
+        try: 
+            proxy = Proxy.from_url('socks5://127.0.0.1:9049') # set the proxy to the port in "src/files/Tor/torrc"
+            connected = True
+
+        except Exception:
+            utils().launch_tor() # launch tor
+            continue
+    
+    if not connected:
+        return
 
     while time.time() < stoptime and not Core.killattack:
         if not Core.attackrunning:

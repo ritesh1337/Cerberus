@@ -25,9 +25,10 @@ Python module to generate random useragents
 from random import randint, choice
 from json import load
 from os.path import dirname, abspath, join
+
 from src.core import *
 
-with open(join(dirname(abspath(__file__)), 'files', 'agents.json'), buffering=(16*1024*1024)) as file:
+with open(join(dirname(abspath(__file__)), 'files', 'agents.json'), buffering=Core.file_buffer) as file:
     agents = load(file)
 
 def getAgent() -> str:

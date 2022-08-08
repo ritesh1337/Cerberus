@@ -24,9 +24,10 @@ Python module to generate random referers
 
 from random import randint, choice
 from os.path import dirname, abspath, join
+
 from src.core import *
 
-with open(join(dirname(abspath(__file__)), 'files', 'referers.txt'), buffering=(16*1024*1024)) as file:
+with open(join(dirname(abspath(__file__)), 'files', 'referers.txt'), buffering=Core.file_buffer) as file:
     referers = file.read().splitlines()
 
 def getReferer() -> str:

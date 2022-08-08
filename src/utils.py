@@ -47,10 +47,10 @@ elif sys.version_info < (3, 2):  # assume posix
 else:  # Python 3.2+ and Unix
     Popen_kwargs.update(start_new_session=True)
 
-with open(join('src', 'files', 'keywords.txt'), buffering=(16*1024*1024)) as file:
+with open(join('src', 'files', 'keywords.txt'), buffering=Core.file_buffer) as file:
     keywords = file.read().splitlines()
 
-with open(join('src', 'files', 'openredirects.txt'), buffering=(16*1024*1024)) as file:
+with open(join('src', 'files', 'openredirects.txt'), buffering=Core.file_buffer) as file:
     openredirects = file.read().splitlines()
 
 class HTTPAdapter(requests.adapters.HTTPAdapter):
@@ -115,6 +115,20 @@ class utils():
         self.content_types = ['multipart/form-data', 'application/x-url-encoded']
         self.accepts = ['text/plain', '*/*', '/', 'application/json', 'text/html', 'application/xhtml+xml', 'application/xml', 'image/webp', 'image/*', 'image/jpeg', 'application/x-ms-application', 'image/gif', 'application/xaml+xml', 'image/pjpeg', 'application/x-ms-xbap', 'application/x-shockwave-flash', 'application/msword']
     
+    def dump_exception(self, exception) -> None:
+        '''
+        dump_exception(exception) -> nothing
+
+        Dumps the given exception to a file
+
+        :param exception str: Exception to write to the log file
+        :returns None: Nothing
+        '''
+        
+        log_name = f'log_{datetime.now().strftime("%m_%d_%Y")}.txt'
+        with open(os.path.join('src', 'logs', log_name), 'a+', buffering=Core.file_buffer) as fd:
+            fd.write(f'{"="*20}\n{str(exception)}\n')
+
     def new_identity(self) -> None:
         '''
         new_identity() -> nothing
@@ -126,7 +140,9 @@ class utils():
 
         with Controller.from_port(port=9052) as controller:
             controller.authenticate(password='cerberus')
-            controller.signal(Signal.NEWNYM)
+
+            if controller.is_newnym_available:
+                controller.signal(Signal.NEWNYM)
 
     def launch_tor(self, torrc=join('src','files','Tor','torrc')) -> None:
         '''

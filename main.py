@@ -27,17 +27,18 @@ try:
     import tabulate # pretty tables
     import dns.resolver # dns watertorture attack
     import websocket # websocket flooder
+    import python_socks # proxification
 except Exception as e:
-    print(' - Error, it looks like i\'m missing some modules. Did you try "pip install -r requirements"?')
-    print(f' - Stacktrace: \n{str(e).rstrip()}')
+    print(f' - Error, it looks like i\'m missing some modules. Did you try "pip install -r requirements"?\n - Stacktrace: \n{str(e).rstrip()}')
     exit()
 
 import sys # checking the python version
-if sys.version_info[0] < 3 and sys.version_info[1] < 6:
-    sys.exit(' - Error, please run Cerberus with Python 3.6 or higher.') # now that we've import sys, we can exit and print with a single function, awesome!
+if sys.version_info[0] < 3 and sys.version_info[1] < 9:
+    sys.exit(' - Error, please run Cerberus with Python 3.9 or higher.') # now that we've import sys, we can exit and print with a single function, awesome!
 
 # import the standard library modules, should have no problems importing them
 try:
+    import os # file path checking, random data generation
     import urllib # url parsing
     import threading # threaded attacks
     import json # parsing json, and creating json objects
@@ -50,12 +51,12 @@ try:
     import asyncio # asynchronous stuff
     import re # regex
     import hashlib # hashing
+    import traceback # printing stacktraces
     from timeit import default_timer as timer
     from http.client import HTTPConnection # setting the "HTTP/" value
     from urllib3.exceptions import InsecureRequestWarning # to disable that annoying "Insecure request!" warning
 except Exception as e:
-    print(' - Error, failed to import standard library modules.')
-    print(f' - Stacktrace: \n{str(e).rstrip()}')
+    print(f' - Error, failed to import standard library modules.\n - Stacktrace: \n{str(e).strip()}')
     exit()
 
 # import all custom modules from the "src" directory
@@ -67,8 +68,8 @@ try:
     from src.methods import * # attack methods
     from src.proxy import * # proxy scraping
 except Exception as e:
-    print(' - Error, failed to import core modules.')
-    sys.exit(f' - Stacktrace: \n{str(e).rstrip()}')
+    print(' - Error, failed to import core modules.\n - Stacktrace:\n')
+    traceback.print_exc(); exit()
 
 # initialize colorama
 init(autoreset=True) # makes it so i don't need to do Fore.RESET at the end of every print()
@@ -119,12 +120,12 @@ def main(args):
                 proxies = Proxy().get_proxies(Core.proxy_proto.lower())
 
                 print(f' + Gathered {len(proxies)} unchecked proxies\n')
-                with open(args['proxy_file'], 'a+') as fd:
+                with open(args['proxy_file'], 'a+', buffering=Core.file_buffer) as fd:
                     [fd.write(f'{proxy}\n') for proxy in proxies]
             else:
                 sys.exit('\n + Bye!\n')
         
-        with open(args['proxy_file'], buffering=(2048*2048)) as fd:
+        with open(args['proxy_file'], buffering=Core.file_buffer) as fd:
             [Core.proxy_pool.append(x.rstrip()) for x in fd.readlines() if bool(Core.ipregex.match(x))] # sadly no ipv6 supported (yet)
         
         if Core.proxy_pool == []:
@@ -175,7 +176,7 @@ def main(args):
                 sys.exit('\n')
         except: sys.exit('\n + Bye!\n')
 
-    if not args.get('IS_FROM_ID') and not args.get('IS_FROM_BOOSTER'): # skip if we are running the attack from a pre-existing id or from a hoic booster
+    if not args.get('IS_FROM_ID'): # skip if we are running the attack from a pre-existing id
         print('\n + Creating unique identifier for attack')
         tohash = args['target_url'] + str(args['duration']) + args['method'] + str(args['workers']) + str(args['bypass_cache']) + str(args['yes_to_all'])
         Core.attack_id = attack_id = hashlib.sha1(tohash.encode()).hexdigest()
@@ -291,7 +292,9 @@ def main(args):
     for thread in threadbox:
         try: thread.join()
         except KeyboardInterrupt: sys.exit('\n + Bye!\n')
-        except Exception as e: print(f' - Failed to kill thread: {str(e).rstrip()}')
+        except Exception as e: 
+            print(f' - Failed to kill thread. \n - Stacktrace:\n')
+            traceback.print_exc()
 
     s_took = "%.2f" % (timer() - s_start) # count after we stopped all threads, because some threads might still be sending some rogue requests
     

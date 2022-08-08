@@ -236,7 +236,7 @@ class Proxy():
             return self.proxy_dict
         
         with self.lock:
-            with open(file) as fd:
+            with open(file, buffering=Core.file_buffer) as fd:
                 proxies = [line.rstrip() for line in fd.readlines()]
         
         shuffle(proxies)

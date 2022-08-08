@@ -51,6 +51,7 @@ class Core:
     recursive_urls = []
     sockets = []
     http_proto_ver = '1.0'
+    file_buffer = (16*1024*1024)
     ipregex = re.compile(r'([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})|(([a-f0-9:]+:+)+[a-f0-9]+)')
     default_headers = {
         "Upgrade-Insecure-Requests": "1",

@@ -93,7 +93,7 @@ class database():
         :returns None: Nothing
         '''
 
-        with open(os.path.join('database', 'db.db'), 'w+') as fd: # first, we create the file
+        with open(os.path.join('database', 'db.db'), 'w+', buffering=Core.file_buffer) as fd: # first, we create the file
             pass
 
         self.connect() # then we connect
