@@ -179,7 +179,8 @@ class utils():
 
         return "".join([f'\\x{choice("0123456789ABCDEF")}{choice("0123456789ABCDEF")}' for _ in range(size)])
 
-    def get_proxy(self, is_requests=True, force_give=False) -> dict | str:
+    # removed "-> dict | str" because it was throwing errors for somebody
+    def get_proxy(self, is_requests=True, force_give=False):
         '''
         get_proxy(is for requests, force give) -> dictionary if for requests, else string
 
