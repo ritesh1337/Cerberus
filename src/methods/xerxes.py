@@ -36,10 +36,8 @@ def flood(attack_id, url, stoptime) -> None:
     if not Core.is_tor_active: # TOR dead? (re)launch it
         utils().launch_tor()
 
-    socket = None
-
-    connected = False
-    for _ in range(20): # try to restart TOR atleast 20 times
+    socket, connected, proxy = None, False, Proxy
+    for _ in range(10): # try to restart TOR atleast 10 times
         if connected: break
 
         try: 

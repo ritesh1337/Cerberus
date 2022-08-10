@@ -33,8 +33,8 @@ class Core:
     session = requests.session
     ddosguard_cookies_grabbed = False
     blazingfast_ids_grabbed = False
-    target_host = ''
-    target_port = 80
+    target_host = None
+    target_port = None
     target_netloc = ''
     is_tor_active = False
     attack_id = ''

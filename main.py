@@ -384,7 +384,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
             sys.exit('\n')
 
-        if args['launch_from_id']: # id has been specified
+        if args['launch_from_id']: # attack id has been specified
             attack_id = args['launch_from_id']
             print(f' + Parsing attack configuration from ID {attack_id}')
 
