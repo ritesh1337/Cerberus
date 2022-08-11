@@ -44,7 +44,7 @@ def getAgent() -> str:
     if not Core.useragent_list:
 
         browsers = ['chrome', 'firefox', 'opera', 'edge', 'explorer', 'brave']
-        other = ['pyrequests','curl','wget']
+        other = ['pyrequests','curl','wget', 'apt']
 
         agent = ''
         if randint(0,3) != 1:
