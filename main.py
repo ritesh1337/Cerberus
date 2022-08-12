@@ -110,26 +110,52 @@ def main(args):
     Core.post_buffer = args['post_buffer']
 
     if args['proxy_file']:
+        file = args['proxy_file']
         Core.proxy_pool = []
-        if not os.path.isfile(args['proxy_file']):
+
+        if not os.path.isfile(file):
             print(f'\n - Error, "{args["proxy_file"]}" not found\n')
 
             if input(' + Would you like to scrape some proxies first? (Y/n) ').lower().startswith('y'):
                 print(f' + Scraping {Core.proxy_proto.upper()} proxies')
             
-                proxies = Proxy().get_proxies(Core.proxy_proto.lower())
+                proxies = Proxy().get_proxies(Core.proxy_proto)
 
                 print(f' + Gathered {len(proxies)} unchecked proxies\n')
-                with open(args['proxy_file'], 'a+', buffering=Core.file_buffer) as fd:
+                with open(file, 'a+', buffering=Core.file_buffer) as fd:
                     [fd.write(f'{proxy}\n') for proxy in proxies]
+            
+            if input(' + Would you to check them too? (Y/n) ').lower().startswith('y'):
+                print(f' + Filtering, hold on...')
+                filtered = Proxy().check_proxies(Core.proxy_proto, file)
+
+                utils().clear()
+                print(f' + Good proxies: {len(filtered["good"])}')
+                print(f' + Bad proxies: {len(filtered["bad"])}')
+
+                with open(f'{Core.proxy_proto}_good.txt', 'a+', buffering=Core.file_buffer) as fd:
+                    [fd.write(f'{goodproxy}\n') for goodproxy in filtered["good"]]
+                
+                with open(f'{Core.proxy_proto}_bad.txt', 'a+', buffering=Core.file_buffer) as fd:
+                    [fd.write(f'{badproxy}\n') for badproxy in filtered["bad"]]
             else:
                 sys.exit('\n + Bye!\n')
         
-        with open(args['proxy_file'], buffering=Core.file_buffer) as fd:
-            [Core.proxy_pool.append(x.rstrip()) for x in fd.readlines() if bool(Core.ipregex.match(x))] # sadly no ipv6 supported (yet)
+        with open(file, buffering=Core.file_buffer) as fd:
+            [Core.proxy_pool.append(x.rstrip()) for x in fd.readlines() if bool(Core.ipregex.match(x))]
         
         if Core.proxy_pool == []:
             sys.exit(f'\n - Error, no proxies collected, maybe wrong file?\n')
+    
+    if args['reflector_file']:
+        file = args['reflector_file']
+        Core.reflectors = []
+
+        if not os.path.isfile(file):
+            sys.exit(f'\n - Error, {file} not found\n')
+
+        with open(file, buffering=Core.file_buffer) as fd:
+            [Core.reflectors.append(x.rstrip()) for x in fd.readlines()]        
 
     print(' + Current attack configuration:')
     if not Core.targets or len(Core.targets) <= 1: print(f'   - Target: {args["target_url"]}')
@@ -169,6 +195,9 @@ def main(args):
     if args['proxy_file']:
         print(f'   - Proxies loaded: {str(len(Core.proxy_pool))}')
         print(f'   - Global proxy protocol: {str(Core.proxy_proto)}')
+    
+    if args['reflector_file']:
+        print(f'   - Reflectors loaded: {str(len(Core.reflectors))}')
 
     if not args['yes_to_all']:
         try:
@@ -344,22 +373,23 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
     ''', argument_default=argparse.SUPPRESS, allow_abbrev=False)
 
         # add arguments
-        parser.add_argument('-t',       '--target',          action='store',      dest='target_url',    metavar='target url(s)',    type=str,  help='Target url(s) to attack, seperated by ","', default=None)
-        parser.add_argument(            '--referers',        action='store',      dest='referer_list',  metavar='referer(s)',       type=str,  help='Referer(s) to use when attacking, seperated by ","', default=None)
-        parser.add_argument(            '--useragents',      action='store',      dest='useragent_list',metavar='useragent(s)',     type=str,  help='Useragent(s) to use when attacking, seperated by ","', default=None)
-        parser.add_argument('-d',       '--attack-duration', action='store',      dest='duration',      metavar='duration',         type=int,  help='Attack length in seconds', default=100)
-        parser.add_argument('-w',       '--workers',         action='store',      dest='workers',       metavar='workers',          type=int,  help='Number of threads/workers to spawn', default=40)
-        parser.add_argument('-m',       '--method',          action='store',      dest='method',        metavar='method',           type=str,  help='Attack method/vector to use', default='GET')
-        parser.add_argument(            '--proxy-file',      action='store',      dest='proxy_file',    metavar='location',         type=str,  help='Location of the proxy file to use', default=None)
-        parser.add_argument(            '--proxy-proto',     action='store',      dest='proxy_proto',   metavar='protocol',         type=str,  help='Proxy protocol (SOCKS4, SOCKS5, HTTP)', default='SOCKS5')
-        parser.add_argument('-logs',    '--list-logs',       action='store_true', dest='list_logs',                                            help='List all attack logs', default=False)
-        parser.add_argument('-methods', '--list-methods',    action='store_true', dest='list_methods',                                         help='List all the attack methods', default=False)
-        parser.add_argument('-bc',      '--bypass-cache',    action='store_true', dest='bypass_cache',                                         help='Try to bypass any caching systems to ensure we hit the main servers', default=True)
-        parser.add_argument('-y',       '--yes-to-all',      action='store_true', dest='yes_to_all',                                           help='Skip any user prompts, and just launch the attack', default=False)
-        parser.add_argument(            '--http-version',    action='store',      dest='http_ver',      metavar='http version',     type=str,  help='Set the HTTP protocol version', default='1.1')
-        parser.add_argument('-id',      '--launch-from-id',  action='store',      dest='launch_from_id',metavar='attack id',        type=str,  help='Attack ID to use, to parse attack configuration from', default=None)
-        parser.add_argument(            '--post-data',       action='store',      dest='post_buffer',   metavar='data',             type=str,  help='Data to send with POST floods', default=None)
-        parser.add_argument(            '--rand-headers',    action='store',      dest='random_headers',  metavar='random header(s)', type=str,  help='Random header(s) to choose when attacking, seperated by ","', default=None)
+        parser.add_argument('-t',       '--target',          action='store',      dest='target_url',     metavar='target url(s)',    type=str,  help='Target url(s) to attack, seperated by ","', default=None)
+        parser.add_argument(            '--referers',        action='store',      dest='referer_list',   metavar='referer(s)',       type=str,  help='Referer(s) to use when attacking, seperated by ","', default=None)
+        parser.add_argument(            '--useragents',      action='store',      dest='useragent_list', metavar='useragent(s)',     type=str,  help='Useragent(s) to use when attacking, seperated by ","', default=None)
+        parser.add_argument('-d',       '--attack-duration', action='store',      dest='duration',       metavar='duration',         type=int,  help='Attack length in seconds', default=100)
+        parser.add_argument('-w',       '--workers',         action='store',      dest='workers',        metavar='workers',          type=int,  help='Number of threads/workers to spawn', default=40)
+        parser.add_argument('-m',       '--method',          action='store',      dest='method',         metavar='method',           type=str,  help='Attack method/vector to use', default='GET')
+        parser.add_argument(            '--proxy-file',      action='store',      dest='proxy_file',     metavar='location',         type=str,  help='File with reflectors to use in reflection attacks', default=None)
+        parser.add_argument(            '--reflector-file',  action='store',      dest='reflector_file', metavar='location',         type=str,  help='Location of the proxy file to use', default=None)
+        parser.add_argument(            '--proxy-proto',     action='store',      dest='proxy_proto',    metavar='protocol',         type=str,  help='Proxy protocol (SOCKS4, SOCKS5, HTTP)', default='SOCKS5')
+        parser.add_argument('-logs',    '--list-logs',       action='store_true', dest='list_logs',                                             help='List all attack logs', default=False)
+        parser.add_argument('-methods', '--list-methods',    action='store_true', dest='list_methods',                                          help='List all the attack methods', default=False)
+        parser.add_argument('-bc',      '--bypass-cache',    action='store_true', dest='bypass_cache',                                          help='Try to bypass any caching systems to ensure we hit the main servers', default=True)
+        parser.add_argument('-y',       '--yes-to-all',      action='store_true', dest='yes_to_all',                                            help='Skip any user prompts, and just launch the attack', default=False)
+        parser.add_argument(            '--http-version',    action='store',      dest='http_ver',       metavar='http version',     type=str,  help='Set the HTTP protocol version', default='1.1')
+        parser.add_argument('-id',      '--launch-from-id',  action='store',      dest='launch_from_id', metavar='attack id',        type=str,  help='Attack ID to use, to parse attack configuration from', default=None)
+        parser.add_argument(            '--post-data',       action='store',      dest='post_buffer',    metavar='data',             type=str,  help='Data to send with POST floods', default=None)
+        parser.add_argument(            '--rand-headers',    action='store',      dest='random_headers', metavar='random header(s)', type=str,  help='Random header(s) to choose when attacking, seperated by ","', default=None)
         args = vars(parser.parse_args()) # parse the arguments
 
         if args['list_logs']:

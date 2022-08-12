@@ -132,10 +132,12 @@ class Proxy():
         ]
 
         self.testing = [ # domains to request when testing the proxies
-            '1.1.1.1:80',
-            '1.0.0.1:80',
-            '8.8.8.8:80',
-            '8.8.4.4:80'
+            'www.google.com',
+            'github.com',
+            'youtube.com',
+            'pastebin.com',
+            'steamcommunity.com',
+            'wikipedia.com'
         ]
 
         self.lock = Lock() # file lock
@@ -149,7 +151,7 @@ class Proxy():
             'socks5': self.socks5_sources
         }
 
-        [shuffle(x) for x in [self.http_sources, self.socks4_sources, self.socks5_sources, self.testing]]
+        [shuffle(x) for x in [self.http_sources, self.socks4_sources, self.socks5_sources, self.testing]] # shuffle everything
     
     def get(self, url) -> str:
         '''
@@ -185,6 +187,7 @@ class Proxy():
         :returns dict: Dictionary with the good and bad proxies sorted
         '''
 
+        proto = proto.lower()
         if not file:
             file = f'{proto}.txt'
 
@@ -307,13 +310,13 @@ class Proxy():
                 line = line.replace('</td><td>', ':')
                 found = re.findall(r'</div></div>:(.*?):', line)
 
-                if found != None and len(found) != 0: proxtype = found[0]
+                if found and len(found) != 0: proxtype = found[0]
                 else: continue
 
                 if proto in proxtype.lower():
                     try:
                         proxy = ':'.join(line.split(':', 2)[:2]).rstrip()
-                        if proxy != None and len(proxy) != 0 and proxy != '' and bool(re.match(r'\d+\.\d+\.\d+\.\d+\:\d+', proxy)):
+                        if proxy and len(proxy) != 0 and proxy != '' and bool(Core.ipregex.match(proxy)):
                             proxies.append(proxy)
                     except Exception: pass
         except Exception:
@@ -333,6 +336,7 @@ class Proxy():
         if not http_sources:
             return []
 
+        # no parsing needed
         for url in http_sources:
             try:
                 contents = self.get(url)
@@ -347,7 +351,7 @@ class Proxy():
         
         final = []
         for proxy in proxies:
-            if not proxy in final:
+            if not proxy in final: # check if the proxy is already in the list
                 final.append(proxy)
 
         return final

@@ -22,7 +22,7 @@ import sys, requests, socket, os, urllib3, subprocess
 
 from random import getrandbits, choice, randint, shuffle, randrange
 from binascii import hexlify
-from netaddr import IPNetwork
+from netaddr import IPNetwork, IPAddress
 from datetime import datetime, timedelta
 from tabulate import tabulate
 from os.path import join
@@ -52,6 +52,12 @@ with open(join('src', 'files', 'keywords.txt'), buffering=Core.file_buffer) as f
 
 with open(join('src', 'files', 'openredirects.txt'), buffering=Core.file_buffer) as file:
     openredirects = file.read().splitlines()
+
+with open(join('src', 'files', 'subdomains.txt'), buffering=Core.file_buffer) as file:
+    subdomains = file.read().splitlines()
+
+with open(join('src', 'files', 'cloudflare.txt'), buffering=Core.file_buffer) as file:
+    cloudflare_ranges = file.read().splitlines()
 
 class HTTPAdapter(requests.adapters.HTTPAdapter):
     '''
@@ -157,7 +163,7 @@ class utils():
         if Core.is_tor_active:
             return
 
-        args = [join('src','files','Tor','tor.exe'), '-f', torrc] if os.name == 'nt' else ['tor','-f',torrc]
+        args = [join('src','files','Tor','tor.exe'), '-f', torrc] if os.name == 'nt' else ['tor','-f',torrc] # assume tor is in the $PATH variable
         with open(os.devnull, 'w') as devnull:
             subprocess.Popen(
                 args, # command line options
@@ -187,8 +193,11 @@ class utils():
         Gets a random proxy from the "proxy_file" variable that was defined by the user
 
         :param is_requests bool: Wether to return a dictionary usable for the Requests module
-        :param force_give bool: Not used anymore
+        :param force_give bool: Not used anymore, only there for backwards compability
         '''
+
+        if not Core.proxy_pool:
+            return
 
         proxy = f'{Core.proxy_proto.lower()}://{choice(Core.proxy_pool)}'
         return {'http': proxy, 'https': proxy} if is_requests else proxy
@@ -202,7 +211,7 @@ class utils():
         :returns str: Randomly picked gateway
         '''
 
-        shuffle(self.tor_gateways)
+        shuffle(self.tor_gateways) # some extra randomization
         return choice(self.tor_gateways)
     
     def buildsession(self) -> requests.Session:
@@ -281,7 +290,7 @@ class utils():
         '''
         buildarme() -> payload
 
-        Builds the payload for the ARME flood, with a random size greater than 1300
+        Builds the payload for the ARME flood, with a random size between 1300 and 1500
 
         :returns str: ARME payload
         '''
@@ -455,8 +464,7 @@ class utils():
         if randrange(2) == 1: headers.update({'Upgrade-Insecure-Requests': '1'}) # upgrade insecure requests to https
 
         proxychoice = randrange(3) # chooses a random "proxy" header
-        if proxychoice == 0: headers.update({choice(['Via','Client-IP','Real-IP']): ', '.join([ self.randip() for _ in range( randint(1, 3) ) ]) }) # fakes the source ip
-        elif proxychoice == 1: headers.update({'X-Forwarded-For': ', '.join([ self.randip() for _ in range( randint(1, 3) ) ])})
+        if proxychoice == 0: headers.update({choice(['Via','Client-IP','Real-IP', 'X-Forwarded-For']): ', '.join([ self.randip() for _ in range( randint(1, 3) ) ]) }) # fakes the source ip
         else: pass
 
         if randrange(2) == 1: headers.update({'DNT': '1'}) # do-not-track
@@ -516,6 +524,21 @@ class utils():
         '''
 
         return bool(Core.ipregex.match(ip))
+    
+    def is_cloudflare_ip(self, ip) -> bool:
+        '''
+        is_cloudflare_ip(ipv4 address) -> True if correct, False if not
+
+        Checks if the given IPv4 address is owned/protected by cloudflare
+
+        :param ip str: IPv4 address to check
+        :returns bool: True if correct, False if not
+        '''
+
+        for cidrange in cloudflare_ranges:
+            if IPAddress(ip) in IPNetwork(cidrange):
+                return True
+        return False
         
     def cidr2iplist(self, cidrange) -> list:
         '''
