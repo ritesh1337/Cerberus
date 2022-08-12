@@ -13,7 +13,7 @@ S*S.    S*S.    S*S    S%S  S*S    S*S  S*S.    S*S    S%S  S*S.     .S*S    .S*
   YSSP    YSSP  S*S    SSS  S*S  SSY      YSSP  S*S    SSS    YSSP~YSSY    YSS'    
                 SP          SP                  SP                                 
                 Y           Y                   Y                                  
-   ```                                                                                
+```                                                                                
 
 <!-- yes i did steal some of these from MHDDoS, lel -->
 <p align="center">
@@ -28,18 +28,22 @@ S*S.    S*S.    S*S    S%S  S*S    S*S  S*S.    S*S    S%S  S*S.     .S*S    .S*
 
 # Cerberus
 Cerberus is a layer 7 network stress testing tool that has a wide variety of normal and exotic attack vectors. <br>
-It's written in Python3 and is usable on all systems with Python installed.
+It's written in Python (3.10) and is usable on all systems with Python installed.
 
 # Attack methods/vectors
 ```
 GOLDENEYE: GoldeneEye dos tool, written by Jan Seidl
 MIX: HTTP flood that randomly picks a http method
 PROXY: HTTP GET flood, using a specified file with proxies
+TORSHAMMER: Slowloris attack using the TOR network
 ARME: HTTP Apache Remote Memory Exhaustation (ARME) flood
 HEAD: HTTP HEAD flood
+SLOWLORIS: Low and slow attack that eats up the connection pool of the target
+APACHEDOS: Exploit which abuses a vulnerability which targets Apache 2.2.x
 OVERLOAD: HTTP GET flood that fills the headers dictionary with lots of junk data
 FAST: HTTP GET flood that just targets "/", good for volumetric attacks
 WEBSOCK: Websocket flood, supports SSL (wss://)
+XMLRPC: Reflection attack abusing XML-RPC pingback endpoints
 WATERTORTURE: DNS watertorture attack
 COOKIE: HTTP GET flood with large cookies, tasty!
 LEECH: Exotic bandwidth draining flood, keep the thread count below <5 and use residential proxies for better results
@@ -47,8 +51,10 @@ RECURSIVE: Recursive HTTP GET flood, very nasty
 GHP: HTTP GET/HEAD/POST flood
 BLAZINGFAST: Blazingfast bypass, impersonates the analytics bot which is allowed by default. Credits to 0x44F and mSQL
 CLOUDFLARE: Cloudflare UAM/IUAM bypass using cloudscraper
+SUBDOMAIN: A Cloudflare bypass attack, which checks for unprotected subdomains
 POST: HTTP POST flood
 XERXES: TCP connection flood, abusing the TOR network
+HULK: HTTP Unbearable Load King
 TOR2WEB: HTTP GET flood abusing Tor 2 Web proxies
 MIMICK: HTTP GET flood that impersonates common web scrapers like Googlebot, Yahoo! Slurp or BaiduSpider
 CONNECT: HTTP CONNECT flood
@@ -60,7 +66,10 @@ GET: HTTP GET flood
 ```
 
 # Notes
-- Cloudflare bypass can't solve v2 challenges, so is therefore pretty much useless
+- CLOUDFLARE attack can't solve v2 challenges
+- SUBDOMAIN attack is very slow, will look into speeding that up in the future
+- XMLRPC needs a reflector list
+- XERXES attack might be a bit unstable
 
 # Usage
 1. Clone the repository
@@ -78,7 +87,7 @@ python3 setup.py
 python3 main.py --help
 ```
 
-4. Profit
+4. Profit.
 
 # Depencies
 - Python 3.9 or higher

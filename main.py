@@ -384,7 +384,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
         parser.add_argument(            '--proxy-proto',     action='store',      dest='proxy_proto',    metavar='protocol',         type=str,  help='Proxy protocol (SOCKS4, SOCKS5, HTTP)', default='SOCKS5')
         parser.add_argument('-logs',    '--list-logs',       action='store_true', dest='list_logs',                                             help='List all attack logs', default=False)
         parser.add_argument('-methods', '--list-methods',    action='store_true', dest='list_methods',                                          help='List all the attack methods', default=False)
-        parser.add_argument('-bc',      '--bypass-cache',    action='store_true', dest='bypass_cache',                                          help='Try to bypass any caching systems to ensure we hit the main servers', default=True)
+        parser.add_argument('-bc',      '--bypass-cache',    action='store_true', dest='bypass_cache',                                          help='Try to bypass any caching systems to ensure we hit the main servers', default=False)
         parser.add_argument('-y',       '--yes-to-all',      action='store_true', dest='yes_to_all',                                            help='Skip any user prompts, and just launch the attack', default=False)
         parser.add_argument(            '--http-version',    action='store',      dest='http_ver',       metavar='http version',     type=str,  help='Set the HTTP protocol version', default='1.1')
         parser.add_argument('-id',      '--launch-from-id',  action='store',      dest='launch_from_id', metavar='attack id',        type=str,  help='Attack ID to use, to parse attack configuration from', default=None)
