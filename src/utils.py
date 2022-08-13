@@ -18,9 +18,9 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 '''
 
-import sys, requests, socket, os, urllib3, subprocess
+import sys, requests, socket, os, urllib3, subprocess, json
 
-from random import getrandbits, choice, randint, shuffle, randrange
+from random import getrandbits, choice, randint, shuffle, randrange, uniform
 from binascii import hexlify
 from netaddr import IPNetwork, IPAddress
 from datetime import datetime, timedelta
@@ -29,6 +29,7 @@ from os.path import join
 from urllib.parse import quote, urlparse
 from stem import Signal
 from stem.control import Controller
+from dict2xml import dict2xml
 
 from src.core import *
 from src.useragent import *
@@ -261,7 +262,7 @@ class utils():
         :returns str: Url with junk data appended to it
         '''
 
-        if url is None: return url
+        if not url: return url
         block = '' if url.endswith('/') else '/'
 
         if Core.bypass_cache: # generates random pages and search queries
@@ -269,18 +270,33 @@ class utils():
             block += self.randstr(randint(2, 8))
             for _ in range(randint(2, 10)):
                 rand = randrange(3)
-                if rand == 0: block += f'/{self.randstr(randint(5, 10))}'
-                elif rand == 1: block += choice(['/..','\\..','%2F..','%5C..']) # magik
-                else: block += f'/{choice(keywords).replace(" ","/")}'
+
+                if rand == 0: 
+                    block += f'/{self.randstr(randint(5, 10))}'
+
+                elif rand == 1: 
+                    block += choice([
+                        '/..',
+                        '\\..',
+                        '%2f..',
+                        '%5c..',
+                        '%2f%2e%2e',
+                        '/%2e%2e',
+                        '%5c%2e%2e',
+                        '%255c%252e%252e',
+                        '%255c..',
+                        '%c0%af..',
+                        '%c1%9c..'
+                    ]) # magik
+
+                else: 
+                    block += f'/{choice(keywords).replace(" ","/")}'
             
             block += f'?{quote(choice(keywords))}={self.randstr(randint(5, 10))}'
 
             for _ in range(randint(2, 9)):
                 if randrange(2) == 1: block += f'&{self.randstr(randint(5, 10))}={quote(choice(keywords))}'
                 else: block += f'&{quote(choice(keywords))}={quote(choice(keywords))}'
-
-            if randrange(2) == 0:
-                block += f'#{quote(choice(keywords))}' # fragment
 
             return url+block if include else block
         else:
@@ -300,6 +316,168 @@ class utils():
             prefix += f',5-{str(i)}'
         
         return prefix
+    
+    def make_list(self, inc_bytes=True) -> list:
+        '''
+        make_list() -> list of random strings, integers, floats and bytes
+
+        Creates a list with random types
+
+        :param inc_bytes bool: Wether to include bytes
+        :returns list: The created list
+        '''
+
+        result = []
+
+        for _ in range(randint(2, 13)):
+            if randint(0, 6) == 0:
+                continue
+
+            value = {
+                0: choice(keywords), # random keyword
+                1: utils().randstr(randint(5, 20)), # gibberish string
+                2: randint(1, 1000), # integer
+                3: uniform(1, 1000), # float
+                4: randint(0, 2) == 1, # boolean
+                5: {
+                    choice([
+                        choice(keywords), 
+                        utils().randstr(randint(5, 20))
+
+                    ]): utils().randstr(randint(5, 50)),
+                }, # dictionary
+                6: os.urandom(randint(1, 200)) if inc_bytes else choice(keywords), # bytes, or random keyword if bytes is disabled
+            }
+
+            result.append(value.get(randint(0, 6)))
+        
+        return result
+
+    def make_dict(self, inc_bytes=True) -> dict:
+        '''
+        make_dict() -> dictionary filled with random keys & values
+
+        Creates a dictionary filled with random junk
+
+        :param inc_bytes bool: Wether to include bytes
+        :returns dict: The created dictionary
+        '''
+
+        result = {}
+        for _ in range(randint(4, 30)):
+            if randint(0, 4) == 0:
+                continue
+
+            # pick a random value
+            if randint(0, 1) == 0: value = self.make_list(inc_bytes)
+            else: value = choice(self.make_list(inc_bytes))
+
+            result.update({
+                choice([
+                    utils().randstr(randint(5, 20)), 
+                    choice(keywords)
+                ]): value
+            })
+
+        return result
+    
+    def make_json_payload(self, indent: int | None = randint(1, 4)) -> tuple:
+        '''
+        make_json_payload(indent) -> (headers, payload)
+
+        Creates a random junk json payload
+
+        :param indent int: Indentation of the result, None for nothing
+        :returns tuple: The "Content-Type" header value and the payload
+        '''
+
+        # adds some extra randomization
+        return ('application/json', json.dumps(
+            self.make_dict(inc_bytes=False), 
+            ensure_ascii=(randint(0, 4)/2==2), 
+            skipkeys=True, 
+            indent=indent, 
+            sort_keys=(randint(0, 4)/2==2)
+        ))
+    
+    def make_url_encoded_payload(self) -> tuple:
+        '''
+        make_url_encoded_payload() -> (headers, payload)
+
+        Creates a random junk url encoded payload
+
+        :returns tuple: The "Content-Type" header value and the payload
+        '''
+
+        data = ''
+        for _ in range(randint(6, 30)):
+            key = choice([
+                self.randstr(randint(5, 20)),
+                choice(keywords)
+            ])
+
+            value = choice([
+                self.randstr(randint(5, 20)),
+                choice(keywords)
+            ])
+
+            if not data.endswith('&') and data != '':
+                key = f'&{key}'
+
+            data += f'{key}={value}'
+        
+        return ('application/x-www-form-urlencoded', data)
+    
+    def make_xml_payload(self, newlines=True) -> tuple:
+        '''
+        make_xml_payload(use newlines) -> (headers, payload)
+
+        Creates a XML payload
+
+        :param newlines bool: Wether to use newlines in the result
+        :returns tuple: The "Content-Type" header value and the payload
+        '''
+
+        data = dict2xml(
+            self.make_dict(inc_bytes=False), 
+            wrap=self.randstr(randint(5, 20)),
+            indent="    ", 
+            newlines=newlines
+        )
+
+        return ('application/xml', data)
+    
+    def make_multi_part_payload(self) -> tuple:
+        '''
+        make_multi_part_payload() -> (headers, payload)
+
+        Builds a random multi-part payload
+
+        :returns tuple: The "Content-Type" header value and the payload
+        '''
+
+        boundary = ''.join([str(randint(0,9)) for _ in range(randint(2, 30))])
+        data = f'--{boundary}\r\n'
+
+        for _ in range(randint(1, 20)):
+            key = choice([
+                self.randstr(randint(5, 20)),
+                choice(keywords)
+            ])
+
+            value = choice([
+                self.randstr(randint(5, 20)),
+                choice(keywords)
+            ])
+
+            data += f'--{boundary}\r\n'
+            data += f'Content-Disposition: form-data; name="{key}"\r\n'
+            data += '\r\n'
+            data += f'{value}\r\n'
+
+        data += f'--{boundary}--\r\n'
+
+        return f'multipart/form-data; boundary={boundary}', data
         
     def builddata(self, length=0) -> tuple:
         '''
@@ -307,36 +485,22 @@ class utils():
 
         Creates a POST body
 
-        :param length int: Approx. length of the payload
+        :param length int: Not used anymore
         :returns tuple: Headers and post payload
         '''
 
         if not Core.post_buffer:
-            if length == 0:
-                length = randint(20,200)
+            rand = {
+                0: self.make_json_payload(None), # json payload
+                1: self.make_url_encoded_payload(), # url encoded payload
+                2: self.make_xml_payload(False), # xml payload
+                3: self.make_multi_part_payload() # multipart payload
+            }.get(randint(0, 3))
 
-            headers = {}
-            if randint(0,1) == 0: # json payload
-                json_data = '{'
+            if not rand:
+                rand = self.make_json_payload() # json payload by default
 
-                for _ in range(length):
-                    json_data += f'"{choice([self.randstr(randint(5, 20)), choice(keywords)])}": "{self.randstr(randint(40, 60))}",'
-                
-                json_data += '}'
-
-                data = json_data        
-                headers.update({'Content-Type': 'application/json'})
-
-            else: # url encoded payload 
-                url_encoded_data = f'{choice([self.randstr(randint(5, 20)), choice(keywords)])}={choice([self.randstr(randint(5, 20)), choice(keywords)])}'
-
-                while len(url_encoded_data) < length:
-                    url_encoded_data += f'&{choice([self.randstr(randint(5, 20)), choice(keywords)])}={choice([self.randstr(randint(5, 20)), choice(keywords)])}'
-
-                data = url_encoded_data
-                headers.update({'Content-Type': 'application/x-www-form-urlencoded'})
-            
-            return (headers, data)
+            return ({'Content-Type': rand[0]}, rand[1])
         else:
             return ({'Content-Type': 'application/x-www-form-urlencoded'}, Core.post_buffer)
     
@@ -412,9 +576,10 @@ class utils():
             cookie += f'; Expires={self.randdate()};'
 
         return cookie
-
         
     def buildheaders(self, url, if_socket=False) -> dict | str:
+        # TODO: refactor this so it has better performance
+
         '''
         buildheaders(url, if socket) -> headers
 
@@ -499,7 +664,7 @@ class utils():
         try:
             if os.name == 'nt': os.system('cls')
             else: os.system('clear')
-        except:
+        except Exception:
             print('\n'*400) # backup method
 
     def make_id(self) -> str:
@@ -511,7 +676,11 @@ class utils():
         :returns str: The random ID
         '''
 
-        return hexlify(getrandbits(128).to_bytes(16, 'little')).decode() # make a simple 32 characters long ID
+        return hexlify(
+            getrandbits(128).to_bytes(
+                16, 
+                'little'
+            )).decode() # make a simple 32 characters long ID
     
     def valid_ip(self, ip) -> bool:
         '''
@@ -538,6 +707,7 @@ class utils():
         for cidrange in cloudflare_ranges:
             if IPAddress(ip) in IPNetwork(cidrange):
                 return True
+
         return False
         
     def cidr2iplist(self, cidrange) -> list:

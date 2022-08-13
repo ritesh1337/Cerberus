@@ -40,6 +40,7 @@ def getReferer() -> str:
     '''
     
     return choice([
-        choice(['http://', 'https://']) +  '.'.join([str(randint(1,255)) for _ in range(4)]), # sadly we can't use utils().genip here, due to circular imports
+        # sadly we can't use utils().genip here, due to circular imports
+        choice(['http://', 'https://']) +  '.'.join([str(randint(1,255)) for _ in range(4)]),
         choice(referers).rstrip() # pick one from the referers.txt file
     ]) if not Core.referer_list else choice(Core.referer_list)

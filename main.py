@@ -203,7 +203,9 @@ def main(args):
         try:
             if not input('\n + Correct? (Y/n) ').lower().startswith('y'):
                 sys.exit('\n')
-        except: sys.exit('\n + Bye!\n')
+
+        except: 
+            sys.exit('\n + Bye!\n')
 
     if not args.get('IS_FROM_ID'): # skip if we are running the attack from a pre-existing id
         print('\n + Creating unique identifier for attack')
@@ -320,7 +322,9 @@ def main(args):
     print(' + Killing all threads, hold on.')
     for thread in threadbox:
         try: thread.join()
+
         except KeyboardInterrupt: sys.exit('\n + Bye!\n')
+        
         except Exception as e: 
             print(f' - Failed to kill thread. \n - Stacktrace:\n')
             traceback.print_exc()

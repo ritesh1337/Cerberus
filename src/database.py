@@ -77,7 +77,7 @@ class database():
 
         output = []
         with Core.threadLock:
-            output = self.cursor.execute(query) if args is None else self.cursor.execute(query, args)
+            output = self.cursor.execute(query) if not args else self.cursor.execute(query, args)
 
             if commit:
                 self.db.commit()
