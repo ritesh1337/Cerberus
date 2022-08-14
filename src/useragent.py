@@ -51,7 +51,7 @@ def getAgent() -> str:
 
             i = randint(0,3)
             if i == 0: agent = f'Mozilla/{choice(agents["mozilla"])}'
-            elif i == 1 or i == 2: agent = f'Opera/{choice(agents["operav"])}'
+            elif i in [1,2]: agent = f'Opera/{choice(agents["operav"])}'
             else: agent = 'Mozilla/5.0'
 
             browser = choice(browsers)
@@ -69,11 +69,16 @@ def getAgent() -> str:
                 else: agent = f'{agent} AppleWebKit/{choice(agents["kits"])} (KHTML, like Gecko)'
 
             if 'Gecko' in agent and browser == 'opera': agent = f'{agent} Opera {choice(agents["opera"])}'
-            if browser == 'chrome': agent = f'{agent} Chrome/{choice(agents["chrome"])} Safari/{choice(agents["safari"])}'
-            elif browser == 'firefox': agent = f'{agent} Firefox/{choice(agents["firefox"])}'
-            elif browser == 'edge': agent = f'{agent} Chrome/{choice(agents["chrome"])} Safari/{choice(agents["safari"])} Edge/{choice(agents["edge"])}'
-            elif browser == 'brave': agent = f'{agent} Brave Chrome/{choice(agents["chrome"])} Safari/{choice(agents["safari"])}'
-            else: pass
+
+            agent_tmp = {
+                'chrome': f'{agent} Chrome/{choice(agents["chrome"])} Safari/{choice(agents["safari"])}',
+                'firefox': f'{agent} Firefox/{choice(agents["firefox"])}',
+                'edge': f'{agent} Chrome/{choice(agents["chrome"])} Safari/{choice(agents["safari"])} Edge/{choice(agents["edge"])}',
+                'brave': f'{agent} Brave Chrome/{choice(agents["chrome"])} Safari/{choice(agents["safari"])}'
+            }.get(agent)
+
+            if agent_tmp:
+                agent = agent_tmp
 
         else:
             agent = {

@@ -222,7 +222,7 @@ class Proxy():
                     with self.lock:
                         self.proxy_dict['good'].append(proxy)
                     
-                    socket.sendall(b'GET / HTTP/1.1\r\n\r\n')
+                    socket.sendall(f'GET / HTTP/1.1\r\nHost: {testhost}\r\nConnection: close\r\n\r\n'.encode())
                     
                     if socket:
                         socket.close()

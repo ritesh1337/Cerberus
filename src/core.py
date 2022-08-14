@@ -53,7 +53,7 @@ class Core:
     sockets = []
     cf_check_done = False
     cf_check_busy = False
-    http_proto_ver = '1.0'
+    http_proto_ver = '1.1'
     file_buffer = (16*1024*1024)
     ipregex = re.compile(r'([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})|(([a-f0-9:]+:+)+[a-f0-9]+)')
     default_headers = {

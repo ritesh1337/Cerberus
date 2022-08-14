@@ -71,8 +71,9 @@ class HTTPAdapter(requests.adapters.HTTPAdapter):
         super(HTTPAdapter, self).__init__(*args, **kwargs)
 
     def init_poolmanager(self, *args, **kwargs):
-        if self.socket_options is not None:
+        if self.socket_options:
             kwargs["socket_options"] = self.socket_options
+            
         super(HTTPAdapter, self).init_poolmanager(*args, **kwargs)
 
 class utils():
@@ -645,7 +646,7 @@ class utils():
 
         if if_socket:
             socket_headers = ''
-            for key, value in headers:
+            for key, value in headers.items():
                 socket_headers += f'{key}: {value}\r\n'
             
             return socket_headers
