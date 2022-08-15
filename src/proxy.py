@@ -84,7 +84,8 @@ class Proxy():
             'https://www.my-proxy.com/free-proxy-list-10.html',
             'https://proxyspace.pro/http.txt',
             'https://proxyspace.pro/https.txt',
-            'https://www.httptunnel.ge/ProxyListForFree.aspx'
+            'https://www.httptunnel.ge/ProxyListForFree.aspx',
+            'https://raw.githubusercontent.com/mopzaysexy/lol/main/ra'
         ]
 
         self.socks4_sources = [
