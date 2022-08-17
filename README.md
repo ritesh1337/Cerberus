@@ -101,7 +101,7 @@ You can support this project by:
  - Making an issue with a new idea, a code enhancement or anything else. I'll gladly look into them.
  - Donating to me:
     <!--Monero FTW-->
-    - With Monero/XMR: `4BFpJ8hEUBBUE8vKUq6arUhRNkmQbPFMG38tDJHroAiTcENF2oCjYgoeHRJg6ULcs42EZ1ynCGj6RVhBTBQ3BcRmKAP1ZRb`
+    - With Monero/XMR: `42Bz4JTttjWPSvHJyN5Pq4StoaPFf118mEB3gqbPpereSHMoCsN9BRTVj9B2eWXrVbJjb6JANc8WaZAsJzDZ3P5hQXzaDcz`
     - With Bitcoin/BTC: `bc1qp8k7yltrc446c4ywyu0uyplkcp2s5ejmx9d2c`
     - With Litecoin/LTC: `ltc1qkyc5s7nkpgthdjfdfcnqjevrkjz79r4jc05nkd`
 
