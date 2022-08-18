@@ -1,7 +1,7 @@
 import os, sys, re, requests, zipfile
 
-if sys.version_info[0] < 3 and sys.version_info[1] < 9:
-    sys.exit(' - Error, please run the setup with Python 3.9 or higher.')
+if sys.version_info[0] < 3 and sys.version_info[1] < 10:
+    sys.exit(' - Error, please run the setup with Python 3.10.')
 
 def main() -> None:
     '''

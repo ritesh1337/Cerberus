@@ -90,7 +90,7 @@ python3 main.py --help
 4. Profit.
 
 # Depencies
-- Python 3.9 or higher
+- Python 3.10
 - Everything can be installed with the `setup.py` script:
     - `python3 setup.py`
 

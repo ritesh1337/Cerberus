@@ -188,7 +188,7 @@ class utils():
         return "".join([f'\\x{choice("0123456789ABCDEF")}{choice("0123456789ABCDEF")}' for _ in range(size)])
 
     # removed "-> dict | str" because it was throwing errors for somebody
-    def get_proxy(self, is_requests=True, force_give=False):
+    def get_proxy(self, is_requests=True, force_give=False) -> dict | str:
         '''
         get_proxy(is for requests, force give) -> dictionary if for requests, else string
 
@@ -382,7 +382,7 @@ class utils():
 
         return result
     
-    def make_json_payload(self, indent: int | None = randint(1, 4)) -> tuple:
+    def make_json_payload(self, indent = randint(1, 4)) -> tuple:
         '''
         make_json_payload(indent) -> (headers, payload)
 

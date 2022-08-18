@@ -18,6 +18,10 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 '''
 
+import sys # checking the python version
+if sys.version_info[0] < 3 and sys.version_info[1] < 10:
+    sys.exit(' - Error, please run Cerberus with Python 3.10.') # now that we've import sys, we can exit and print with a single function, awesome!
+
 # import all non-stdlib modules, just to check if they are actually installed
 try:
     import requests # for sending the actual requests
@@ -29,12 +33,7 @@ try:
     import websocket # websocket flooder
     import python_socks # proxification
 except Exception as e:
-    print(f' - Error, it looks like i\'m missing some modules. Did you try "pip install -r requirements"?\n - Stacktrace: \n{str(e).rstrip()}')
-    exit()
-
-import sys # checking the python version
-if sys.version_info[0] < 3 and sys.version_info[1] < 9:
-    sys.exit(' - Error, please run Cerberus with Python 3.9 or higher.') # now that we've import sys, we can exit and print with a single function, awesome!
+    sys.exit(f' - Error, it looks like i\'m missing some modules. Did you try "pip install -r requirements"?\n - Stacktrace: \n{str(e).rstrip()}')
 
 # import the standard library modules, should have no problems importing them
 try:
@@ -56,8 +55,7 @@ try:
     from http.client import HTTPConnection # setting the "HTTP/" value
     from urllib3.exceptions import InsecureRequestWarning # to disable that annoying "Insecure request!" warning
 except Exception as e:
-    print(f' - Error, failed to import standard library modules.\n - Stacktrace: \n{str(e).strip()}')
-    exit()
+    sys.exit(f' - Error, failed to import standard library modules.\n - Stacktrace: \n{str(e).strip()}')
 
 # import all custom modules from the "src" directory
 try:
