@@ -27,7 +27,7 @@ from src.core import Core
 from src.utils import *
 from src.useragent import *
 
-def open_socket() -> Proxy | None: # opens a new socket, and returns it
+def open_socket(): # opens a new socket, and returns it
     '''
     open_socket() -> Proxy object or None
 
