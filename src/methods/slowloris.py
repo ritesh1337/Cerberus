@@ -26,7 +26,7 @@ from src.core import Core
 from src.utils import *
 from src.useragent import *
 
-def open_socket() -> socket.socket | None: # opens a new socket, and returns it
+def open_socket(): # opens a new socket, and returns it
     '''
     open_socket() -> socket or None
 
