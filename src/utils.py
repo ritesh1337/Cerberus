@@ -578,7 +578,7 @@ class utils():
 
         return cookie
         
-    def buildheaders(self, url, if_socket=False) -> dict | str:
+    def buildheaders(self, url, if_socket=False):
         # TODO: refactor this so it has better performance
 
         '''
